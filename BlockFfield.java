@@ -7,6 +7,7 @@ public class BlockFfield extends Block
 	public BlockFfield(int i, int j)
 		{
 		super(i, j, Material.glass);
+                                this.setCreativeTab(CreativeTabs.tabBlock);
 		}
 	public int idDropped(int i, Random random, int j)
 		{
