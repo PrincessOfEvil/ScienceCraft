@@ -15,6 +15,6 @@ public class mod_forcefield extends BaseMod
 		ModLoader.addName(irtnk, "Iron Tank");
 		ModLoader.addRecipe(new ItemStack(ffield, 64), new Object[]{ "111", "202", "111", Character.valueOf('1'), Block.glass, Character.valueOf('0'), Block.bedrock, Character.valueOf('2'), Item.redstone});	
 		ffield.blockIndexInTexture = ModLoader.addOverride("/terrain.png", "/lazmod/ffield.png");
-		irtnk.blockIndexInTexture = ModLoader.addOverride("/terrain.png", "/lazmod/iron_tank.png")
+		irtnk.blockIndexInTexture = ModLoader.addOverride("/terrain.png", "/lazmod/iron_tank.png");
 		}
 	}
