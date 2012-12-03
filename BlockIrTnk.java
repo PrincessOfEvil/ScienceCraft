@@ -20,7 +20,7 @@ public class BlockIrTnk extends Block
 		
 	public boolean isOpaqueCube()
 		{
-			return false;
+		return false;
 		}
 	public boolean renderAsNormalBlock()
 		{
@@ -29,6 +29,25 @@ public class BlockIrTnk extends Block
 	public int getRenderBlockPass()
 		{
 		return 1;
+		}
+	public int getBlockTextureFromSideAndMetadata(int i, int j)
+		{
+		return getBlockTextureFromSide(i);
+		}
+	public int getBlockTextureFromSide(int i)
+		{
+		if (i == 0)
+			{
+			return mod_forcefield.texTop;
+			}
+		if (i == 1)
+			{
+			return mod_forcefield.texTop;
+			}
+		else
+			{
+			return mod_forcefield.texSides;
+			}
 		}
 
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
