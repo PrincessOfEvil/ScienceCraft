@@ -1,4 +1,6 @@
-package net.minecraft.src;
+package lazmod;
+
+import net.minecraft.item.Item;
 
 public class ItemSoul extends Item
 {

@@ -1,4 +1,11 @@
-package net.minecraft.src;
+package lazmod;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.src.BaseMod;
+import net.minecraft.src.ModLoader;
+
 public class mod_creggs extends BaseMod
 {
 public static final Item soulItem = new ItemSoul(3000).setItemName("soulItem");

@@ -1,13 +1,17 @@
-package net.minecraft.src;
+package lazmod;
 
 import java.util.Random;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.world.IBlockAccess;
 
 public class BlockIrTnk extends Block
 	{
 	public BlockIrTnk(int i, int j)
 		{
 		super(i, j, Material.glass);
-                                this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setCreativeTab(CreativeTabs.tabBlock);
 		}
 	public int idDropped(int i, Random random, int j)
 		{
