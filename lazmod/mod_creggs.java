@@ -11,7 +11,7 @@ import net.minecraft.src.ModLoader;
 public class mod_creggs extends BaseMod
 	{	
 	
-	public static final Item soulItem = new ItemSoul(3000).setItemName("soulItem");
+	public static final Item soulItem = new ItemSoul(3000).setItemName("soulItem").setIconIndex(ModLoader.addOverride("/gui/items.png", "/lazmod/soul.png"));
 	
 	public String getVersion()
 		{
@@ -28,7 +28,6 @@ public class mod_creggs extends BaseMod
 		ModLoader.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 55), new Object[]{ Item.slimeBall, Item.slimeBall, soulItem});
 		ModLoader.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 54), new Object[]{ Item.rottenFlesh, Item.rottenFlesh, soulItem});
 		ModLoader.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 51), new Object[]{ Item.arrow, Item.arrow, Item.bone, Item.bone, soulItem});
-
-soulItem.iconIndex = ModLoader.addOverride("/gui/items.png", "/lazmod/soul.png"); //FIXME
-}
-}
+		
+		}
+	}
