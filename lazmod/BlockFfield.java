@@ -4,6 +4,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockFfield extends Block
@@ -13,6 +14,7 @@ public class BlockFfield extends Block
 		super(i, j, Material.glass); //TODO: Material
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		}
+	
 	@Override
 	public int idDropped(int i, Random random, int j)
 		{
@@ -21,12 +23,12 @@ public class BlockFfield extends Block
 	@Override
 	public int quantityDropped(Random random)
 		{
-		return 1;
+		return 0;
 		}
 	@Override
 	public boolean isOpaqueCube()
 		{
-			return false;
+		return false;
 		}
 	@Override
 	public boolean renderAsNormalBlock()
@@ -38,6 +40,7 @@ public class BlockFfield extends Block
 		{
 		return 1;
 		}
+	private boolean localFlag;
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
 		{
@@ -45,12 +48,21 @@ public class BlockFfield extends Block
 		if(!localFlag && i1 == blockID)
 			{
 			return false;
-			} else
+			}
+		else
 			{
 			return super.shouldSideBeRendered(iblockaccess, i, j, k, l);
 			}
         }
 	
-	private boolean localFlag;
-
+	@Override
+    public String getTextureFile()
+    {
+            return lazProxy.BLOCKS1_PNG;
+    }
+	@Override
+	public int getBlockTextureFromSide(int i)
+		{
+		return 0;
+		}
 	}
