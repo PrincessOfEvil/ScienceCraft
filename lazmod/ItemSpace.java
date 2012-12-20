@@ -1,7 +1,5 @@
 package lazmod;
 
-import static cpw.mods.fml.common.Side.CLIENT;
-import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.src.ModLoader;
