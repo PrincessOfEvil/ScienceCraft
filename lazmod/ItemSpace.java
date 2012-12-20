@@ -6,14 +6,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.src.ModLoader;
 
-public class ItemSoul extends Item
+public class ItemSpace extends Item
 	{
-    public ItemSoul(int i)
+    public ItemSpace(int i)
     	{
         super(i);
-        maxStackSize = 8;
+        maxStackSize = 64;
 		this.setCreativeTab(CreativeTabs.tabMisc);
-        setIconIndex(0);
+		setIconIndex(1);
         }
     public String getTextureFile()
     {
