@@ -11,7 +11,6 @@ public class BlockIrnTnk extends Block //TODO: Actual tank
 	public BlockIrnTnk(int i, int j)
 		{
 		super(i, j, Material.glass); //TODO: Material
-		setCreativeTab(CreativeTabs.tabBlock);
 		}
 
 	@Override
@@ -39,7 +38,7 @@ public class BlockIrnTnk extends Block //TODO: Actual tank
 	@Override
     public String getTextureFile()
     	{
-    	return lazProxy.BLOCKS1_PNG;
+    	return ACProxy.BLOCKS1_PNG;
     	}
 	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)

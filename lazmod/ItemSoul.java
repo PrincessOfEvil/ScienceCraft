@@ -10,11 +10,10 @@ public class ItemSoul extends Item
     	{
         super(i);
         maxStackSize = 8;
-		this.setCreativeTab(AnnihilationCraft.LazTab);
         setIconIndex(0);
         }
     public String getTextureFile()
     {
-            return lazProxy.ITEMS1_PNG;
+            return ACProxy.ITEMS1_PNG;
     }
 	}

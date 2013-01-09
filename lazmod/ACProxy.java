@@ -2,7 +2,7 @@ package lazmod;
 
 import net.minecraftforge.client.MinecraftForgeClient;
 
-public class lazProxy
+public class ACProxy
 	{
 	public static String ITEMS1_PNG = "/lazmod/items.png";
 	

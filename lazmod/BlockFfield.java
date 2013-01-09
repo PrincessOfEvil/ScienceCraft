@@ -19,7 +19,6 @@ public class BlockFField extends Block
 	public BlockFField(int i, int j)
 		{
 		super(i, j, Material.glass); //TODO: Material
-		setCreativeTab(CreativeTabs.tabBlock);
 		}
 	@Override
 	public int idDropped(int i, Random random, int j)
@@ -64,7 +63,7 @@ public class BlockFField extends Block
 	@Override
     public String getTextureFile()
     	{
-        return lazProxy.BLOCKS1_PNG;
+        return ACProxy.BLOCKS1_PNG;
     	}
 	public int getIconIndex()
 		{

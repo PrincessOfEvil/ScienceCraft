@@ -2,7 +2,7 @@ package lazmod;
 
 import net.minecraftforge.client.MinecraftForgeClient;
 
-public class lazClient extends lazProxy
+public class ACClient extends ACProxy
 	{
 	@Override
     public void registerRenderers ()

@@ -4,23 +4,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class LazCreativeTab extends CreativeTabs
+public class ACCreativeTab extends CreativeTabs
 	{
-    	public LazCreativeTab(int id, String name)
+    	public ACCreativeTab(String name)
     		{
-            super(id, name);
+            super(name);
     		}
-        @Override
-        @SideOnly(Side.CLIENT)
-        public String getTranslatedTabLabel()
-        {
-                return  "Annihilation Craft";
-        }
         @Override
         @SideOnly(Side.CLIENT)
         public int getTabIconItemIndex()
         	{
         	return AnnihilationCraft.Space.itemID;
         	}
-
 	}

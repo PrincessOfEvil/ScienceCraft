@@ -28,23 +28,21 @@ public class AnnihilationCraft
 	public static Item Soul;
 	public static Item Space;
 			
-	public static CreativeTabs LazTab;
+	public static final CreativeTabs ACTab = new ACCreativeTab("ACTab");;
 	
-	@SidedProxy(clientSide = "lazmod.lazClient", serverSide= "lazmod.lazProxy")
-	public static lazProxy proxy;
+	@SidedProxy(clientSide = "lazmod.ACClient", serverSide= "lazmod.ACProxy")
+	public static ACProxy proxy;
 
 	@Init
 	public void load(FMLInitializationEvent event)
 		{
 		proxy.registerRenderers();
 		
-		Soul = new ItemSoul(3000).setItemName("soulItem");
-		Space = new ItemSpace(3001).setItemName("spaceItem");
+		Soul = new ItemSoul(30000-256).setItemName("soulItem").setCreativeTab(this.ACTab);
+		Space = new ItemSpace(30001-256).setItemName("spaceItem").setCreativeTab(this.ACTab);
 		
-		FField = new BlockFField(1240, 0).setBlockUnbreakable().setHardness(6000000F).setLightValue(0.4F).setBlockName("ffield");
-		IrnTnk = new BlockIrnTnk(1241, 0).setHardness(6F).setBlockName("irtnk");
-
-		LazTab = new LazCreativeTab(CreativeTabs.getNextID(), "AnnihilationCraft");
+		FField = new BlockFField(1240, 0).setBlockUnbreakable().setLightValue(0.4F).setBlockName("ffield").setCreativeTab(this.ACTab);
+		IrnTnk = new BlockIrnTnk(1241, 0).setHardness(6F).setBlockName("irntnk").setCreativeTab(this.ACTab);
 		
 		GameRegistry.addRecipe(new ItemStack(Soul, 8), new Object[]{ "111", "101", "111", Character.valueOf('0'), Block.slowSand,  Character.valueOf('1'), Item.glassBottle});
 		
@@ -60,6 +58,8 @@ public class AnnihilationCraft
 		
 		LanguageRegistry.addName(FField, "Force Field");
 		LanguageRegistry.addName(IrnTnk, "Iron Tank");
+		
+		LanguageRegistry.instance().addStringLocalization("itemGroup.ACTab", "en_US", "Annihilation Craft");
 		
 		MinecraftForge.setBlockHarvestLevel(IrnTnk, "pickaxe", 2);
 		}

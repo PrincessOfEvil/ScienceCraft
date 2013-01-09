@@ -10,11 +10,10 @@ public class ItemSpace extends Item
     	{
         super(i);
         maxStackSize = 64;
-		this.setCreativeTab(AnnihilationCraft.LazTab);
 		setIconIndex(1);
-        }
+		}
     public String getTextureFile()
     {
-            return lazProxy.ITEMS1_PNG;
+            return ACProxy.ITEMS1_PNG;
     }
 	}
