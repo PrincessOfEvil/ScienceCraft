@@ -10,7 +10,7 @@ public class ItemSpace extends Item
     	{
         super(i);
         maxStackSize = 64;
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setCreativeTab(AnnihilationCraft.LazTab);
 		setIconIndex(1);
         }
     public String getTextureFile()

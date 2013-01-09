@@ -10,7 +10,7 @@ public class ItemSoul extends Item
     	{
         super(i);
         maxStackSize = 8;
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setCreativeTab(AnnihilationCraft.LazTab);
         setIconIndex(0);
         }
     public String getTextureFile()

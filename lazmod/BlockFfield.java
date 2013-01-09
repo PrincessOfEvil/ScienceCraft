@@ -14,14 +14,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockFfield extends Block
+public class BlockFField extends Block
 	{
-	public BlockFfield(int i, int j)
+	public BlockFField(int i, int j)
 		{
 		super(i, j, Material.glass); //TODO: Material
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		setCreativeTab(CreativeTabs.tabBlock);
 		}
-	
 	@Override
 	public int idDropped(int i, Random random, int j)
 		{
@@ -64,16 +63,16 @@ public class BlockFfield extends Block
 	
 	@Override
     public String getTextureFile()
-    {
-            return lazProxy.BLOCKS1_PNG;
-    }
+    	{
+        return lazProxy.BLOCKS1_PNG;
+    	}
+	public int getIconIndex()
+		{
+		return 0;
+		}
 	@Override
 	public int getBlockTextureFromSide(int i)
 		{
 		return 0;
 		}
-    @SideOnly(Side.CLIENT)
-    public void registerAnimation(Minecraft minecraft) {
-    	ModLoader.addAnimation(new TextureFfieldFX());
-    } 
 	}

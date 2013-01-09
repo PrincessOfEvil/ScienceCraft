@@ -10,6 +10,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.BaseMod;
@@ -19,14 +20,16 @@ import net.minecraftforge.common.MinecraftForge;
 @Mod(modid = "AnnihilationCraft", name = "Annihilation Craft", version = "0.1 alpha")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
-public class annihilationcraft
+public class AnnihilationCraft
 	{
-	public static Block ffield;
-	public static Block irtnk;
+	public static Block FField;
+	public static Block IrnTnk;
 	
-	public static Item soul;
-	public static Item space;
+	public static Item Soul;
+	public static Item Space;
 			
+	public static CreativeTabs LazTab;
+	
 	@SidedProxy(clientSide = "lazmod.lazClient", serverSide= "lazmod.lazProxy")
 	public static lazProxy proxy;
 
@@ -35,30 +38,29 @@ public class annihilationcraft
 		{
 		proxy.registerRenderers();
 		
-		soul = new ItemSoul(3000).setItemName("soulItem");
-		space = new ItemSpace(3001).setItemName("spaceItem");
+		Soul = new ItemSoul(3000).setItemName("soulItem");
+		Space = new ItemSpace(3001).setItemName("spaceItem");
 		
-		ffield = new BlockFfield(1240, 0).setBlockUnbreakable().setHardness(6000000F).setLightValue(0.4F).setBlockName("ffield");
-		irtnk = new BlockIrTnk(1241, 0).setHardness(6F).setBlockName("irtnk");
-		
-		GameRegistry.registerBlock(ffield);
-		GameRegistry.registerBlock(irtnk);
+		FField = new BlockFField(1240, 0).setBlockUnbreakable().setHardness(6000000F).setLightValue(0.4F).setBlockName("ffield");
+		IrnTnk = new BlockIrnTnk(1241, 0).setHardness(6F).setBlockName("irtnk");
 
-		GameRegistry.addRecipe(new ItemStack(soul, 8), new Object[]{ "111", "101", "111", Character.valueOf('0'), Block.slowSand,  Character.valueOf('1'), Item.glassBottle});
+		LazTab = new LazCreativeTab(CreativeTabs.getNextID(), "AnnihilationCraft");
 		
-		GameRegistry.addRecipe(new ItemStack(ffield, 1), new Object[]{ "111", "202", "111", Character.valueOf('0'), Block.bedrock, Character.valueOf('1'), Block.glass, Character.valueOf('2'), Item.redstone});
-		GameRegistry.addRecipe(new ItemStack(irtnk, 1), new Object[]{ "#1#", "202", "#1#", Character.valueOf('0'), Block.glass, Character.valueOf('1'), Item.ingotIron, Character.valueOf('2'), Block.blockSteel});
+		GameRegistry.addRecipe(new ItemStack(Soul, 8), new Object[]{ "111", "101", "111", Character.valueOf('0'), Block.slowSand,  Character.valueOf('1'), Item.glassBottle});
+		
+		GameRegistry.addRecipe(new ItemStack(FField, 1), new Object[]{ "111", "202", "111", Character.valueOf('0'), Block.bedrock, Character.valueOf('1'), Block.glass, Character.valueOf('2'), Item.redstone});
+		GameRegistry.addRecipe(new ItemStack(IrnTnk, 1), new Object[]{ "#1#", "202", "#1#", Character.valueOf('0'), Block.glass, Character.valueOf('1'), Item.ingotIron, Character.valueOf('2'), Block.blockSteel});
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 55), new Object[]{ Item.slimeBall, Item.slimeBall, soul});
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 54), new Object[]{ Item.rottenFlesh, Item.rottenFlesh, soul});
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 51), new Object[]{ Item.arrow, Item.arrow, Item.bone, Item.bone, soul});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 55), new Object[]{ Item.slimeBall, Item.slimeBall, Soul});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 54), new Object[]{ Item.rottenFlesh, Item.rottenFlesh, Soul});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.monsterPlacer, 1, 51), new Object[]{ Item.arrow, Item.arrow, Item.bone, Item.bone, Soul});
 		
-		LanguageRegistry.addName(soul, "Soul in a Bottle");
-		LanguageRegistry.addName(space, "Contained Space");
+		LanguageRegistry.addName(Soul, "Soul in a Bottle");
+		LanguageRegistry.addName(Space, "Contained Space");
 		
-		LanguageRegistry.addName(ffield, "Force Field");
-		LanguageRegistry.addName(irtnk, "Iron Tank");
+		LanguageRegistry.addName(FField, "Force Field");
+		LanguageRegistry.addName(IrnTnk, "Iron Tank");
 		
-		MinecraftForge.setBlockHarvestLevel(irtnk, "pickaxe", 2);
+		MinecraftForge.setBlockHarvestLevel(IrnTnk, "pickaxe", 2);
 		}
 	}
