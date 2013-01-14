@@ -1,12 +1,17 @@
 package lazmod;
 
 import java.util.Random;
+
+import buildcraft.factory.TileTank;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
-public class BlockIrnTnk extends Block //TODO: Actual tank
+public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
 	{
 	public BlockIrnTnk(int i, int j)
 		{
@@ -23,7 +28,11 @@ public class BlockIrnTnk extends Block //TODO: Actual tank
 		{
 		return 1;
 		}
-
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		return new TileIrnTnk();
+	}
+	
 	@Override
 	public boolean isOpaqueCube()
 		{

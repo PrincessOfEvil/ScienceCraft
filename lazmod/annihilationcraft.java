@@ -1,21 +1,20 @@
 package lazmod;
 
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.ModLoader;
-import net.minecraftforge.common.MinecraftForge;
+
+
 
 @Mod(modid = "AnnihilationCraft", name = "Annihilation Craft", version = "0.1 alpha")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -43,6 +42,11 @@ public class AnnihilationCraft
 		
 		FField = new BlockFField(1240, 0).setBlockUnbreakable().setLightValue(0.4F).setBlockName("ffield").setCreativeTab(this.ACTab);
 		IrnTnk = new BlockIrnTnk(1241, 0).setHardness(6F).setBlockName("irntnk").setCreativeTab(this.ACTab);
+		
+		GameRegistry.registerBlock(FField, "ForceField");
+		GameRegistry.registerBlock(IrnTnk, "IronTank");
+		
+		GameRegistry.registerTileEntity(TileIrnTnk.class, "IronTankTile");
 		
 		GameRegistry.addRecipe(new ItemStack(Soul, 8), new Object[]{ "111", "101", "111", Character.valueOf('0'), Block.slowSand,  Character.valueOf('1'), Item.glassBottle});
 		
