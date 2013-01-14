@@ -1,5 +1,6 @@
 package lazmod;
 
+import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ACProxy

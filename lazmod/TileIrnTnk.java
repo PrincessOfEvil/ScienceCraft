@@ -1,8 +1,5 @@
 package lazmod;
 
-import static net.minecraftforge.common.ForgeDirection.DOWN;
-import buildcraft.BuildCraftFactory;
-import buildcraft.factory.TileTank;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -40,6 +37,7 @@ public class TileIrnTnk extends TileEntity implements ITankContainer
 		if (IrnTnk.getLiquid() != null)
 			{
 			data.setTag("IrnTnk", IrnTnk.getLiquid().writeToNBT(new NBTTagCompound()));
+			System.out.println("Fukken saved!");
 			}
 		}
 
@@ -72,7 +70,6 @@ public class TileIrnTnk extends TileEntity implements ITankContainer
 			resource.amount -= used;
 			totalUsed += used;
 			}
-
 		return totalUsed;
 		}
 
