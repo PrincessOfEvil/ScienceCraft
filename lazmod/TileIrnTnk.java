@@ -81,7 +81,7 @@ public class TileIrnTnk extends TileEntity implements ITankContainer
 	@Override
 	public LiquidStack drain(int tankIndex, int maxEmpty, boolean doDrain) 
 		{
-			return null;
+		return IrnTnk.drain(maxEmpty, doDrain);
 		}
 
 	@Override
