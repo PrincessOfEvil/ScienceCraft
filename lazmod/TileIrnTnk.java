@@ -13,8 +13,6 @@ public class TileIrnTnk extends TileEntity implements ITankContainer
 	{
 	public LiquidTank IrnTnk = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 32);
 	
-	int timer = 1;
-	
 	@Override
 	public void readFromNBT(NBTTagCompound data)
 		{
@@ -101,6 +99,7 @@ public class TileIrnTnk extends TileEntity implements ITankContainer
 		{
 		return IrnTnk;
 		}
+	private int timer = 1;
 	public void updateEntity()
 		{
 		timer++;

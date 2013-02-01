@@ -11,14 +11,13 @@ public class ACEnergy
 	 */
 	public void EnergyEdit(int amount, boolean gen)
 		{
-		if (gen = true)
+		if (gen)
 			{
 			this.Energy += amount;
 			}
-		else if (gen = false)
+		else
 			{
-//			this.Energy -= amount;
-			this.Energy = this.Energy - amount;
+			this.Energy -= amount;
 			}
 		}
 }
