@@ -11,8 +11,10 @@ import net.minecraftforge.liquids.LiquidTank;
 
 public class TileIrnTnk extends TileEntity implements ITankContainer
 	{
-	public final LiquidTank IrnTnk = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 32);
-
+	public LiquidTank IrnTnk = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 32);
+	
+	int timer = 1;
+	
 	@Override
 	public void readFromNBT(NBTTagCompound data)
 		{
@@ -37,7 +39,6 @@ public class TileIrnTnk extends TileEntity implements ITankContainer
 		if (IrnTnk.getLiquid() != null)
 			{
 			data.setTag("IrnTnk", IrnTnk.getLiquid().writeToNBT(new NBTTagCompound()));
-			System.out.println("Fukken saved!");
 			}
 		}
 
@@ -99,6 +100,17 @@ public class TileIrnTnk extends TileEntity implements ITankContainer
 	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type)
 		{
 		return IrnTnk;
+		}
+	public void updateEntity()
+		{
+		timer++;
+		if (timer > 32) {timer = 1;}
+		if (timer == 32)
+			{
+			AnnihilationCraft.ObjEnergy.EnergyEdit(5,false);
+			System.out.println(AnnihilationCraft.ObjEnergy.Energy);
+			}
+		System.out.println(timer);
 		}
 	}
 	
