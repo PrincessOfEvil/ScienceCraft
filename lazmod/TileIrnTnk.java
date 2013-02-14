@@ -9,7 +9,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
-public class TileIrnTnk extends TileEntity implements ITankContainer
+public class TileIrnTnk extends TileEntity implements ITankContainer //TODO: This motherfucker crashes.
 	{
 	public LiquidTank IrnTnk = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 32);
 	
@@ -93,23 +93,23 @@ public class TileIrnTnk extends TileEntity implements ITankContainer
 		compositeTank.setCapacity(capacity);
 		return new ILiquidTank[] { compositeTank };
 		}
-
 	@Override
 	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type)
 		{
 		return IrnTnk;
 		}
+	
 	private int timer = 1;
 	public void updateEntity()
 		{
-		timer++;
-		if (timer > 32) {timer = 1;}
-		if (timer == 32)
+		this.timer++;
+		if (this.timer > 32) {this.timer = 1;}
+		if (this.timer == 32)
 			{
 			AnnihilationCraft.ObjEnergy.EnergyEdit(5,false);
-			System.out.println(AnnihilationCraft.ObjEnergy.Energy);
+			System.out.println("Energy: "+AnnihilationCraft.ObjEnergy.getEnergy());
 			}
-		System.out.println(timer);
+		System.out.println("Timer: "+this.timer);
 		}
 	}
 	

@@ -1,8 +1,8 @@
 package lazmod;
 
+import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.creativetab.CreativeTabs;
 
 public class ACCreativeTab extends CreativeTabs
 	{

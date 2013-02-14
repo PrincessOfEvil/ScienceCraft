@@ -1,17 +1,9 @@
 package lazmod;
 
-import static cpw.mods.fml.relauncher.Side.CLIENT;
-
 import java.util.Random;
 
-import cpw.mods.fml.client.TextureFXManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockFField extends Block

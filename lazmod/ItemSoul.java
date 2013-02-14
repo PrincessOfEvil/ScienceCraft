@@ -1,8 +1,6 @@
 package lazmod;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.src.ModLoader;
 
 public class ItemSoul extends Item
 	{

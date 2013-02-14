@@ -2,16 +2,23 @@ package lazmod;
 
 public class ACEnergy
 {
-	public int Energy = 100500;
-
-	/**
-	 * 
-	 * @param amount Amount of energy 
-	 * @param gen Generator?
-	 */
-	public void EnergyEdit(int amount, boolean gen)
+	private int Energy;
+	
+	public ACEnergy()
 		{
-		if (gen)
+		this.Energy = 100500;
+		}
+	public ACEnergy(int energy)
+		{
+		this.Energy = energy;
+		}
+	
+	/**
+	Relative setter.
+	*/
+	public void EnergyEdit(int amount, boolean isGenerator)
+		{
+		if (isGenerator)
 			{
 			this.Energy += amount;
 			}
@@ -19,5 +26,12 @@ public class ACEnergy
 			{
 			this.Energy -= amount;
 			}
+		}
+	/**
+	Typical getter.
+	*/
+	public int getEnergy()
+		{
+		return this.Energy;
 		}
 }

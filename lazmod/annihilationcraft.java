@@ -3,7 +3,6 @@ package lazmod;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
@@ -39,13 +38,13 @@ public class AnnihilationCraft
 		{
 		proxy.registerRenderers();
 		
-		Soul = new ItemSoul(30000-256).setItemName("soulItem").setCreativeTab(this.ACTab);
+		Soul = new ItemSoul(30000-256/*Yea.*/).setItemName("soulItem").setCreativeTab(this.ACTab);
 		Space = new ItemSpace(30001-256).setItemName("spaceItem").setCreativeTab(this.ACTab);
 		
 		FField = new BlockFField(1240, 0).setBlockUnbreakable().setLightValue(0.4F).setBlockName("ffield").setCreativeTab(this.ACTab);
 		IrnTnk = new BlockIrnTnk(1241, 0).setHardness(6F).setBlockName("irntnk").setCreativeTab(this.ACTab);
 		
-		ObjEnergy = new ACEnergy();
+		ObjEnergy = new ACEnergy(1000);
 		
 		GameRegistry.registerBlock(FField, "ForceField");
 		GameRegistry.registerBlock(IrnTnk, "IronTank");
