@@ -106,7 +106,7 @@ public class TileIrnTnk extends TileEntity implements ITankContainer //TODO: Thi
 		if (this.timer > 32) {this.timer = 1;}
 		if (this.timer == 32)
 			{
-			AnnihilationCraft.ObjEnergy.EnergyEdit(5,false);
+			AnnihilationCraft.ObjEnergy.edtEnergy(5,false);
 			System.out.println("Energy: "+AnnihilationCraft.ObjEnergy.getEnergy());
 			}
 		System.out.println("Timer: "+this.timer);

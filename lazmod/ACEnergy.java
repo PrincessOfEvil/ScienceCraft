@@ -1,13 +1,23 @@
 package lazmod;
 
+/**
+Energy class.
+Maybe I have to change it to energy/matter class? 
+*/
 public class ACEnergy
 {
 	private int Energy;
 	
+	/**
+	Lazy constructor.
+	*/
 	public ACEnergy()
 		{
 		this.Energy = 100500;
 		}
+	/**
+	Constructor. I'm pretty sure it's done O_o
+	*/
 	public ACEnergy(int energy)
 		{
 		this.Energy = energy;
@@ -16,7 +26,7 @@ public class ACEnergy
 	/**
 	Relative setter.
 	*/
-	public void EnergyEdit(int amount, boolean isGenerator)
+	public void edtEnergy(int amount, boolean isGenerator)
 		{
 		if (isGenerator)
 			{
