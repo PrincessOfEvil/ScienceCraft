@@ -31,7 +31,7 @@ public class AnnihilationCraft
 	@SidedProxy(clientSide = "lazmod.ACClient", serverSide= "lazmod.ACProxy")
 	public static ACProxy proxy;
 	
-	public static ACEnergy ObjEnergy;
+	public static ACSystem TempSystem;
 	
 	@Init
 	public void load(FMLInitializationEvent event)
@@ -44,7 +44,7 @@ public class AnnihilationCraft
 		FField = new BlockFField(1240, 0).setBlockUnbreakable().setLightValue(0.4F).setBlockName("ffield").setCreativeTab(this.ACTab);
 		IrnTnk = new BlockIrnTnk(1241, 0).setHardness(6F).setBlockName("irntnk").setCreativeTab(this.ACTab);
 		
-		ObjEnergy = new ACEnergy(1000);
+		TempSystem = new ACSystem(1000,1000);
 		
 		GameRegistry.registerBlock(FField, "ForceField");
 		GameRegistry.registerBlock(IrnTnk, "IronTank");
