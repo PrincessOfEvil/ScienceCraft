@@ -9,7 +9,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
-public class TileIrnTnk extends TileEntity implements ITankContainer //TODO: This motherfucker crashes.
+public class TileIrnTnk extends ACEntity implements ITankContainer //TODO: This motherfucker crashes.
 	{
 	public LiquidTank IrnTnk = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 32);
 	
