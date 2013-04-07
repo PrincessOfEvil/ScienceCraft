@@ -1,4 +1,4 @@
-package lazmod;
+package mods.lazmod;
 
 /**
 Energy/matter class.

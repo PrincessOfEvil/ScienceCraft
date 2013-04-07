@@ -1,6 +1,8 @@
-package lazmod;
+package mods.lazmod;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,24 +27,24 @@ public class AnnihilationCraft
 	
 	public static Item Soul;
 	public static Item Space;
-			
+	
 	public static final CreativeTabs ACTab = new ACCreativeTab("ACTab");;
 	
-	@SidedProxy(clientSide = "lazmod.ACClient", serverSide= "lazmod.ACProxy")
-	public static ACProxy proxy;
+	//@SidedProxy(clientSide = "mods.lazmod.ACClient", serverSide= "mods.lazmod.ACProxy")
+	//public static ACProxy proxy;
 	
 	public static ACSystem TempSystem;
 	
 	@Init
 	public void load(FMLInitializationEvent event)
 		{
-		proxy.registerRenderers();
+		//proxy.registerRenderers();
 		
-		Soul = new ItemSoul(30000-256/*Yea.*/).setItemName("soulItem").setCreativeTab(this.ACTab);
-		Space = new ItemSpace(30001-256).setItemName("spaceItem").setCreativeTab(this.ACTab);
+		Soul = new ItemSoul(30000-256).setUnlocalizedName("soulItem").setCreativeTab(this.ACTab);
+		Space = new ItemSpace(30001-256).setUnlocalizedName("spaceItem").setCreativeTab(this.ACTab);
 		
-		FField = new BlockFField(1240, 0).setBlockUnbreakable().setLightValue(0.4F).setBlockName("ffield").setCreativeTab(this.ACTab);
-		IrnTnk = new BlockIrnTnk(1241, 0).setHardness(6F).setBlockName("irntnk").setCreativeTab(this.ACTab);
+		FField = new BlockFField(1240).setUnlocalizedName("ffield").setBlockUnbreakable().setLightValue(0.4F).setCreativeTab(this.ACTab);
+		IrnTnk = new BlockIrnTnk(1241).setUnlocalizedName("irntnk").setHardness(6F).setCreativeTab(this.ACTab);
 		
 		TempSystem = new ACSystem(1000,1000);
 		

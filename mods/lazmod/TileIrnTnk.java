@@ -1,4 +1,4 @@
-package lazmod;
+package mods.lazmod;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -9,7 +9,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
-public class TileIrnTnk extends ACEntity implements ITankContainer //TODO: This motherfucker crashes.
+public class TileIrnTnk extends ACEntity implements ITankContainer //TODO: crash.
 	{
 	public LiquidTank IrnTnk = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 32);
 	

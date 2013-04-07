@@ -1,4 +1,4 @@
-package lazmod;
+package mods.lazmod;
 
 import net.minecraft.tileentity.TileEntity;
 
