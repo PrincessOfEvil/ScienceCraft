@@ -1,7 +1,6 @@
 package mods.lazmod;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
@@ -99,17 +98,17 @@ public class TileIrnTnk extends ACEntity implements ITankContainer //TODO: crash
 		return IrnTnk;
 		}
 	
-	private int timer = 1;
-	public void updateEntity()
-		{
-		this.timer++;
-		if (this.timer > 32) {this.timer = 1;}
-		if (this.timer == 32)
-			{
-			AnnihilationCraft.TempSystem.addMatter(-1);
-			System.out.println("Matter: "+AnnihilationCraft.TempSystem.getEnergy());
-			}
-		System.out.println("Timer: "+this.timer);
-		}
+//	private int timer = 1;
+//	public void updateEntity()
+//		{
+//		this.timer++;
+//		if (this.timer > 32) {this.timer = 1;}
+//		if (this.timer == 32)
+//			{
+//			AnnihilationCraft.TempSystem.addMatter(-1);
+//			System.out.println("Matter: "+AnnihilationCraft.TempSystem.getMatter());
+//			}
+//		System.out.println("Timer: "+this.timer);
+//		}
 	}
 	

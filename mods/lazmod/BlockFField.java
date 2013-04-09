@@ -12,6 +12,9 @@ public class BlockFField extends Block
 	public BlockFField(int i)
 		{
 		super(i, Material.glass); //TODO: Material
+        this.slipperiness = 1.5F;
+        this.blockParticleGravity = 0.0F;
+        setLightOpacity(1);
 		}
 	@Override
     public int getMobilityFlag()

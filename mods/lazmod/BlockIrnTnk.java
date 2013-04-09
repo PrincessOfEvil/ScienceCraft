@@ -87,9 +87,9 @@ public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
 			}
 		}
 	private boolean localFlag;
-	@Override
-	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
-		{
-		return true;
-        }
+//	@Override
+//	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
+//		{
+//		return true;
+//      }
 	}
