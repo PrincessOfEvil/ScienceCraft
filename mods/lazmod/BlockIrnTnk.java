@@ -22,7 +22,7 @@ public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
 	@Override
 	public int idDropped(int i, Random random, int j)
 		{
-		return AnnihilationCraft.IrnTnk.blockID;
+		return HighEnergyCraft.IrnTnk.blockID; //TODO: Save liquid
 		}
 	@Override
 	public int quantityDropped(Random random)

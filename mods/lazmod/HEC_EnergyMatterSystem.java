@@ -4,7 +4,7 @@ package mods.lazmod;
 Energy/matter class.
 Actually, I don't know how to call it.
 */
-public class ACSystem
+public class HEC_EnergyMatterSystem
 {
 	private int Energy;
 	private int Matter;
@@ -12,7 +12,7 @@ public class ACSystem
 	/**
 	Lazy constructor.
 	*/
-	public ACSystem()
+	public HEC_EnergyMatterSystem()
 		{
 		this.Energy = 100500;
 		this.Matter = 100500;
@@ -20,7 +20,7 @@ public class ACSystem
 	/**
 	Constructor. I'm pretty sure it's done O_o
 	*/
-	public ACSystem(int energy, int matter)
+	public HEC_EnergyMatterSystem(int energy, int matter)
 		{
 		this.Energy = energy;
 		this.Matter = matter;

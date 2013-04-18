@@ -14,10 +14,10 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 
-@Mod(modid = "AnnihilationCraft", name = "Annihilation Craft", version = "0.1 alpha")
+@Mod(modid = "HighEnergyCraft", name = "High Energy Craft", version = "0.11 alpha")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
-public class AnnihilationCraft
+public class HighEnergyCraft
 	{
 	public static Block FField;
 	public static Block IrnTnk;
@@ -25,12 +25,12 @@ public class AnnihilationCraft
 	public static Item Soul;
 	public static Item Space;
 	
-	public static final CreativeTabs ACTab = new ACCreativeTab("ACTab");;
+	public static final CreativeTabs ACTab = new HEC_CreativeTab("ACTab");;
 	
-	//@SidedProxy(clientSide = "mods.lazmod.ACClient", serverSide= "mods.lazmod.ACProxy")
+	//@SidedProxy(clientSide = "mods.lazmod.HEC_Client", serverSide= "mods.lazmod.HEC_Proxy")
 	//public static ACProxy proxy;
 	
-	public static ACSystem TempSystem;
+	public static HEC_EnergyMatterSystem TempSystem;
 	
 	@Init
 	public void load(FMLInitializationEvent event)
@@ -43,7 +43,7 @@ public class AnnihilationCraft
 		FField = new BlockFField(1240).setUnlocalizedName("ffield").setBlockUnbreakable().setLightValue(0.4F).setCreativeTab(this.ACTab);
 		IrnTnk = new BlockIrnTnk(1241).setUnlocalizedName("irntnk").setHardness(6F).setCreativeTab(this.ACTab);
 		
-		TempSystem = new ACSystem(1000,1000);
+		TempSystem = new HEC_EnergyMatterSystem(1000,1000);
 		
 		GameRegistry.registerBlock(FField, "ForceField");
 		GameRegistry.registerBlock(IrnTnk, "IronTank");
