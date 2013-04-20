@@ -2,6 +2,9 @@ package mods.lazmod;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -12,9 +15,9 @@ public class BlockFField extends Block
 	public BlockFField(int i)
 		{
 		super(i, Material.glass); //TODO: Material
-        this.slipperiness = 1.5F;
+        this.slipperiness = 1F;
         this.blockParticleGravity = 0.0F;
-        setLightOpacity(1);
+        this.setLightOpacity(1);
 		}
 	@Override
     public int getMobilityFlag()
@@ -46,7 +49,7 @@ public class BlockFField extends Block
 		{
 		return 1;
 		}
-
+	
 	@Override
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 		{

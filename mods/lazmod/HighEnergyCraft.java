@@ -14,7 +14,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 
-@Mod(modid = "HighEnergyCraft", name = "High Energy Craft", version = "0.11 alpha")
+@Mod(modid = "HighEnergyCraft", name = "HighEnergy Craft", version = "0.11 alpha")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 public class HighEnergyCraft
