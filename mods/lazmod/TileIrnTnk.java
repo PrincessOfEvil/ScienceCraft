@@ -24,16 +24,18 @@ public class TileIrnTnk extends HEC_Entity implements ITankContainer //TODO: cra
 			}
 		else
 			{
-			LiquidStack liquid = new LiquidStack(0, 0, 0);
-			liquid.readFromNBT(data.getCompoundTag("IrnTnk"));
-			IrnTnk.setLiquid(liquid);
+			LiquidStack liquid = LiquidStack.loadLiquidStackFromNBT(data.getCompoundTag("IrnTnk"));
+			if (liquid != null)
+				{
+				IrnTnk.setLiquid(liquid);
+				}
 			}
 		}
 	@Override
 	public void writeToNBT(NBTTagCompound data)
 		{
 		super.writeToNBT(data);
-		if (IrnTnk.getLiquid() != null)
+		if (IrnTnk.containsValidLiquid())
 			{
 			data.setTag("IrnTnk", IrnTnk.getLiquid().writeToNBT(new NBTTagCompound()));
 			}
@@ -85,12 +87,10 @@ public class TileIrnTnk extends HEC_Entity implements ITankContainer //TODO: cra
 	@Override
 	public ILiquidTank[] getTanks(ForgeDirection direction)
 		{
-		LiquidTank compositeTank = new LiquidTank(IrnTnk.getCapacity());
+		LiquidTank IrnTank = new LiquidTank(IrnTnk.getCapacity());
 
-		int capacity = IrnTnk.getCapacity();
-
-		compositeTank.setCapacity(capacity);
-		return new ILiquidTank[] { compositeTank };
+		IrnTank.setCapacity(IrnTnk.getCapacity());
+		return new ILiquidTank[] { IrnTank };
 		}
 	@Override
 	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type)

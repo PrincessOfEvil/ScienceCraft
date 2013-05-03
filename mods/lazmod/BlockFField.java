@@ -53,13 +53,13 @@ public class BlockFField extends Block
 	@Override
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 		{
-		return super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, 1 - par5);
+		return true;
 		}
 	
 	@Override
-	public void registerIcons(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister IconRegister)
 		{
-		this.blockIcon = par1IconRegister.registerIcon("lazmod:blockFField");
+		this.blockIcon = IconRegister.registerIcon("lazmod:blockFField");
 		}
 
 	}
