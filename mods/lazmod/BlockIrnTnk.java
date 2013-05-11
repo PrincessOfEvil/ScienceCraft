@@ -69,9 +69,9 @@ public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
 			{
 			return iconSaver[1];
 			}
-		}
+		} 
 	@Override
-    public Icon getBlockTextureFromSideAndMetadata(int blockSide, int blockMeta)
+	public Icon getIcon(int blockSide, int metadata)
 		{
 		if (blockSide == 0)
 			{
@@ -86,7 +86,10 @@ public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
 			return iconSaver[1];
 			}
 		}
-	private boolean localFlag;
+	
+	
+	
+	//private boolean localFlag;
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
 		{

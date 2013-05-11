@@ -11,8 +11,8 @@ public class ItemSoul extends Item
     	maxStackSize = 8;
         }
     @Override
-    public void updateIcons(IconRegister iconRegister)
+    public void registerIcons(IconRegister iconRegister)
     	{
-    	iconIndex = iconRegister.registerIcon("lazmod:itemSoul");
+    	itemIcon = iconRegister.registerIcon("lazmod:itemSoul");
     	}
 	}

@@ -15,7 +15,7 @@ public class BlockFField extends Block
 	public BlockFField(int i)
 		{
 		super(i, Material.glass); //TODO: Material
-        this.slipperiness = 1F;
+        this.slipperiness = 1.1F; //Enough to not slow down
         this.blockParticleGravity = 0.0F;
         this.setLightOpacity(1);
 		}

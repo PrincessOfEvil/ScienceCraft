@@ -11,8 +11,8 @@ public class ItemSpace extends Item
         maxStackSize = 64;
 		}
     @Override
-    public void updateIcons(IconRegister iconRegister)
+    public void registerIcons(IconRegister iconRegister)
     	{
-    	iconIndex = iconRegister.registerIcon("lazmod:itemSpace");
+    	itemIcon = iconRegister.registerIcon("lazmod:itemSpace");
     	}
 	}

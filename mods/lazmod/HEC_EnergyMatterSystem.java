@@ -10,7 +10,8 @@ public class HEC_EnergyMatterSystem
 	private int Matter;
 	
 	/**
-	Lazy constructor.
+	Constructor.
+	Sets energy and matter to 100500.
 	*/
 	public HEC_EnergyMatterSystem()
 		{
@@ -18,7 +19,7 @@ public class HEC_EnergyMatterSystem
 		this.Matter = 100500;
 		}
 	/**
-	Constructor. I'm pretty sure it's done O_o
+	Constructor.
 	*/
 	public HEC_EnergyMatterSystem(int energy, int matter)
 		{
@@ -27,7 +28,7 @@ public class HEC_EnergyMatterSystem
 		}
 	
 	/**
-	Relative setter. Fuck isGen.
+	Relative setter.
 	*/
 	public void addEnergy(int amount)
 		{

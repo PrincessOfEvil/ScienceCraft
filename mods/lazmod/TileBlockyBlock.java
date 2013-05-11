@@ -29,7 +29,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
     	{
     	thisBlockType = i;
     	}
-    
+
 	@Override
 	public int getSizeInventory() {
 		// TODO Auto-generated method stub
@@ -103,22 +103,20 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	}
 
 	@Override
-	public int[] getSizeInventorySide(int var1) {
+	public int[] getAccessibleSlotsFromSide(int var1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean func_102007_a(int par1, ItemStack par2ItemStack, int par3)
-		{
-        return this.isStackValidForSlot(par1, par2ItemStack);
-		}
-
-	@Override
-	public boolean func_102008_b(int i, ItemStack itemstack, int j)
-		{
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
 		// TODO Auto-generated method stub
 		return false;
-		}
-    
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	}

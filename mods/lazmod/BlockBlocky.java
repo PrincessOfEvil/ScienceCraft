@@ -50,8 +50,8 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock. It'll b
     	iconSaver = new Icon[3];
 
     	iconSaver[0] = par1IconRegister.registerIcon("lazmod:block"+"TB");
-		iconSaver[1] = par1IconRegister.registerIcon("lazmod:block"+"Side");
-		iconSaver[2] = par1IconRegister.registerIcon("lazmod:block"+"Face");
+		iconSaver[1] = par1IconRegister.registerIcon("lazmod:block"+"Face");
+		iconSaver[2] = par1IconRegister.registerIcon("lazmod:block"+"Side");
 		}
     @Override
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int blockSide)
@@ -64,29 +64,32 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock. It'll b
 			{
     		return iconSaver[0];
 			}
-    	if (blockSide == 1)
-			{
-    		return iconSaver[0];
-			}
-    	else
-			{
-    		return iconSaver[3];
-			}
-		}
-    @Override
-    public Icon getBlockTextureFromSideAndMetadata(int blockSide, int blockMeta)
-		{
-    	if (blockSide == 0)
-			{
-    		return iconSaver[0];
-			}
-    	if (blockSide == 1)
-			{
-    		return iconSaver[0];
-			}
-    	else
+    	if (blockSide == 2)
 			{
     		return iconSaver[1];
+			}
+    	else
+			{
+    		return iconSaver[2];
+			}
+		}
+	public Icon getIcon(int blockSide, int metadata)
+		{
+    	if (blockSide == 0)
+    		{
+    		return iconSaver[0];
+    		}
+    	if (blockSide == 1)
+			{
+    		return iconSaver[0];
+			}
+    	if (blockSide == 2)
+			{
+    		return iconSaver[1];
+			}
+    	else
+			{
+    		return iconSaver[2];
 			}
 		}
 	}
