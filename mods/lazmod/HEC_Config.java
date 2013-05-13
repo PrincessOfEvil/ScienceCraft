@@ -2,9 +2,8 @@ package mods.lazmod;
 
 import java.io.File;
 
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.event.Event;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class HEC_Config
 	{
