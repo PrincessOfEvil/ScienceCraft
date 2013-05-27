@@ -34,7 +34,7 @@ public class HighEnergyCraft
 
 	public static float Unawakening;
 	
-	protected registryThing Thing;
+	protected longThingsHandler Handler;
 	
 	public static final CreativeTabs ACTab = new HEC_CreativeTab("ACTab");;
 	
@@ -78,10 +78,10 @@ public class HighEnergyCraft
 		
 		TempSystem	= new HEC_EnergyMatterSystem(1000,1000);
 		
-		Thing		= new registryThing(); 
-		Thing.addNames();
-		Thing.addRecipes();
-		Thing.registerThings();
+		Handler		= new longThingsHandler(); 
+		Handler.addNames();
+		Handler.addRecipes();
+		Handler.registerThings();
 		
 		MinecraftForge.setBlockHarvestLevel(IrnTnk, "pickaxe", 2);
 		}

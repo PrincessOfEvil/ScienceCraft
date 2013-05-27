@@ -6,11 +6,11 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public class registryThing
+public class longThingsHandler
 	{
-	protected registryThing() {}
+	protected longThingsHandler() {}
 	
-	public static Block FField		= HighEnergyCraft.FField;
+	public static Block FField		= HighEnergyCraft.FField; // This is Java, after all
 	public static Block IrnTnk		= HighEnergyCraft.IrnTnk;
 	public static Block BlockyBlock	= HighEnergyCraft.BlockyBlock;
 	
