@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockFField extends Block
 	{
@@ -16,6 +17,13 @@ public class BlockFField extends Block
         this.blockParticleGravity = 0.0F;
         this.setLightOpacity(1);
 		}
+	
+	@Override
+	public boolean canDragonDestroy(World world, int x, int y, int z)
+		{
+		return false;
+		}
+
 	@Override
     public int getMobilityFlag()
 		{

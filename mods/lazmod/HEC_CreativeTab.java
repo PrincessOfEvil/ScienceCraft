@@ -14,6 +14,6 @@ public class HEC_CreativeTab extends CreativeTabs
         @SideOnly(Side.CLIENT)
         public int getTabIconItemIndex()
         	{
-        	return HighEnergyCraft.Space.itemID;
+        	return HighEnergyCraft.CraftingItem.itemID;
         	}
 	}
