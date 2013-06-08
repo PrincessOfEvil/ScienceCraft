@@ -2,8 +2,6 @@ package mods.lazmod;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -15,7 +13,7 @@ public class ItemCrafting extends Item
 	private Icon[] iconSaver;
 	public boolean hasSubtypes = true;
 	
-	private byte itemNumber = HighEnergyCraft.DateHandler.CraftingItemNumber;
+	private byte itemNumber = ScienceCraft.DateHandler.CraftingItemNumber;
 	
     public ItemCrafting(int i)
     	{
@@ -46,6 +44,6 @@ public class ItemCrafting extends Item
 		}
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 		{
-		return HighEnergyCraft.DateHandler.CraftingLocalization[par1ItemStack.getItemDamage()];
+		return ScienceCraft.DateHandler.CraftingLocalization[par1ItemStack.getItemDamage()];
 		}
 	}

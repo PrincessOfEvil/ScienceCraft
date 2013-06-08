@@ -15,10 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost implemented. It'll be Solar-powered Furnace right now.
 	{
@@ -31,7 +28,7 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
 	
 	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems)
 		{
-		for (int ix = 0; ix < HighEnergyCraft.DateHandler.BlockyBlockTypeAmount; ix++)
+		for (int ix = 0; ix < ScienceCraft.DateHandler.BlockyBlockTypeAmount; ix++)
 			{
 			subItems.add(new ItemStack(this, 1, ix));
 			}
@@ -58,7 +55,7 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
 		}
 	
 	private Icon[][] iconSaver;
-	private byte blockTypeAmount = HighEnergyCraft.DateHandler.BlockyBlockTypeAmount;
+	private byte blockTypeAmount = ScienceCraft.DateHandler.BlockyBlockTypeAmount;
 	
     public void registerIcons(IconRegister par1IconRegister)
 		{
@@ -66,10 +63,10 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
 
     	for (int tItemId = 0; tItemId < blockTypeAmount; tItemId++)
     		{
-    		iconSaver[tItemId][0] = par1IconRegister.registerIcon("lazmod:block"+HighEnergyCraft.DateHandler.BlockyBlockTypeName[tItemId]+"Bottom");
-    		iconSaver[tItemId][1] = par1IconRegister.registerIcon("lazmod:block"+HighEnergyCraft.DateHandler.BlockyBlockTypeName[tItemId]+"Top");
-    		iconSaver[tItemId][2] = par1IconRegister.registerIcon("lazmod:block"+HighEnergyCraft.DateHandler.BlockyBlockTypeName[tItemId]+"Face");
-    		iconSaver[tItemId][3] = par1IconRegister.registerIcon("lazmod:block"+HighEnergyCraft.DateHandler.BlockyBlockTypeName[tItemId]+"Side");
+    		iconSaver[tItemId][0] = par1IconRegister.registerIcon("lazmod:block"+ScienceCraft.DateHandler.BlockyBlockTypeName[tItemId]+"Bottom");
+    		iconSaver[tItemId][1] = par1IconRegister.registerIcon("lazmod:block"+ScienceCraft.DateHandler.BlockyBlockTypeName[tItemId]+"Top");
+    		iconSaver[tItemId][2] = par1IconRegister.registerIcon("lazmod:block"+ScienceCraft.DateHandler.BlockyBlockTypeName[tItemId]+"Face");
+    		iconSaver[tItemId][3] = par1IconRegister.registerIcon("lazmod:block"+ScienceCraft.DateHandler.BlockyBlockTypeName[tItemId]+"Side");
     		}
     	}
     @Override
@@ -145,7 +142,7 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
         	{
             return false;
             }
-        player.openGui(HighEnergyCraft.instance, 0, world, x, y, z);
+        player.openGui(ScienceCraft.instance, 0, world, x, y, z);
         return true;
     	}
 	}

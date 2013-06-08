@@ -4,7 +4,7 @@ package mods.lazmod;
 Energy/matter class.
 Actually, I don't know how to call it.
 */
-public class HEC_EnergyMatterSystem
+public class SC_EnergyMatterSystem
 {
 	private int Energy;
 	private int Matter;
@@ -13,7 +13,7 @@ public class HEC_EnergyMatterSystem
 	Constructor.
 	Sets energy and matter to 100500.
 	*/
-	public HEC_EnergyMatterSystem()
+	public SC_EnergyMatterSystem()
 		{
 		this.Energy = 100500;
 		this.Matter = 100500;
@@ -21,7 +21,7 @@ public class HEC_EnergyMatterSystem
 	/**
 	Constructor.
 	*/
-	public HEC_EnergyMatterSystem(int energy, int matter)
+	public SC_EnergyMatterSystem(int energy, int matter)
 		{
 		this.Energy = energy;
 		this.Matter = matter;

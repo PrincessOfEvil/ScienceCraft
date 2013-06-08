@@ -8,7 +8,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 
-public class TileIrnTnk extends HEC_Entity implements ITankContainer //TODO: crash.
+public class TileIrnTnk extends SC_Entity implements ITankContainer //TODO: crash.
 	{
 	public LiquidTank IrnTnk = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME * 32);
 	

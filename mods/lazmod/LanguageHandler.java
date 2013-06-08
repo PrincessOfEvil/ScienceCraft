@@ -31,12 +31,15 @@ public class LanguageHandler
 	
 	protected void addNames()
 		{
-		LanguageRegistry.addName(HighEnergyCraft.FField,		"Force Field"); //I need to use strings.
-		LanguageRegistry.addName(HighEnergyCraft.IrnTnk,		"Iron Tank");
-		LanguageRegistry.addName(HighEnergyCraft.BlockyBlock,	"Type-A TE Blocks");
+		LanguageRegistry.addName(ScienceCraft.FField,		"Force Field"); //TODO: I need to use strings. And load them. Later.
+		LanguageRegistry.addName(ScienceCraft.IrnTnk,		"Iron Tank");
+		LanguageRegistry.addName(ScienceCraft.BlockyBlock,	"Type-A TE Blocks");
 		
-		forL(HighEnergyCraft.DateHandler.BlockyLocalization,HighEnergyCraft.DateHandler.BlockyBlockTypeAmount,HighEnergyCraft.BlockyBlock);
-		forL(HighEnergyCraft.DateHandler.CraftingLocalization,HighEnergyCraft.DateHandler.CraftingItemNumber,HighEnergyCraft.CraftingItem);
+		LanguageRegistry.addName(ScienceCraft.Derivium,	"Derivium");
+		LanguageRegistry.addName(ScienceCraft.Emmitium,	"Emmitium");
+		
+		forL(ScienceCraft.DateHandler.BlockyLocalization,ScienceCraft.DateHandler.BlockyBlockTypeAmount,ScienceCraft.BlockyBlock);
+		forL(ScienceCraft.DateHandler.CraftingLocalization,ScienceCraft.DateHandler.CraftingItemNumber,ScienceCraft.CraftingItem);
 		
 		LanguageRegistry.instance().addStringLocalization("itemGroup.ACTab", "en_US", "Annihilation Craft");
 		}

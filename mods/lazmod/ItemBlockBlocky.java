@@ -20,6 +20,6 @@ public class ItemBlockBlocky extends ItemBlock
 		
 		public String getUnlocalizedName(ItemStack par1ItemStack)
 			{
-			return HighEnergyCraft.DateHandler.BlockyLocalization[par1ItemStack.getItemDamage()];
+			return ScienceCraft.DateHandler.BlockyLocalization[par1ItemStack.getItemDamage()];
 			}
 	}

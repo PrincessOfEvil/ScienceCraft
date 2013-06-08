@@ -1,6 +1,6 @@
 package mods.lazmod;
 
-public interface IHighPowered
+public interface ICrystalPowered
 
 	{
 	public int energyChanged();

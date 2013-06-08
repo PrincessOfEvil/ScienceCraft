@@ -6,13 +6,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileBlockyBlock extends TileEntity implements ISidedInventory //TODO: Alot, shiftclick
+public class TileBlockyBlock extends SC_Entity implements ISidedInventory //TODO: Alot, shiftclick
 	{
     public int blockMeta;
     
-    public	byte[] ISamnt = HighEnergyCraft.DateHandler.BlockyISamount;
+    public	byte[] ISamnt = ScienceCraft.DateHandler.BlockyISamount;
     
     private ItemStack[]	inventory;
 
@@ -119,7 +118,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	@Override
 	public String getInvName()
 		{
-		return HighEnergyCraft.DateHandler.BlockyLocalization[blockMeta];
+		return ScienceCraft.DateHandler.BlockyLocalization[blockMeta];
 		}
 
 	@Override

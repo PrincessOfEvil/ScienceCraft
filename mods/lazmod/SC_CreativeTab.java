@@ -4,9 +4,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class HEC_CreativeTab extends CreativeTabs
+public class SC_CreativeTab extends CreativeTabs
 	{
-    	public HEC_CreativeTab(String name)
+    	public SC_CreativeTab(String name)
     		{
             super(name);
     		}
@@ -14,6 +14,6 @@ public class HEC_CreativeTab extends CreativeTabs
         @SideOnly(Side.CLIENT)
         public int getTabIconItemIndex()
         	{
-        	return HighEnergyCraft.CraftingItem.itemID;
+        	return ScienceCraft.CraftingItem.itemID;
         	}
 	}

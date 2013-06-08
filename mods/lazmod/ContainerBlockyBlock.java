@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 public class ContainerBlockyBlock extends Container
 	{
@@ -18,9 +17,9 @@ public class ContainerBlockyBlock extends Container
     	
     	id = te.blockMeta;
     	
-    	for (byte ctr = 0; ctr < HighEnergyCraft.DateHandler.BlockyISamount[id]; ctr++)
+    	for (byte ctr = 0; ctr < ScienceCraft.DateHandler.BlockyISamount[id]; ctr++)
     		{
-    		addSlotToContainer(new Slot(te, ctr, HighEnergyCraft.DateHandler.BlockySlotCoordX[id][ctr], HighEnergyCraft.DateHandler.BlockySlotCoordY[id][ctr]));
+    		addSlotToContainer(new Slot(te, ctr, ScienceCraft.DateHandler.BlockySlotCoordX[id][ctr], ScienceCraft.DateHandler.BlockySlotCoordY[id][ctr]));
     		}
     	
     	bindPlayerInventory(inventoryPlayer);
