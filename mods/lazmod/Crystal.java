@@ -2,6 +2,7 @@ package mods.lazmod;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -57,5 +58,11 @@ public class Crystal extends BlockContainer
 	public TileEntity createNewTileEntity(World world)
 		{
 		return new TileCrystal(Type);
+		}
+	
+	@Override
+	public void registerIcons(IconRegister IconRegister)
+		{
+		this.blockIcon = IconRegister.registerIcon("lazmod:crystal"+Type);
 		}
 	}
