@@ -7,13 +7,8 @@ import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.liquids.ILiquidTank;
-import net.minecraftforge.liquids.ITankContainer;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidStack;
-import net.minecraftforge.liquids.LiquidTank;
 
-public class TileIrnTnk extends TileEntity implements IFluidTank //TODO: crash. Also, it's a copy of FTank.
+public class TileIrnTnk extends TileEntity implements IFluidTank //TODO: crash. Also, it's a copy of FhTank.
 	{
     protected FluidStack fluid;
     protected int capacity;

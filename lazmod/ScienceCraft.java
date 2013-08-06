@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -21,6 +22,7 @@ import lazmod.EMS.*;
 
 @Mod(modid = "ScienceCraft", name = "Science Craft", version = "0.111 alpha")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
+
 
 public class ScienceCraft
 	{
@@ -54,17 +56,17 @@ public class ScienceCraft
 	
 	public static DataHandler	DateHandler = new DataHandler();
 	
-	public static final CreativeTabs ACTab = new SC_CreativeTab("ACTab");
+	public static final CreativeTabs SCTab = new SC_CreativeTab("SCTab");
 	
 	//@SidedProxy(clientSide = "mods.lazmod.HEC_Client", serverSide= "mods.lazmod.HEC_Proxy")
 	//public static HEC_Proxy proxy;
 	
 	public static EnergyMatterSystem TempSystem;
 	
-    @Instance("HighEnergyCraft")
+    @Instance("ScienceCraft")
     public static ScienceCraft instance;
 
-	@PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
 		{
 		// We do what we must
@@ -89,17 +91,17 @@ public class ScienceCraft
 		DateHandler.addLocalizations();
 		}
 	
-	@Init
+    @EventHandler
 	public void load(FMLInitializationEvent event) // Warranty void if void.
 		{
-		FField			= new BlockFField(FField_Cfg).setUnlocalizedName("b.ffield").setBlockUnbreakable().setLightValue(0.4F).setCreativeTab(this.ACTab);
-		IrnTnk			= new BlockIrnTnk(IrnTnk_Cfg).setUnlocalizedName("b.irntnk").setHardness(6F).setCreativeTab(this.ACTab);
-		BlockyBlock		= new BlockBlocky(BlockyBlock_Cfg).setUnlocalizedName("b.lockyblock").setHardness(6F).setCreativeTab(this.ACTab);
+		FField			= new BlockFField(FField_Cfg).setUnlocalizedName("b.ffield").setBlockUnbreakable().setLightValue(0.4F).setCreativeTab(this.SCTab);
+		IrnTnk			= new BlockIrnTnk(IrnTnk_Cfg).setUnlocalizedName("b.irntnk").setHardness(6F).setCreativeTab(this.SCTab);
+		BlockyBlock		= new BlockBlocky(BlockyBlock_Cfg).setUnlocalizedName("b.lockyblock").setHardness(6F).setCreativeTab(this.SCTab);
 		
-		Derivium		= new Crystal(Derivium_Cfg,"Derivium").setUnlocalizedName("cr.derivium").setHardness(8F).setCreativeTab(this.ACTab).setLightValue(0.5F);
-		Emmitium		= new Crystal(Emmitium_Cfg,"Emmitium").setUnlocalizedName("cr.emmitium").setHardness(8F).setCreativeTab(this.ACTab).setLightValue(0.7F);	
+		Derivium		= new Crystal(Derivium_Cfg,"Derivium").setUnlocalizedName("cr.derivium").setHardness(8F).setCreativeTab(this.SCTab).setLightValue(0.5F);
+		Emmitium		= new Crystal(Emmitium_Cfg,"Emmitium").setUnlocalizedName("cr.emmitium").setHardness(8F).setCreativeTab(this.SCTab).setLightValue(0.7F);	
 		
-		CraftingItem	= new ItemCrafting((int)Unawakening).setUnlocalizedName("i.crafting").setCreativeTab(this.ACTab);
+		CraftingItem	= new ItemCrafting((int)Unawakening).setUnlocalizedName("i.crafting").setCreativeTab(this.SCTab);
 		
 		TempSystem		= new EnergyMatterSystem(1000,1000);
 		

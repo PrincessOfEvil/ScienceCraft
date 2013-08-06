@@ -148,14 +148,14 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	public void closeChest() {}
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack)
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 		{
 		if (getInvName() == "Solar Furnace" && i == 1) return false;
 		return true;
 		}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
+	public int[] getAccessibleSlotsFromSide(int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
