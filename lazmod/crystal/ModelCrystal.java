@@ -32,7 +32,6 @@ public class ModelCrystal extends ModelBase
         GL11.glPushMatrix();
        
         GL11.glTranslatef((float)x, (float)y, (float)z + 1f);
-
 		GL11.glScalef(0.5f*size, 0.5f*size, 0.5f*size);
 
 	    FMLClientHandler.instance().getClient().renderEngine.func_110577_a(new ResourceLocation("lazmod:textures/crystals/crystal"+Type+".png"));
