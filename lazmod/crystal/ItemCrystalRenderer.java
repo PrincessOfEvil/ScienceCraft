@@ -61,7 +61,7 @@ public class ItemCrystalRenderer implements IItemRenderer
 	    
 	    GL11.glDisable(GL11.GL_LIGHTING);
 	     
-	    GL11.glTranslatef(x, y - 1f, z - 1f);
+	    GL11.glTranslatef(x, y, z + 1f);
 	    GL11.glScalef(scale*3.5f, scale*3.5f, scale*3.5f);
 	    GL11.glRotatef(180f, 0f, 1f, 0f);
 	    

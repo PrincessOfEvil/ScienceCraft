@@ -31,16 +31,8 @@ public class ModelCrystal extends ModelBase
     	{
         GL11.glPushMatrix();
        
-      //GL11.glTranslatef((float)x + 0.5f, (float)y + 0.5f, (float)z + 0.5f);
-      //GL11.glScalef(0.5f, 0.5f, 0.5f);
-        if (Type == "Derivium")
-        	{
-            GL11.glTranslatef((float)x, (float)y, (float)z + 1f);
-        	}
-        else
-        	{
-        	GL11.glTranslatef((float)x + 0.25f, (float)y, (float)z + 1f - 0.25f);
-        	}
+        GL11.glTranslatef((float)x, (float)y, (float)z + 1f);
+
 		GL11.glScalef(0.5f*size, 0.5f*size, 0.5f*size);
 
 	    FMLClientHandler.instance().getClient().renderEngine.func_110577_a(new ResourceLocation("lazmod:textures/crystals/crystal"+Type+".png"));
