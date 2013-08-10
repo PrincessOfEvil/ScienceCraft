@@ -3,171 +3,85 @@ package lazmod.blocks.tileentities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 
-public class TileIrnTnk extends TileEntity implements IFluidTank //TODO: crash. Also, it's a copy of FhTank.
+public class TileIrnTnk extends TileEntity implements IFluidHandler //TODO: Texture.
 	{
-    protected FluidStack fluid;
-    protected int capacity;
-    protected TileEntity tile;
+    protected FluidTank tank;
 
+    public TileIrnTnk()
+		{
+    	this(null, 0);
+		}
+    
     public TileIrnTnk(int capacity)
     	{
         this(null, capacity);
     	}
 
-    public TileIrnTnk(FluidStack stack, int capacity)
+    public TileIrnTnk(FluidStack fluid, int capacity)
     	{
-        this.fluid = stack;
-        this.capacity = capacity;
+    	tank = new FluidTank(fluid,capacity * FluidContainerRegistry.BUCKET_VOLUME);
     	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound data)
 		{
 		super.readFromNBT(data);
-        if (!data.hasKey("Empty"))
-        	{
-            FluidStack fluid = FluidStack.loadFluidStackFromNBT(data);
-
-            if (fluid != null)
-            	{
-                setFluid(fluid);
-            	}
-        	}
+        tank.readFromNBT(data);
+        tank.setCapacity(data.getInteger("Capacity"));
 		}
 	@Override
 	public void writeToNBT(NBTTagCompound data)
 		{
 		super.writeToNBT(data);
-        if (fluid != null)
-        	{
-            fluid.writeToNBT(data);
-        	}
-        else 
-        	{
-        	data.setString("Empty", "");
-        	}
+        tank.writeToNBT(data);
+        data.setInteger("Capacity", tank.getCapacity());
 		}
-	
-	@Override
-	public FluidStack getFluid()
-		{
-		return fluid;
-		}
-    public void setFluid(FluidStack fluid)
-	{
-    this.fluid = fluid;
-	}
     
 	@Override
-	public int getFluidAmount()
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 		{
-        if (fluid == null)
-        	{
-            return 0;
-        	}
-        return fluid.amount;
+        return tank.fill(resource, doFill);
 		}
 	@Override
-	public int getCapacity()
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 		{
-		return capacity;
-		}
-    public void setCapacity(int capacity)
-    	{
-        this.capacity = capacity;
-    	}
-
-	@Override
-	public FluidTankInfo getInfo()
-		{
-        return new FluidTankInfo(this);
-		}
-
-	@Override
-	public int fill(FluidStack resource, boolean doFill)
-		{
-        if (resource == null)
-        	{
-            return 0;
-        	}
-        if (!doFill)
-        	{
-            if (fluid == null)
-            	{
-                return Math.min(capacity, resource.amount);
-            	}
-            if (!fluid.isFluidEqual(resource))
-            	{
-                return 0;
-            	}
-            return Math.min(capacity - fluid.amount, resource.amount);
-        	}
-        if (fluid == null)
-        	{
-            fluid = new FluidStack(resource, Math.min(capacity, resource.amount));
-
-            if (tile != null)
-            	{
-                FluidEvent.fireEvent(new FluidEvent.FluidFillingEvent(fluid, tile.worldObj, tile.xCoord, tile.yCoord, tile.zCoord, this));
-            	}
-            return fluid.amount;
-        	}
-        if (!fluid.isFluidEqual(resource))
-        	{
-            return 0;
-        	}
-        int filled = capacity - fluid.amount;
-
-        if (resource.amount < filled)
-        	{
-            fluid.amount += resource.amount;
-            filled = resource.amount;
-        	}
-        else
-        	{
-            fluid.amount = capacity;
-        	}
-        if (tile != null)
-        	{
-            FluidEvent.fireEvent(new FluidEvent.FluidFillingEvent(fluid, tile.worldObj, tile.xCoord, tile.yCoord, tile.zCoord, this));
-        	}
-        return filled;
-	}
-	@Override
-	public FluidStack drain(int maxDrain, boolean doDrain)
-		{
-        if (fluid == null)
+        if (resource == null || !resource.isFluidEqual(tank.getFluid()))
         	{
             return null;
         	}
-        int drained = maxDrain;
+        return tank.drain(resource.amount, doDrain);
+		}
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+		{
+        return tank.drain(maxDrain, doDrain);
+		}
 
-        if (fluid.amount < drained)
-        	{
-            drained = fluid.amount;
-        	}
-        
-        FluidStack stack = new FluidStack(fluid, drained);
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid)
+		{
+		return true;
+		}
 
-        if (doDrain)
-        	{
-            fluid.amount -= drained;
+	@Override
+	public boolean canDrain(ForgeDirection from, Fluid fluid)
+		{
+        return true;
+		}
 
-            if (fluid.amount <= 0)
-            	{
-                fluid = null;
-            	}
-            if (tile != null)
-            	{
-                FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(fluid, tile.worldObj, tile.xCoord, tile.yCoord, tile.zCoord, this));
-            	}
-        	}
-        return stack;
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection from)
+		{
+        return new FluidTankInfo[] {tank.getInfo()};
 		}
 	}
 	

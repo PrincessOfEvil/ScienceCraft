@@ -40,7 +40,7 @@ public class ItemCrafting extends Item
 	@Override
 	public void getSubItems(int par1, CreativeTabs tab, List subItems)
 		{
-		for (int tItemId = 0; tItemId < itemNumber; tItemId++)
+		for (int tItemId = 1; tItemId < itemNumber; tItemId++)
 			{
 			subItems.add(new ItemStack(par1, 1, tItemId));
 			}

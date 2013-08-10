@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerBlockyBlock extends Container
 	{
@@ -50,7 +51,7 @@ public class ContainerBlockyBlock extends Container
         	}
     	}
 
-    /*
+    
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot)
     	{
@@ -62,7 +63,7 @@ public class ContainerBlockyBlock extends Container
         	ItemStack stackInSlot = slotObject.getStack();
         	stack = stackInSlot.copy();
         	
-        	if (slot < 2)
+        	if (slot < tileEntity.ISamnt[tileEntity.blockMeta]-1)
         		{
         		if (!this.mergeItemStack(stackInSlot, 9, 45, true))
         			{
@@ -91,5 +92,5 @@ public class ContainerBlockyBlock extends Container
         	}
         return stack;
     	}
-    	*/
+    	
 	}

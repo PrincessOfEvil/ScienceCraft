@@ -41,6 +41,6 @@ public class LanguageHandler
 		forL(ScienceCraft.DateHandler.BlockyLocalization,ScienceCraft.DateHandler.BlockyBlockTypeAmount,ScienceCraft.BlockyBlock);
 		forL(ScienceCraft.DateHandler.CraftingLocalization,ScienceCraft.DateHandler.CraftingItemNumber,ScienceCraft.CraftingItem);
 		
-		LanguageRegistry.instance().addStringLocalization("itemGroup.ACTab", "en_US", "Annihilation Craft");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.SCTab", "en_US", "Science Craft");
 		}
 	}

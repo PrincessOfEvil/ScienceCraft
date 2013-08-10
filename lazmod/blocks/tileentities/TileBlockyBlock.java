@@ -11,12 +11,12 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileBlockyBlock extends TileEntity implements ISidedInventory //TODO: Alot, shiftclick
 	{
-    public int blockMeta;
+    public	int blockMeta;
     
     public	byte[] ISamnt = ScienceCraft.DateHandler.BlockyISamount;
     
     private ItemStack[]	inventory;
-
+    
     public TileBlockyBlock(int blockMeta) 
     	{
     	this.blockMeta = blockMeta;
@@ -41,7 +41,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		super.readFromNBT(tagCompound);
 		
         NBTTagList tagList = tagCompound.getTagList("Inventory");
-        for (int i = 0; i < tagList.tagCount(); i++)
+        for (byte i = 0; i < tagList.tagCount(); i++)
         	{
         	NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
         	byte slot = tag.getByte("Slot");
@@ -57,7 +57,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		super.writeToNBT(tagCompound);
 		
         NBTTagList itemList = new NBTTagList();
-        for (int i = 0; i < inventory.length; i++)
+        for (byte i = 0; i < inventory.length; i++)
         	{
             ItemStack stack = inventory[i];
             if (stack != null)
@@ -150,27 +150,34 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 		{
-		if (getInvName() == "Solar Furnace" && i == 1) return false;
+		if (blockMeta == 0 && i == 1) return false;
 		return true;
 		}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int i) {
-		// TODO Auto-generated method stub
+	public int[] getAccessibleSlotsFromSide(int i)
+		{
+		if (blockMeta == 0) 
+			{
+			if (i == 1) {return new int[]{0};}
+			else {return new int[]{1};}
+			}
 		return null;
-	}
+		}
  
 	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean canInsertItem(int i, ItemStack itemstack, int j)
+		{
+		if ((i == 1 && blockMeta == 0) || (j != 1 && blockMeta == 0)) {return false;}
+		return true;
+		}
 
 	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean canExtractItem(int i, ItemStack itemstack, int j)
+		{
+		if ((i == 0 && j != 1 && blockMeta == 0) || (i == 1 && j == 1 && blockMeta == 0)) {return false;}
+		return true;
+		}
 	
     public void smeltItem()
     	{
@@ -199,7 +206,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 
 	private boolean canSmelt()
 	    {
-	    if (this.inventory[0] == null || blockMeta != 0)
+	    if (this.inventory[0] == null)
 	    	{
 	        return false;
 	        }

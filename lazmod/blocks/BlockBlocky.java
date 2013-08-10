@@ -84,7 +84,7 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
 			{
     		return iconSaver[metadata][1];
 			}
-    	if (blockSide == 2)
+    	if (blockSide == 3)
 			{
     		return iconSaver[metadata][2];
 			}
