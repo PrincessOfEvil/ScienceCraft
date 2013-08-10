@@ -32,8 +32,6 @@ public class ScienceCraft
 	public static Block IrnTnk;
 	public static Block BlockyBlock;
 	
-	public static Block TestTank;
-	
 	public static Block Derivium;
 	public static Block Emmitium; // Guess what it does.
 	
@@ -102,8 +100,6 @@ public class ScienceCraft
 		IrnTnk			= new BlockIrnTnk	(IrnTnk_Cfg)				.setUnlocalizedName("b.irntnk")		.setHardness(6F)		.setCreativeTab(this.SCTab);
 		BlockyBlock		= new BlockBlocky	(BlockyBlock_Cfg)			.setUnlocalizedName("b.lockyblock")	.setHardness(6F)		.setCreativeTab(this.SCTab);
 		
-		TestTank		= new TankTest		(1243)						.setUnlocalizedName("b.tanktest")	.setHardness(6F)		.setCreativeTab(this.SCTab);
-		
 		Derivium		= new Crystal		(Derivium_Cfg,"Derivium")	.setUnlocalizedName("cr.derivium")	.setHardness(8F)		.setCreativeTab(this.SCTab).setLightValue(0.5F);
 		Emmitium		= new Crystal		(Emmitium_Cfg,"Emmitium")	.setUnlocalizedName("cr.emmitium")	.setHardness(8F)		.setCreativeTab(this.SCTab).setLightValue(0.7F);	
 		
@@ -118,8 +114,6 @@ public class ScienceCraft
 		ReciHandler.addRecipes();
 		RegiHandler.registerThings();
 		LangHandler.addNames();
-		
-		GameRegistry.registerBlock(TestTank, "TestTank");
 		
 		MinecraftForge.setBlockHarvestLevel(IrnTnk, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(BlockyBlock, "pickaxe", 1);
