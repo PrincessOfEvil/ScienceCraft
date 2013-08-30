@@ -3,7 +3,6 @@ package lazmod.items;
 import java.util.List;
 
 import lazmod.ScienceCraft;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -34,7 +33,13 @@ public class ItemCrafting extends Item
     @Override
     public Icon getIconFromDamage(int i)
     	{
-			return iconSaver[i];
+		return iconSaver[i];
+    	}
+    
+    @Override
+    public boolean requiresMultipleRenderPasses()
+    	{
+        return true;
     	}
     
 	@Override

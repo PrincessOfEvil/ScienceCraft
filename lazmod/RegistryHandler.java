@@ -1,6 +1,9 @@
 package lazmod;
 
-import lazmod.blocks.itemblocks.*;
+import buildcraft.factory.TileTank;
+import buildcraft.factory.render.RenderTank;
+import lazmod.blocks.itemblocks.ItemBlockBlocky;
+import lazmod.blocks.itemblocks.ItemBlockIrnTnk;
 import lazmod.blocks.tileentities.TileBlockyBlock;
 import lazmod.blocks.tileentities.TileIrnTnk;
 import lazmod.crystal.ItemCrystalRenderer;
@@ -23,12 +26,11 @@ public class RegistryHandler
 	protected void registerThings()
 		{
 		GameRegistry.registerBlock(ScienceCraft.FField, "ForceField");
-		GameRegistry.registerBlock(ScienceCraft.IrnTnk, "IronTank");
+		GameRegistry.registerBlock(ScienceCraft.IrnTnk, ItemBlockIrnTnk.class, "IronTank");
 		GameRegistry.registerBlock(ScienceCraft.BlockyBlock, ItemBlockBlocky.class, "BlockyBlock");
 		
 		GameRegistry.registerBlock(ScienceCraft.Emmitium, "Emmitium");
 		GameRegistry.registerBlock(ScienceCraft.Derivium, "Derivium");
-		
 		
 		GameRegistry.registerTileEntity(TileIrnTnk.class, "IronTankTile");
         GameRegistry.registerTileEntity(TileBlockyBlock.class, "BlockyBlockTile");
@@ -36,6 +38,7 @@ public class RegistryHandler
         GameRegistry.registerTileEntity(TileCrystal.class, "CrystalTile");
         
         ClientRegistry.bindTileEntitySpecialRenderer(TileCrystal.class, new TileCrystalRenderer());
+		
         MinecraftForgeClient.registerItemRenderer(ScienceCraft.Derivium.blockID, new ItemCrystalRenderer("Derivium"));
         MinecraftForgeClient.registerItemRenderer(ScienceCraft.Emmitium.blockID, new ItemCrystalRenderer("Emmitium"));
         

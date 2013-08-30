@@ -1,26 +1,21 @@
 package lazmod;
 
+import lazmod.EMS.EnergyMatterSystem;
+import lazmod.blocks.BlockBlocky;
+import lazmod.blocks.BlockFField;
+import lazmod.blocks.BlockIrnTnk;
+import lazmod.crystal.Crystal;
+import lazmod.items.ItemCrafting;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import lazmod.blocks.*;
-import lazmod.blocks.tileentities.TileIrnTnk;
-import lazmod.items.*;
-import lazmod.crystal.*;
-
-import lazmod.EMS.*;
 
 @Mod(modid = "ScienceCraft", name = "Science Craft", version = "0.111 alpha")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -33,7 +28,7 @@ public class ScienceCraft
 	public static Block BlockyBlock;
 	
 	public static Block Derivium;
-	public static Block Emmitium; // Guess what it does.
+	public static Block Emmitium; // Guess what it does. Well, will do.
 	
 	public static Item CraftingItem;
 	
@@ -60,8 +55,8 @@ public class ScienceCraft
 	
 	public static final CreativeTabs SCTab = new SC_CreativeTab("SCTab");
 	
-	//@SidedProxy(clientSide = "mods.lazmod.HEC_Client", serverSide= "mods.lazmod.HEC_Proxy")
-	//public static HEC_Proxy proxy;
+	//@SidedProxy(clientSide = "mods.lazmod.SC_Client", serverSide= "mods.lazmod.SC_Proxy")
+	//public static SC_Proxy proxy;
 	
 	public static EnergyMatterSystem TempSystem;
 	
