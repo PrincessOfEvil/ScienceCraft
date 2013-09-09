@@ -1,7 +1,5 @@
 package lazmod;
 
-import buildcraft.factory.TileTank;
-import buildcraft.factory.render.RenderTank;
 import lazmod.blocks.itemblocks.ItemBlockBlocky;
 import lazmod.blocks.itemblocks.ItemBlockIrnTnk;
 import lazmod.blocks.tileentities.TileBlockyBlock;

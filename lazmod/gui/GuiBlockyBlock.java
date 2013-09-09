@@ -31,7 +31,7 @@ public class GuiBlockyBlock extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     	{
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.func_110577_a(new ResourceLocation("lazmod:textures/gui/"+ScienceCraft.DateHandler.BlockyBlockTypeName[id]+".png"));
+        mc.renderEngine.bindTexture(new ResourceLocation("lazmod:textures/gui/"+ScienceCraft.DateHandler.BlockyBlockTypeName[id]+".png"));
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);

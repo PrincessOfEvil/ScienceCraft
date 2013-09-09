@@ -64,7 +64,7 @@ public class ItemCrystalRenderer implements IItemRenderer
 		GL11.glTranslatef(x, y, z);
 	    GL11.glScalef(scale*3f, scale*3f, scale*3f);
 	    
-	    FMLClientHandler.instance().getClient().renderEngine.func_110577_a(new ResourceLocation("lazmod:textures/crystals/crystal"+modelCrystal.Type+".png"));
+	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal"+modelCrystal.Type+".png"));
 	    
 	    modelCrystal.render();
 	    

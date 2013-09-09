@@ -43,11 +43,14 @@ public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
 	@Override
 	public TileEntity createNewTileEntity(World var1)
 		{
-		return tile = new TileIrnTnk(32);
+		return tile =  new TileIrnTnk(32);
 		}
-	
+		
 	public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 		{
+		tile = (TileIrnTnk) par1World.getBlockTileEntity(x, y, z);
+		if (tile == null) {System.out.println("FUUUUUUK");}
+		
         FluidTank tank = tile.tank;
 		
 		if (tank.getFluid() != null)
@@ -75,10 +78,18 @@ public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
 			}
 		return true;
 		}
+
+	@Override
+    public void onBlockHarvested(World par1World, int x, int y, int z, int meta, EntityPlayer par6EntityPlayer) 
+		{
+		tile = (TileIrnTnk) par1World.getBlockTileEntity(x, y, z);
+		
+        super.onBlockHarvested(par1World, x, y, z, meta, par6EntityPlayer);
+		}
 	
 	@Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int x, int y, int z, int st)
-    	{
+    	{		
         ItemStack itemstack = this.createStackedBlock(st);
         if (itemstack != null)
             {            
