@@ -59,16 +59,22 @@ public class ItemCrystalRenderer implements IItemRenderer
 	    {
 	    GL11.glPushMatrix();
 	    
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+	    
 	    GL11.glDisable(GL11.GL_LIGHTING);
 	     
-		GL11.glTranslatef(x, y, z);
+		GL11.glTranslatef(x, y - 0.5f, z);
 	    GL11.glScalef(scale*3f, scale*3f, scale*3f);
 	    
 	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal"+modelCrystal.Type+".png"));
 	    
 	    modelCrystal.render();
 	    
+	    GL11.glDisable(GL11.GL_BLEND);
+	    
 	    GL11.glEnable(GL11.GL_LIGHTING);
+	    
 	    GL11.glPopMatrix();
 	    }
 	}

@@ -23,6 +23,10 @@ public class ItemBlockIrnTnk extends ItemBlock
 			par3List.add("Fluid = " + fluid.getFluid().getName());
 			par3List.add("Fluid amount = " + ((Integer)fluid.amount).toString());
 			}
+		else
+			{
+			par3List.add("Empty");
+			}
 		}
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack)

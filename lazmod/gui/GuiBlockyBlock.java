@@ -13,11 +13,13 @@ import org.lwjgl.opengl.GL11;
 public class GuiBlockyBlock extends GuiContainer
 	{
 	private int id;
+	private TileBlockyBlock TE;
 	
     public GuiBlockyBlock (InventoryPlayer inventoryPlayer, TileBlockyBlock tileEntity)
     	{
     	super(new ContainerBlockyBlock(inventoryPlayer, tileEntity));
     	id = tileEntity.blockMeta;
+    	TE = tileEntity;
     	}
 
     @Override
@@ -25,6 +27,7 @@ public class GuiBlockyBlock extends GuiContainer
     	{
     	fontRenderer.drawString(ScienceCraft.DateHandler.BlockyLocalization[id], 8, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+    	fontRenderer.drawString(((Integer)(TE.charge)).toString(), 8, 16, 4210752);
     	}
 
     @Override

@@ -31,13 +31,18 @@ public class ModelCrystal extends ModelBase
     	{
         GL11.glPushMatrix();
        
-        GL11.glTranslatef((float)x+0.5f, (float)y + 0.5f, (float)z+0.5f);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        
+        GL11.glTranslatef((float)x+0.5f, (float)y, (float)z+0.5f);
 		GL11.glScalef(0.5f*size, 0.5f*size, 0.5f*size);
 		
 	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal"+Type+".png"));
 
         this.render();
 
+        GL11.glDisable(GL11.GL_BLEND);
+        
         GL11.glPopMatrix();
     	}
 	}

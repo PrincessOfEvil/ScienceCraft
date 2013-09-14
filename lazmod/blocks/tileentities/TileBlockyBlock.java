@@ -13,11 +13,15 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	{
     public	int blockMeta;
     
+    public	int charge;
+    
     public	byte[] ISamnt = ScienceCraft.DateHandler.BlockyISamount;
     
-    private ItemStack[]	inventory;
+    private	ItemStack[]	inventory;
     
-    public TileBlockyBlock(int blockMeta) 
+    public	TileBlockyBlock(){}
+    
+    public	TileBlockyBlock(int blockMeta) 
     	{
     	this.blockMeta = blockMeta;
     	inventory = new ItemStack[ISamnt[blockMeta]];
@@ -40,7 +44,13 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		{
 		super.readFromNBT(tagCompound);
 		
+		blockMeta = tagCompound.getInteger("BlockMeta");
+		inventory = new ItemStack[ISamnt[blockMeta]];
+		
+		charge = tagCompound.getInteger("Charge");
+		
         NBTTagList tagList = tagCompound.getTagList("Inventory");
+        System.out.println(tagList.tagCount());
         for (byte i = 0; i < tagList.tagCount(); i++)
         	{
         	NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
@@ -55,6 +65,10 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	public void writeToNBT(NBTTagCompound tagCompound) 
 		{
 		super.writeToNBT(tagCompound);
+		
+		tagCompound.setInteger("BlockMeta", blockMeta);
+		
+		tagCompound.setInteger("Charge", charge);
 		
         NBTTagList itemList = new NBTTagList();
         for (byte i = 0; i < inventory.length; i++)
@@ -72,6 +86,18 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		tagCompound.setTag("Inventory", itemList);
 		}
 
+    public void updateEntity()
+    	{
+    	if (charge <36000)
+    		{
+    		charge += worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*16;
+    		}
+    	if (canSmelt() && charge >= 9000)
+    		{
+    		this.smeltItem();
+    		charge -= 9000;
+    		}
+    	}
 
     @Override
     public ItemStack decrStackSize(int slot, int amt)
@@ -164,7 +190,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 			}
 		return null;
 		}
- 
+	
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j)
 		{
@@ -206,7 +232,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 
 	private boolean canSmelt()
 	    {
-	    if (this.inventory[0] == null)
+	    if (this.inventory[0] == null || blockMeta != 0)
 	    	{
 	        return false;
 	        }
@@ -215,7 +241,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	    	ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.inventory[0]);
 	    	if (itemstack == null) return false;
 	    	if (this.inventory[1] == null) return true;
-	    	if (!this.inventory[1].isItemEqual(itemstack)) return false;
+	    	if (this.inventory[1].isItemEqual(itemstack)) return true;
 	    	int result = inventory[1].stackSize + itemstack.stackSize;
 	    	return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
 	        }
