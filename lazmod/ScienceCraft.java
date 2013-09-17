@@ -95,8 +95,8 @@ public class ScienceCraft
 		IrnTnk			= new BlockIrnTnk	(IrnTnk_Cfg)				.setUnlocalizedName("b.irntnk")		.setHardness(6F)		.setCreativeTab(this.SCTab);
 		BlockyBlock		= new BlockBlocky	(BlockyBlock_Cfg)			.setUnlocalizedName("b.lockyblock")	.setHardness(6F)		.setCreativeTab(this.SCTab);
 		
-		Derivium		= new Crystal		(Derivium_Cfg,"Derivium")	.setUnlocalizedName("cr.derivium")	.setHardness(8F)		.setCreativeTab(this.SCTab).setLightValue(0.5F);
-		Emmitium		= new Crystal		(Emmitium_Cfg,"Emmitium")	.setUnlocalizedName("cr.emmitium")	.setHardness(8F)		.setCreativeTab(this.SCTab).setLightValue(0.7F);	
+		Derivium		= new Crystal		(Derivium_Cfg,"Derivium")	.setUnlocalizedName("cr.derivium")	.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.5F);
+		Emmitium		= new Crystal		(Emmitium_Cfg,"Emmitium")	.setUnlocalizedName("cr.emmitium")	.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.7F);	
 		
 		CraftingItem	= new ItemCrafting	((int)Unawakening)			.setUnlocalizedName("i.crafting")							.setCreativeTab(this.SCTab);
 		

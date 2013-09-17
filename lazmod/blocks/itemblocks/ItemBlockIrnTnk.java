@@ -13,6 +13,9 @@ public class ItemBlockIrnTnk extends ItemBlock
 	public ItemBlockIrnTnk(int par1)
 		{
 		super(par1);
+		setMaxDamage(32000);
+		maxStackSize = 1;
+		setNoRepair();
 		}
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) 
@@ -20,8 +23,8 @@ public class ItemBlockIrnTnk extends ItemBlock
 		FluidStack fluid = FluidStack.loadFluidStackFromNBT(par1ItemStack.stackTagCompound);
 		if (fluid != null)
 			{
-			par3List.add("Fluid = " + fluid.getFluid().getName());
-			par3List.add("Fluid amount = " + ((Integer)fluid.amount).toString());
+			par3List.add("Fluid: " + fluid.getFluid().getName());
+			par3List.add("Fluid amount: " + ((Integer)fluid.amount).toString() + " / 32000");
 			}
 		else
 			{

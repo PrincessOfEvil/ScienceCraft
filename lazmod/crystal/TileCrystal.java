@@ -1,13 +1,34 @@
 package lazmod.crystal;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileCrystal extends TileEntity
 	{
-	public String Type;
+	public String type;
+	public int size;
 	
-	public TileCrystal(String type)
+	public TileCrystal(){}
+	
+	public TileCrystal(int Size,String Type)
 		{
-		Type = type;
+		size = Size;
+		type = Type;
+		}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound data)
+		{
+		super.readFromNBT(data);
+		size = data.getInteger("Size");
+		type = data.getString("Type");
+		}
+
+	@Override
+	public void writeToNBT(NBTTagCompound data)
+		{
+		super.writeToNBT(data);
+		data.setInteger("Size", size);
+		data.setString("Type", type);
 		}
 	}

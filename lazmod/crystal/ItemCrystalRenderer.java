@@ -12,9 +12,9 @@ public class ItemCrystalRenderer implements IItemRenderer
 	{
     private ModelCrystal modelCrystal;
     
-    public ItemCrystalRenderer(String s)
+    public ItemCrystalRenderer(String type)
     	{
-    	modelCrystal = new ModelCrystal(s);
+    	modelCrystal = new ModelCrystal(1, type);
     	}
 	
 	@Override
@@ -64,10 +64,10 @@ public class ItemCrystalRenderer implements IItemRenderer
 	    
 	    GL11.glDisable(GL11.GL_LIGHTING);
 	     
-		GL11.glTranslatef(x, y - 0.5f, z);
+		GL11.glTranslatef(x, y - 0.75f, z);
 	    GL11.glScalef(scale*3f, scale*3f, scale*3f);
 	    
-	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal"+modelCrystal.Type+".png"));
+	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal"+modelCrystal.type+".png"));
 	    
 	    modelCrystal.render();
 	    

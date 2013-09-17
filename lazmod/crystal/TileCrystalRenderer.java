@@ -13,7 +13,7 @@ public class TileCrystalRenderer extends TileEntitySpecialRenderer
     	if(tileEntity instanceof TileCrystal)
     		{
     		TileCrystal tileCrystal = (TileCrystal)tileEntity;
-    		modelCrystal = new ModelCrystal(tileCrystal.Type);
+    		modelCrystal = new ModelCrystal(tileCrystal.size, tileCrystal.type);
     		modelCrystal.render(tileCrystal, x, y, z);
     		}
 	    }

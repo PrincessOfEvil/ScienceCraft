@@ -1,6 +1,7 @@
 package lazmod.blocks.tileentities;
 
 import lazmod.ScienceCraft;
+import lazmod.blocks.tileentities.handlers.ISolarHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,8 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
     public	int charge;
     
     public	byte[] ISamnt = ScienceCraft.DateHandler.BlockyISamount;
+    
+    public	ISolarHandler handler = ScienceCraft.DateHandler.BlockyHandler[blockMeta];
     
     private	ItemStack[]	inventory;
     
@@ -50,7 +53,6 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		charge = tagCompound.getInteger("Charge");
 		
         NBTTagList tagList = tagCompound.getTagList("Inventory");
-        System.out.println(tagList.tagCount());
         for (byte i = 0; i < tagList.tagCount(); i++)
         	{
         	NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
@@ -88,14 +90,14 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 
     public void updateEntity()
     	{
-    	if (charge <36000)
+    	if (charge <32000)
     		{
     		charge += worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*16;
     		}
-    	if (canSmelt() && charge >= 9000)
+    	if (canUse() && charge >= 8000)
     		{
-    		this.smeltItem();
-    		charge -= 9000;
+    		this.useItem();
+    		charge -= 8000;
     		}
     	}
 
@@ -158,7 +160,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	@Override
 	public int getInventoryStackLimit()
 		{
-		return 64;
+		return handler.getInventoryStackLimit();
 		}
 
 	@Override
@@ -174,76 +176,36 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	public void closeChest() {}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 		{
-		if (blockMeta == 0 && i == 1) return false;
-		return true;
+		return handler.isItemValidForSlot(slot);
 		}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int i)
+	public int[] getAccessibleSlotsFromSide(int side)
 		{
-		if (blockMeta == 0) 
-			{
-			if (i == 1) {return new int[]{0};}
-			else {return new int[]{1};}
-			}
-		return null;
+		return handler.getAccessibleSlotsFromSide(side);
 		}
 	
 	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j)
+	public boolean canInsertItem(int slot, ItemStack itemstack, int side)
 		{
-		if ((i == 1 && blockMeta == 0) || (j != 1 && blockMeta == 0)) {return false;}
-		return true;
+		return handler.canInsertItem(slot, side);
 		}
 
 	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j)
+	public boolean canExtractItem(int slot, ItemStack itemstack, int side)
 		{
-		if ((i == 0 && j != 1 && blockMeta == 0) || (i == 1 && j == 1 && blockMeta == 0)) {return false;}
-		return true;
+		return handler.canExtractItem(slot, side);
 		}
 	
-    public void smeltItem()
+	public void useItem()
     	{
-        if (this.canSmelt() && blockMeta == 0)
-        	{
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.inventory[0]);
-
-            if (this.inventory[1] == null)
-            	{
-                this.inventory[1] = itemstack.copy();
-            	}
-            else if (this.inventory[1].isItemEqual(itemstack))
-            	{
-            	inventory[1].stackSize += itemstack.stackSize;
-            	}
-
-            --this.inventory[0].stackSize;
-
-            if (this.inventory[0].stackSize <= 0)
-            	{
-                this.inventory[0] = null;
-            	}
-        	}
+		inventory = handler.useItem(inventory);
     	}
 
-
-	private boolean canSmelt()
+	private boolean canUse()
 	    {
-	    if (this.inventory[0] == null || blockMeta != 0)
-	    	{
-	        return false;
-	        }
-	    else
-	       	{
-	    	ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.inventory[0]);
-	    	if (itemstack == null) return false;
-	    	if (this.inventory[1] == null) return true;
-	    	if (this.inventory[1].isItemEqual(itemstack)) return true;
-	    	int result = inventory[1].stackSize + itemstack.stackSize;
-	    	return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
-	        }
+		return handler.canUse(inventory);
 	    }
 	}

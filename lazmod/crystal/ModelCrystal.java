@@ -11,14 +11,15 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelCrystal extends ModelBase
 	{
-    public String Type;
-    public float size = 2;
+    public String type;
+    public float size;
     
 	private IModelCustom modelCrystal;
     
-    public ModelCrystal(String s)
+    public ModelCrystal(int Size, String Type)
     	{
-    	Type = s;
+    	size = Size;
+    	type = Type;
     	modelCrystal = AdvancedModelLoader.loadModel("/assets/lazmod/models/crystal"+Type+".obj");
     	}
     
@@ -35,9 +36,9 @@ public class ModelCrystal extends ModelBase
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         
         GL11.glTranslatef((float)x+0.5f, (float)y, (float)z+0.5f);
-		GL11.glScalef(0.5f*size, 0.5f*size, 0.5f*size);
+		GL11.glScalef(0.25f*size, 0.25f*size, 0.25f*size);
 		
-	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal"+Type+".png"));
+	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal"+type+".png"));
 
         this.render();
 

@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
+public class BlockIrnTnk extends BlockContainer
 	{
 	public TileIrnTnk tile;
 	
@@ -33,13 +33,14 @@ public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
 	@Override
 	public int idDropped(int i, Random random, int j)
 		{
-		return ScienceCraft.IrnTnk.blockID; //TODO: Save liquid
+		return ScienceCraft.IrnTnk.blockID;
 		}
 	@Override
 	public int quantityDropped(Random random)
 		{
 		return 1;
 		}
+
 	@Override
 	public TileEntity createNewTileEntity(World var1)
 		{
@@ -107,6 +108,8 @@ public class BlockIrnTnk extends BlockContainer //TODO: Actual tank
             	}
         	
         	itemstack.setTagCompound(data);
+        	
+        	itemstack.setItemDamage(32000 - tile.tank.getFluidAmount());
         	
             par2EntityPlayer.addStat(StatList.mineBlockStatArray[this.blockID], 1);
             par2EntityPlayer.addExhaustion(0.025F);
