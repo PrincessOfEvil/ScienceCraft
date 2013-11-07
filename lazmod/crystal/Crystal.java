@@ -1,9 +1,13 @@
 package lazmod.crystal;
 
+import java.util.List;
+
+import lazmod.ScienceCraft;
 import lazmod.blocks.tileentities.TileIrnTnk;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,7 +20,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class Crystal extends BlockContainer
 	{
 	public String type;
-	public float size;
+	public float size = 2;
 	public Double sieT;
 	public TileCrystal TE; 
 	
@@ -24,18 +28,17 @@ public class Crystal extends BlockContainer
 		{
 		super(Int, Material.glass);
 		type = Type;
-		size = 2;
-		sieT = 0.5 - (size / 16);
+		sieT = 0.5 - (size / 8);
 		minX = sieT.doubleValue();
 		sieT= 0.0;
 		minY = sieT.doubleValue();
-		sieT=  0.5 - (size / 16) ;
+		sieT=  0.5 - (size / 8) ;
 		minZ = sieT.doubleValue();
-		sieT= 0.5 + (size / 16);
+		sieT= 0.5 + (size / 8);
 		maxX = sieT.doubleValue();
-		sieT= (double) (size / 8);
+		sieT= (double) (size / 4);
 		maxY = sieT.doubleValue();
-		sieT= 0.5 + (size / 16);
+		sieT= 0.5 + (size / 8);
 		maxZ = sieT.doubleValue();
 		}
 	
@@ -44,6 +47,19 @@ public class Crystal extends BlockContainer
 		{
 		return false;
 		}
+	
+	@Override
+	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems)
+	{
+	for (int sz = 1; sz < 5; sz++)
+		{
+		NBTTagCompound data = new NBTTagCompound();
+		data.setInteger("Size", sz);
+		ItemStack stack = new ItemStack(this, 1);
+		stack.setTagCompound(data);
+		subItems.add(stack);
+		}
+	}
 	
 	@Override
     public int getMobilityFlag()

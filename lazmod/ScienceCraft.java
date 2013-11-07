@@ -91,14 +91,14 @@ public class ScienceCraft
     @EventHandler
 	public void load(FMLInitializationEvent event) // Warranty void if void.
 		{
-		FField			= new BlockFField	(FField_Cfg)				.setUnlocalizedName("b.ffield")		.setBlockUnbreakable()	.setCreativeTab(this.SCTab).setLightValue(0.4F);
-		IrnTnk			= new BlockIrnTnk	(IrnTnk_Cfg)				.setUnlocalizedName("b.irntnk")		.setHardness(6F)		.setCreativeTab(this.SCTab);
-		BlockyBlock		= new BlockBlocky	(BlockyBlock_Cfg)			.setUnlocalizedName("b.lockyblock")	.setHardness(6F)		.setCreativeTab(this.SCTab);
+		FField			= new BlockFField	(FField_Cfg)				.setUnlocalizedName("ffield")		.setBlockUnbreakable()	.setCreativeTab(this.SCTab).setLightValue(0.4F);
+		IrnTnk			= new BlockIrnTnk	(IrnTnk_Cfg)				.setUnlocalizedName("irntnk")		.setHardness(6F)		.setCreativeTab(this.SCTab);
+		BlockyBlock		= new BlockBlocky	(BlockyBlock_Cfg)			.setUnlocalizedName("lockyblock")	.setHardness(6F)		.setCreativeTab(this.SCTab);
 		
-		Derivium		= new Crystal		(Derivium_Cfg,"Derivium")	.setUnlocalizedName("cr.derivium")	.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.5F);
-		Emmitium		= new Crystal		(Emmitium_Cfg,"Emmitium")	.setUnlocalizedName("cr.emmitium")	.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.7F);	
+		Derivium		= new Crystal		(Derivium_Cfg,"Derivium")	.setUnlocalizedName("derivium")		.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.5F);
+		Emmitium		= new Crystal		(Emmitium_Cfg,"Emmitium")	.setUnlocalizedName("emmitium")		.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.7F);	
 		
-		CraftingItem	= new ItemCrafting	((int)Unawakening)			.setUnlocalizedName("i.crafting")							.setCreativeTab(this.SCTab);
+		CraftingItem	= new ItemCrafting	((int)Unawakening)			.setUnlocalizedName("crafting")								.setCreativeTab(this.SCTab);
 		
 		TempSystem		= new EnergyMatterSystem(1000,1000);
 		

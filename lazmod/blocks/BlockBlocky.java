@@ -5,6 +5,7 @@ import java.util.Random;
 
 import lazmod.ScienceCraft;
 import lazmod.blocks.tileentities.TileBlockyBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

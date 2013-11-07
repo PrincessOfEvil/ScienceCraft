@@ -8,6 +8,7 @@ import lazmod.crystal.ItemCrystal;
 import lazmod.crystal.ItemCrystalRenderer;
 import lazmod.crystal.TileCrystal;
 import lazmod.crystal.TileCrystalRenderer;
+import lazmod.items.renderer.CraftingItemRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -40,6 +41,8 @@ public class RegistryHandler
 		
         MinecraftForgeClient.registerItemRenderer(ScienceCraft.Derivium.blockID, new ItemCrystalRenderer("Derivium"));
         MinecraftForgeClient.registerItemRenderer(ScienceCraft.Emmitium.blockID, new ItemCrystalRenderer("Emmitium"));
+        
+        MinecraftForgeClient.registerItemRenderer(ScienceCraft.CraftingItem.itemID, new CraftingItemRenderer());
         
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		}

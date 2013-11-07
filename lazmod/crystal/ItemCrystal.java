@@ -2,6 +2,7 @@ package lazmod.crystal;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
@@ -17,7 +18,7 @@ public class ItemCrystal extends ItemBlock
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4) 
 		{
-		if (itemStack.stackTagCompound.getInteger("Size") != 0)
+		if (itemStack.stackTagCompound != null)
 			{
 			list.add("Size: " + itemStack.stackTagCompound.getInteger("Size"));
 			}

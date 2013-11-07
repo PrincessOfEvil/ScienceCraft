@@ -1,7 +1,7 @@
 package lazmod.blocks.tileentities;
 
 import lazmod.ScienceCraft;
-import lazmod.blocks.tileentities.handlers.ISolarHandler;
+import lazmod.blocks.tileentities.handlers.SolarHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -12,15 +12,17 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileBlockyBlock extends TileEntity implements ISidedInventory //TODO: Alot, shiftclick
 	{
-    public	int blockMeta;
+    public	int					blockMeta;
     
-    public	int charge;
+    public	int					charge;
     
-    public	byte[] ISamnt = ScienceCraft.DateHandler.BlockyISamount;
+    public	boolean				isUsing;
     
-    public	ISolarHandler handler = ScienceCraft.DateHandler.BlockyHandler[blockMeta];
+    private	byte[]				ISamnt = ScienceCraft.DateHandler.BlockyISamount;
     
-    private	ItemStack[]	inventory;
+    private	static SolarHandler	handler;
+    
+    private	ItemStack[]			inventory;
     
     public	TileBlockyBlock(){}
     
@@ -28,6 +30,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
     	{
     	this.blockMeta = blockMeta;
     	inventory = new ItemStack[ISamnt[blockMeta]];
+    	handler = new SolarHandler(blockMeta);
     	}
 
 	@Override
@@ -48,6 +51,8 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		super.readFromNBT(tagCompound);
 		
 		blockMeta = tagCompound.getInteger("BlockMeta");
+		handler = new SolarHandler(blockMeta);
+
 		inventory = new ItemStack[ISamnt[blockMeta]];
 		
 		charge = tagCompound.getInteger("Charge");
@@ -90,14 +95,28 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 
     public void updateEntity()
     	{
-    	if (charge <32000)
+    	if (charge <= 32000)
     		{
     		charge += worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*16;
     		}
+    	if (charge > 32000)
+			{
+    		charge = 32000;
+			}
     	if (canUse() && charge >= 8000)
     		{
     		this.useItem();
     		charge -= 8000;
+    		isUsing = true;
+    		}
+    	else
+    		{
+    		isUsing = false;
+    		}
+    	if (handler.id != blockMeta)
+    		{
+    		handler = new SolarHandler(blockMeta);
+    		System.out.println("YAAAY");
     		}
     	}
 
