@@ -1,15 +1,15 @@
-package lazmod.blocks.tileentities.handlers;
+package lazmod.blocks.tileentities.logic;
 
 import lazmod.ScienceCraft;
 import net.minecraft.item.ItemStack;
 
-public class SolarHandler
+public class SolarLogic
 	{
 	public static int id;
 	
 	public static ICraftHandler handler;
 	
-	public SolarHandler(int Id)
+	public SolarLogic(int Id)
 		{
 		id = Id;
 		handler = ScienceCraft.DateHandler.BlockyCraftHandler[id];

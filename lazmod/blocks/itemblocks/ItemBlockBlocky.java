@@ -1,6 +1,7 @@
 package lazmod.blocks.itemblocks;
 
 import lazmod.ScienceCraft;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 

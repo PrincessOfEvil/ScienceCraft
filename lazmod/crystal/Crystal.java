@@ -2,8 +2,6 @@ package lazmod.crystal;
 
 import java.util.List;
 
-import lazmod.ScienceCraft;
-import lazmod.blocks.tileentities.TileIrnTnk;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -15,7 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 
 public class Crystal extends BlockContainer
 	{

@@ -4,11 +4,15 @@ import lazmod.EMS.EnergyMatterSystem;
 import lazmod.blocks.BlockBlocky;
 import lazmod.blocks.BlockFField;
 import lazmod.blocks.BlockIrnTnk;
+import lazmod.blocks.BlockWtrSrc;
 import lazmod.crystal.Crystal;
 import lazmod.items.ItemCrafting;
+import lazmod.items.ItemObsidianPick;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -25,6 +29,8 @@ public class ScienceCraft
 	{
 	public static Block FField;
 	public static Block IrnTnk;
+	public static Block WtrSrc;
+	
 	public static Block BlockyBlock;
 	
 	public static Block Derivium;
@@ -32,14 +38,22 @@ public class ScienceCraft
 	
 	public static Item CraftingItem;
 	
+	public static Item ObsidianPick;
+	
 	public static int FField_Cfg;
 	public static int IrnTnk_Cfg;
+	public static int WtrSrc_Cfg;
+	
 	public static int BlockyBlock_Cfg;
 	
 	public static int Derivium_Cfg;
 	public static int Emmitium_Cfg;
 	
 	public static float Unawakening;
+	
+	public static int ObsPick_Cfg;
+	
+	public static EnumToolMaterial SC_OBSIDIAN;
 	
 	// But no matter how distant
 	// In time and space...
@@ -71,36 +85,44 @@ public class ScienceCraft
 		
 		CFG = new SC_Config(event,"ScienceCraft/IDs.cfg");
 		
-		FField_Cfg		= CFG.config.get("Blocks",		"Force Field",		1240	 ).getInt();
-		IrnTnk_Cfg		= CFG.config.get("Blocks",		"Iron Tank",		1241	 ).getInt();
-		BlockyBlock_Cfg	= CFG.config.get("Blocks",		"Type-A TE Blocks",	1242	 ).getInt();
+		FField_Cfg		= CFG.config.get("Blocks",	"Force Field",			1240	 ).getInt();
+		IrnTnk_Cfg		= CFG.config.get("Blocks",	"Iron Tank",			1241	 ).getInt();
+		WtrSrc_Cfg		= CFG.config.get("Blocks",	"Infinite Water Source",1242	 ).getInt();
+		
+		BlockyBlock_Cfg	= CFG.config.get("Blocks",	"Type-A TE Blocks",		1250	 ).getInt();
 
-		Derivium_Cfg	= CFG.config.get("Crystals",	"Derivium",			1250	 ).getInt();
-		Emmitium_Cfg	= CFG.config.get("Crystals",	"Emmitium",			1251	 ).getInt();
+		Derivium_Cfg	= CFG.config.get("Crystals","Derivium",				1260	 ).getInt();
+		Emmitium_Cfg	= CFG.config.get("Crystals","Emmitium",				1261	 ).getInt();
 		
 		// Must I float away?
 		// Will I ever awake? 
-		Unawakening		= CFG.config.get("Items",		"Crafting items",	30000-256).getInt();
+		Unawakening		= CFG.config.get("Items",	"Crafting items",		30000-256).getInt();
+		
+		ObsPick_Cfg		= CFG.config.get("Items",	"Obsidian Pick",		30032-256).getInt();
 		
 		CFG.config.save();
 		
 		DateHandler.addValues();
 		DateHandler.addLocalizations();
+		
+		SC_OBSIDIAN = EnumHelper.addToolMaterial("SC Obsidian", 2, 500, 6.0F, 5, 24); 
 		}
 	
     @EventHandler
 	public void load(FMLInitializationEvent event) // Warranty void if void.
 		{
-		FField			= new BlockFField	(FField_Cfg)				.setUnlocalizedName("ffield")		.setBlockUnbreakable()	.setCreativeTab(this.SCTab).setLightValue(0.4F);
-		IrnTnk			= new BlockIrnTnk	(IrnTnk_Cfg)				.setUnlocalizedName("irntnk")		.setHardness(6F)		.setCreativeTab(this.SCTab);
-		BlockyBlock		= new BlockBlocky	(BlockyBlock_Cfg)			.setUnlocalizedName("lockyblock")	.setHardness(6F)		.setCreativeTab(this.SCTab);
+		FField			= new BlockFField		(FField_Cfg)				.setUnlocalizedName("ffield")		.setBlockUnbreakable()	.setCreativeTab(this.SCTab).setLightValue(0.4F);
+		IrnTnk			= new BlockIrnTnk		(IrnTnk_Cfg)				.setUnlocalizedName("irntnk")		.setHardness(6F)		.setCreativeTab(this.SCTab);
+		WtrSrc			= new BlockWtrSrc		(WtrSrc_Cfg)				.setUnlocalizedName("wtrsrc")		.setHardness(6F)		.setCreativeTab(this.SCTab);
 		
-		Derivium		= new Crystal		(Derivium_Cfg,"Derivium")	.setUnlocalizedName("derivium")		.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.5F);
-		Emmitium		= new Crystal		(Emmitium_Cfg,"Emmitium")	.setUnlocalizedName("emmitium")		.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.7F);	
+		BlockyBlock		= new BlockBlocky		(BlockyBlock_Cfg)			.setUnlocalizedName("blockyblock")	.setHardness(6F)		.setCreativeTab(this.SCTab);
 		
-		CraftingItem	= new ItemCrafting	((int)Unawakening)			.setUnlocalizedName("crafting")								.setCreativeTab(this.SCTab);
+		Derivium		= new Crystal			(Derivium_Cfg,"Derivium")	.setUnlocalizedName("derivium")		.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.5F);
+		Emmitium		= new Crystal			(Emmitium_Cfg,"Emmitium")	.setUnlocalizedName("emmitium")		.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.7F);	
 		
-		TempSystem		= new EnergyMatterSystem(1000,1000);
+		CraftingItem	= new ItemCrafting		((int)Unawakening)			.setUnlocalizedName("crafting")								.setCreativeTab(this.SCTab);
+		
+		ObsidianPick	= new ItemObsidianPick	(ObsPick_Cfg)				.setUnlocalizedName("obspick")								.setCreativeTab(this.SCTab);
 		
 		ReciHandler		= new RecipeHandler();
 		RegiHandler		= new RegistryHandler();

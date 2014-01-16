@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileIrnTnk extends TileEntity implements IFluidHandler //TODO: Texture.
+public class TileIrnTnk extends TileEntity implements IFluidHandler
 	{
     public FluidTank tank;
 

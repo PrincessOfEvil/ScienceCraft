@@ -1,7 +1,6 @@
-package lazmod.blocks.tileentities.handlers;
+package lazmod.blocks.tileentities.logic;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 
 public interface ICraftHandler
 

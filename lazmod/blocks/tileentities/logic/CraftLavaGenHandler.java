@@ -1,16 +1,14 @@
-package lazmod.blocks.tileentities.handlers;
+package lazmod.blocks.tileentities.logic;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-public class CraftSmasherHandler implements ICraftHandler
+public class CraftLavaGenHandler implements ICraftHandler
 	{
-    private static final CraftSmasherHandler craftBase = new CraftSmasherHandler();
+    private static final CraftLavaGenHandler craftBase = new CraftLavaGenHandler();
 	private HashMap<List<Integer>, ItemStack> craftList = new HashMap<List<Integer>, ItemStack>();
 	
 	public static final ICraftHandler staticInst()

@@ -1,11 +1,10 @@
 package lazmod.blocks.tileentities;
 
 import lazmod.ScienceCraft;
-import lazmod.blocks.tileentities.handlers.SolarHandler;
+import lazmod.blocks.tileentities.logic.SolarLogic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -20,7 +19,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
     
     private	byte[]				ISamnt = ScienceCraft.DateHandler.BlockyISamount;
     
-    private	static SolarHandler	handler;
+    private	static SolarLogic	logic;
     
     private	ItemStack[]			inventory;
     
@@ -30,7 +29,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
     	{
     	this.blockMeta = blockMeta;
     	inventory = new ItemStack[ISamnt[blockMeta]];
-    	handler = new SolarHandler(blockMeta);
+    	logic = new SolarLogic(blockMeta);
     	}
 
 	@Override
@@ -51,7 +50,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		super.readFromNBT(tagCompound);
 		
 		blockMeta = tagCompound.getInteger("BlockMeta");
-		handler = new SolarHandler(blockMeta);
+		logic = new SolarLogic(blockMeta);
 
 		inventory = new ItemStack[ISamnt[blockMeta]];
 		
@@ -113,10 +112,10 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
     		{
     		isUsing = false;
     		}
-    	if (handler.id != blockMeta)
+    	if (logic.id != blockMeta)
     		{
-    		handler = new SolarHandler(blockMeta);
-    		System.out.println("YAAAY");
+    		logic = new SolarLogic(blockMeta);
+    		System.out.println("TBB.update: -_-");
     		}
     	}
 
@@ -179,7 +178,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	@Override
 	public int getInventoryStackLimit()
 		{
-		return handler.getInventoryStackLimit();
+		return logic.getInventoryStackLimit();
 		}
 
 	@Override
@@ -197,34 +196,34 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 		{
-		return handler.isItemValidForSlot(slot);
+		return logic.isItemValidForSlot(slot);
 		}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 		{
-		return handler.getAccessibleSlotsFromSide(side);
+		return logic.getAccessibleSlotsFromSide(side);
 		}
 	
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemstack, int side)
 		{
-		return handler.canInsertItem(slot, side);
+		return logic.canInsertItem(slot, side);
 		}
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemstack, int side)
 		{
-		return handler.canExtractItem(slot, side);
+		return logic.canExtractItem(slot, side);
 		}
 	
 	public void useItem()
     	{
-		inventory = handler.useItem(inventory);
+		inventory = logic.useItem(inventory);
     	}
 
 	private boolean canUse()
 	    {
-		return handler.canUse(inventory);
+		return logic.canUse(inventory);
 	    }
 	}

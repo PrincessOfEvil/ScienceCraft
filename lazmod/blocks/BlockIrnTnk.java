@@ -22,13 +22,13 @@ import net.minecraftforge.fluids.FluidTank;
 public class BlockIrnTnk extends BlockContainer
 	{
 	public TileIrnTnk tile;
+	private Icon[] iconSaver;
 	
 	public BlockIrnTnk(int i)
 		{
 		super(i, Material.iron); //TODO: Material... Maybe.
 		}
-	
-	private Icon[] iconSaver;
+
 
 	@Override
 	public int idDropped(int i, Random random, int j)
@@ -90,7 +90,7 @@ public class BlockIrnTnk extends BlockContainer
 	
 	@Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int x, int y, int z, int st)
-    	{		
+    	{
         ItemStack itemstack = this.createStackedBlock(st);
         if (itemstack != null)
             {            

@@ -1,6 +1,5 @@
 package lazmod;
 
-import lazmod.blocks.tileentities.handlers.CraftSmasherHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,7 +23,7 @@ public class RecipeHandler
 		{
 		
 		/*
-		 *	Old pre-Forge recipes
+		 *	Old ML recipes
 		 */
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ScienceCraft.CraftingItem, 8, 1), new Object[]{Block.slowSand, Item.glassBottle, Item.glassBottle, Item.glassBottle, Item.glassBottle, Item.glassBottle, Item.glassBottle, Item.glassBottle, Item.glassBottle});
@@ -38,13 +37,14 @@ public class RecipeHandler
 		 *	Generic Tiles
 		 */
 		
-		GameRegistry.addRecipe(new ItemStack(ScienceCraft.IrnTnk, 1), new Object[]{ "314", "101", "#2#", Character.valueOf('0'), Block.glass, Character.valueOf('1'), Item.ingotIron, Character.valueOf('2'), Block.blockIron, Character.valueOf('3'), Item.redstone,Character.valueOf('2'), new ItemStack(Item.dyePowder, 1, 4)});
+		GameRegistry.addRecipe(new ItemStack(ScienceCraft.IrnTnk, 1), new Object[]{ "#11", "323", "11#", Character.valueOf('1'), Item.ingotIron, Character.valueOf('2'), Block.blockIron, Character.valueOf('3'), Item.redstone});
+		GameRegistry.addRecipe(new ItemStack(ScienceCraft.WtrSrc, 1), new Object[]{ "#11", "323", "11#", Character.valueOf('1'), Item.ingotIron, Character.valueOf('2'), Item.bucketWater, Character.valueOf('3'), Item.redstone});
 
+		
 		/*
 		 *	Solar machines
 		 */
 		
-		GameRegistry.addRecipe(new ItemStack(ScienceCraft.BlockyBlock, 1, 0), new Object[]{ "wVw", "xGx", "000", Character.valueOf('w'), isDerivium, Character.valueOf('V'), isEmmitium, Character.valueOf('x'), Item.redstone, Character.valueOf('G'), Block.furnaceIdle});
 	
 		/*	
 		 *	Solar Smasher recipes

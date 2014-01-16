@@ -33,10 +33,14 @@ public class LanguageHandler
 		{
 		LanguageRegistry.addName(ScienceCraft.FField,		"Force Field"); //TODO: I need to use strings. And load them. Later.
 		LanguageRegistry.addName(ScienceCraft.IrnTnk,		"Iron Tank");
+		LanguageRegistry.addName(ScienceCraft.WtrSrc,		"Infinite Water Source");
+		
 		LanguageRegistry.addName(ScienceCraft.BlockyBlock,	"Solar-Powered Type-B TE Blocks");
 		
-		LanguageRegistry.addName(ScienceCraft.Derivium,	"Derivium");
-		LanguageRegistry.addName(ScienceCraft.Emmitium,	"Emmitium");
+		LanguageRegistry.addName(ScienceCraft.Derivium,		"Derivium");
+		LanguageRegistry.addName(ScienceCraft.Emmitium,		"Emmitium");
+		
+		LanguageRegistry.addName(ScienceCraft.ObsidianPick,	"Obsidian Pick");
 		
 		forL(ScienceCraft.DateHandler.BlockyLocalization,ScienceCraft.DateHandler.BlockyBlockTypeAmount,ScienceCraft.BlockyBlock);
 		forL(ScienceCraft.DateHandler.CraftingLocalization,ScienceCraft.DateHandler.CraftingItemNumber,ScienceCraft.CraftingItem);
