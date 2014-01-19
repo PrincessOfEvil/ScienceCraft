@@ -1,6 +1,8 @@
 package lazmod.blocks.tileentities;
 
 import lazmod.ScienceCraft;
+import lazmod.EMS.EMSWaveEvent;
+import lazmod.EMS.EnergyMatterSystem.EMSType;
 import lazmod.blocks.tileentities.logic.SolarLogic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -8,8 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.event.ForgeSubscribe;
 
-public class TileBlockyBlock extends TileEntity implements ISidedInventory //TODO: Alot, shiftclick
+public class TileBlockyBlock extends EMSTileEntity implements ISidedInventory //TODO: Alot, shiftclick
 	{
     public	int					blockMeta;
     
@@ -23,6 +26,7 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
     
     private	ItemStack[]			inventory;
     
+    
     public	TileBlockyBlock(){}
     
     public	TileBlockyBlock(int blockMeta) 
@@ -32,6 +36,18 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
     	logic = new SolarLogic(blockMeta);
     	}
 
+	public void undoCharge()
+		{
+		if (maxAdded == true)
+			{
+			system.addMax(EMSType.ENERGY, -32000);
+			}
+		}
+	public int getCharge()
+		{
+		return system.get(EMSType.ENERGY);
+		}
+	
 	@Override
 	public int getSizeInventory()
 		{
@@ -51,10 +67,8 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		
 		blockMeta = tagCompound.getInteger("BlockMeta");
 		logic = new SolarLogic(blockMeta);
-
-		inventory = new ItemStack[ISamnt[blockMeta]];
 		
-		charge = tagCompound.getInteger("Charge");
+		inventory = new ItemStack[ISamnt[blockMeta]];
 		
         NBTTagList tagList = tagCompound.getTagList("Inventory");
         for (byte i = 0; i < tagList.tagCount(); i++)
@@ -74,8 +88,6 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		
 		tagCompound.setInteger("BlockMeta", blockMeta);
 		
-		tagCompound.setInteger("Charge", charge);
-		
         NBTTagList itemList = new NBTTagList();
         for (byte i = 0; i < inventory.length; i++)
         	{
@@ -91,32 +103,39 @@ public class TileBlockyBlock extends TileEntity implements ISidedInventory //TOD
 		
 		tagCompound.setTag("Inventory", itemList);
 		}
-
-    public void updateEntity()
-    	{
-    	if (charge <= 32000)
-    		{
-    		charge += worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*16;
-    		}
-    	if (charge > 32000)
+	
+	@ForgeSubscribe
+	@Override
+    public void onWaveEvent(EMSWaveEvent event)
+		{
+		if (!worldObj.isRemote)
 			{
-    		charge = 32000;
+			if (event.player.username == this.player)
+				{
+		    	if (maxAdded == false)
+					{
+		    		system.addMax(EMSType.ENERGY, 32000);
+		    		maxAdded = true;
+					}
+		    	system.add(EMSType.ENERGY,(int) (worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*320));
+		    	charge = system.get(EMSType.ENERGY);
+		    	if (canUse() && system.get(EMSType.ENERGY) >= 8000)
+		    		{
+		    		this.useItem();
+		    		system.add(EMSType.ENERGY,-8000);
+		    		isUsing = true;
+		    		}
+		    	else
+		    		{
+		    		isUsing = false;
+		    		}
+		    	if (logic.id != blockMeta)
+		    		{
+		    		System.out.println("TBB.update: -_-"+logic.toString());
+		    		logic = new SolarLogic(blockMeta);
+		    		}
+				}
 			}
-    	if (canUse() && charge >= 8000)
-    		{
-    		this.useItem();
-    		charge -= 8000;
-    		isUsing = true;
-    		}
-    	else
-    		{
-    		isUsing = false;
-    		}
-    	if (logic.id != blockMeta)
-    		{
-    		logic = new SolarLogic(blockMeta);
-    		System.out.println("TBB.update: -_-");
-    		}
     	}
 
     @Override

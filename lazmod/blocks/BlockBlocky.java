@@ -5,6 +5,7 @@ import java.util.Random;
 
 import lazmod.ScienceCraft;
 import lazmod.blocks.tileentities.TileBlockyBlock;
+import lazmod.blocks.tileentities.TileIrnTnk;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -25,8 +26,10 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
 		{
 		super(par1, Material.iron);
 		}
-	
+
+	public TileBlockyBlock tile;
 	public int blockMeta;
+	private EntityPlayer player;
 	
 	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems)
 		{
@@ -39,15 +42,16 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack)
 		{
-		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);
-
+		player = (EntityPlayer) par5EntityLiving;
 		blockMeta = par6ItemStack.getItemDamage();
+		tile.tileRegister(player.username);
+		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);
 		}
 	
 	@Override
 	public TileEntity createNewTileEntity(World var1)
 		{
-		return new TileBlockyBlock(blockMeta);
+		return tile = new TileBlockyBlock(blockMeta);
 		}
 	
 	@Override
@@ -96,6 +100,7 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
     public void breakBlock(World world, int x, int y, int z, int par5, int par6)
     	{
         dropItems(world, x, y, z);
+        tile.undoCharge();
         super.breakBlock(world, x, y, z, par5, par6);
     	}
     private void dropItems(World world, int x, int y, int z)

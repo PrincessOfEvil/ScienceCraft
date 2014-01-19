@@ -51,18 +51,18 @@ public class ContainerBlockyBlock extends Container
     public void addCraftingToCrafters(ICrafting par1ICrafting)
     	{
         super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0, this.tileEntity.charge);
+        par1ICrafting.sendProgressBarUpdate(this, 0, this.tileEntity.getCharge());
         par1ICrafting.sendProgressBarUpdate(this, 1, this.tileEntity.blockMeta);
     	}
     
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int codifier, int amount)
-    	{
+    	{	/*
         if (codifier == 0)
         	{
-        	this.tileEntity.charge = amount;
+        	this.tileEntity.setCharge(amount);
         	}
-
+    	 	 */
         if (codifier == 1)
         	{
         	this.tileEntity.blockMeta = amount;
@@ -76,19 +76,19 @@ public class ContainerBlockyBlock extends Container
         for (int i = 0; i < this.crafters.size(); ++i)
         	{
             ICrafting icrafting = (ICrafting)this.crafters.get(i);
-
-            if (this.lastCharge != this.tileEntity.charge)
+/*
+            if (this.lastCharge != this.tileEntity.getCharge())
             	{
-                icrafting.sendProgressBarUpdate(this, 0, this.tileEntity.charge);
+                icrafting.sendProgressBarUpdate(this, 0, this.tileEntity.getCharge());
             	}
-            
+ */
             if (this.lastBlockMeta != this.tileEntity.blockMeta)
             	{
                 icrafting.sendProgressBarUpdate(this, 1, this.tileEntity.blockMeta);
             	}
         	}
 
-        this.lastCharge = this.tileEntity.charge;
+        this.lastCharge = this.tileEntity.getCharge();
         this.lastBlockMeta = this.tileEntity.blockMeta;
     	}
     

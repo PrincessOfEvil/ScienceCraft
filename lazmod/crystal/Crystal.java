@@ -19,7 +19,8 @@ public class Crystal extends BlockContainer
 	public String type;
 	public float size = 2;
 	public Double sieT;
-	public TileCrystal TE; 
+	public TileCrystal tile;
+	private EntityPlayer player; 
 	
 	public Crystal(int Int, String Type)
 		{
@@ -93,7 +94,7 @@ public class Crystal extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world)
 		{
-		return TE = new TileCrystal((int) size,type);
+		return tile = new TileCrystal((int) size,type);
 		}
 	
 	@Override
@@ -105,14 +106,15 @@ public class Crystal extends BlockContainer
 	@Override
     public void onBlockHarvested(World par1World, int x, int y, int z, int meta, EntityPlayer par6EntityPlayer) 
 		{
-		TE = (TileCrystal) par1World.getBlockTileEntity(x, y, z);
-		
+		tile = (TileCrystal) par1World.getBlockTileEntity(x, y, z);
+        tile.undoCharge();
+        
         super.onBlockHarvested(par1World, x, y, z, meta, par6EntityPlayer);
 		}
 	
 	@Override
 	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int x, int y, int z, int st)
-		{		
+		{
 		ItemStack itemstack = this.createStackedBlock(st);
 		if (itemstack != null)
 			{            
@@ -131,7 +133,8 @@ public class Crystal extends BlockContainer
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemstack)
 		{
-		super.onBlockPlacedBy(world, x, y, z, entityliving, itemstack);
+		player = (EntityPlayer) entityliving;
+		tile.tileRegister(player.username);
 		
 		if (itemstack.stackTagCompound != null)
 			{
@@ -143,6 +146,7 @@ public class Crystal extends BlockContainer
 			{
 			size = 2;
 			}
+		super.onBlockPlacedBy(world, x, y, z, entityliving, itemstack);
 		}
     } 
 

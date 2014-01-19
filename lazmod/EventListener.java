@@ -18,39 +18,44 @@ public class EventListener
 	@ForgeSubscribe
 	public void playerJoinLoadEMS(EntityJoinWorldEvent event)
 		{
-		if (event.entity instanceof EntityPlayer)
+		if (!event.world.isRemote)
 			{
-			EntityPlayer entity = (EntityPlayer) event.entity;
-			int[] array;
-			
-			if (event.entity.getEntityData().getBoolean("EMS"))
+			if (event.entity instanceof EntityPlayer)
 				{
-				NBTTagCompound tags = entity.getEntityData();
-				array = tags.getIntArray("EMS_Amounts");
-				EnergyMatterSystem ems = new EnergyMatterSystem(entity, array);
+				EntityPlayer entity = (EntityPlayer) event.entity;
+				int[] array;
+				
+				if (event.entity.getEntityData().getBoolean("EMS"))
+					{
+					NBTTagCompound tags = entity.getEntityData();
+					array = tags.getIntArray("EMS_Amounts");
+					EnergyMatterSystem ems = new EnergyMatterSystem(entity, array);
+					
+					}
+				else
+					{
+					EnergyMatterSystem ems = new EnergyMatterSystem(entity);
+					}
 				}
-			else
-				{
-				EnergyMatterSystem ems = new EnergyMatterSystem(entity);
-				}
-
 			}
 		}
 	
 	@ForgeSubscribe
 	public void playerSaveEMS(Save event)
 		{
-		Iterator iterator = event.world.playerEntities.iterator();
-		while (iterator.hasNext())
+		if (!event.world.isRemote)
 			{
-			EntityPlayer entity = (EntityPlayer) iterator.next();
-			if (ScienceCraft.DateHandler.EMS.containsKey(entity.username))
+			Iterator iterator = event.world.playerEntities.iterator();
+			while (iterator.hasNext())
 				{
-				NBTTagCompound tags = entity.getEntityData();
-				tags.setBoolean("EMS", true);
-				tags.setIntArray("EMS_Amounts", ((EnergyMatterSystem)(ScienceCraft.DateHandler.EMS.get(entity.username))).get());
+				EntityPlayer entity = (EntityPlayer) iterator.next();
+				if (ScienceCraft.DateHandler.EMS.containsKey(entity.username))
+					{
+					NBTTagCompound tags = entity.getEntityData();
+					tags.setBoolean("EMS", true);
+					tags.setIntArray("EMS_Amounts", ((EnergyMatterSystem)(ScienceCraft.DateHandler.EMS.get(entity.username))).get());
+					}
 				}
 			}
 		}
-	
 	}

@@ -26,7 +26,7 @@ public class BlockIrnTnk extends BlockContainer
 	
 	public BlockIrnTnk(int i)
 		{
-		super(i, Material.iron); //TODO: Material... Maybe.
+		super(i, Material.iron);
 		}
 
 
@@ -49,35 +49,39 @@ public class BlockIrnTnk extends BlockContainer
 		
 	public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 		{
-		tile = (TileIrnTnk) par1World.getBlockTileEntity(x, y, z);
-		if (tile == null) {System.out.println("FUUUUUUK");}
-		
-        FluidTank tank = tile.tank;
-		
-		if (tank.getFluid() != null)
+		if (!par1World.isRemote)
 			{
-			int amount = tank.getFluidAmount();
+			tile = (TileIrnTnk) par1World.getBlockTileEntity(x, y, z);
+			if (tile == null) {System.out.println("BIT:FUUUUUUK");}
 			
-			par5EntityPlayer.addChatMessage("-------");
-			par5EntityPlayer.addChatMessage("Fluid = " + tank.getFluid().getFluid().getName());
-			switch ((int)(amount/8000f))
+	        FluidTank tank = tile.tank;
+			
+			if (tank.getFluid() != null)
 				{
-				case 0: par5EntityPlayer.addChatMessage("§9Fluid amount = " + ((Integer)amount).toString());
-				break;
-				case 1: par5EntityPlayer.addChatMessage("§aFluid amount = " + ((Integer)amount).toString());
-				break;
-				case 2: par5EntityPlayer.addChatMessage("§eFluid amount = " + ((Integer)amount).toString());
-				break;
-				case 3: par5EntityPlayer.addChatMessage("§6Fluid amount = " + ((Integer)amount).toString());
-				break;
-				case 4: par5EntityPlayer.addChatMessage("§cFluid amount = " + ((Integer)amount).toString());
-				break;
-				default:
-				break;
+				int amount = tank.getFluidAmount();
+				
+				par5EntityPlayer.addChatMessage("-------");
+				par5EntityPlayer.addChatMessage("Fluid = " + tank.getFluid().getFluid().getName());
+				switch ((int)(amount/8000f))
+					{
+					case 0: par5EntityPlayer.addChatMessage("§9Fluid amount = " + ((Integer)amount).toString());
+					break;
+					case 1: par5EntityPlayer.addChatMessage("§aFluid amount = " + ((Integer)amount).toString());
+					break;
+					case 2: par5EntityPlayer.addChatMessage("§eFluid amount = " + ((Integer)amount).toString());
+					break;
+					case 3: par5EntityPlayer.addChatMessage("§6Fluid amount = " + ((Integer)amount).toString());
+					break;
+					case 4: par5EntityPlayer.addChatMessage("§cFluid amount = " + ((Integer)amount).toString());
+					break;
+					default:
+					break;
+					}
+				par5EntityPlayer.addChatMessage("-------");
+				return true;
 				}
-			par5EntityPlayer.addChatMessage("-------");
 			}
-		return true;
+		return false;
 		}
 
 	@Override

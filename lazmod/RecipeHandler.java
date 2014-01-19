@@ -14,6 +14,12 @@ public class RecipeHandler
 	public ItemStack isSoul			= new ItemStack(ScienceCraft.CraftingItem, 1, 1);
 	public ItemStack isSpace		= new ItemStack(ScienceCraft.CraftingItem, 1, 2);
 
+	public ItemStack isIron			= new ItemStack(ScienceCraft.CraftingItem, 1, 3);
+	public ItemStack isGold			= new ItemStack(ScienceCraft.CraftingItem, 1, 4);
+	
+	public ItemStack isIron2		= new ItemStack(ScienceCraft.CraftingItem, 2, 3);
+	public ItemStack isGold2		= new ItemStack(ScienceCraft.CraftingItem, 2, 4);
+
 	public ItemStack isDerivium		= new ItemStack(ScienceCraft.Derivium, 1);
 	public ItemStack isEmmitium		= new ItemStack(ScienceCraft.Emmitium, 1);
 	
@@ -45,12 +51,24 @@ public class RecipeHandler
 		 *	Solar machines
 		 */
 		
+		
 	
 		/*	
-		 *	Solar Smasher recipes
+		 *	Solar recipes
 		 */
+		// Furnace
+		ScienceCraft.DateHandler.BlockyCraftHandler[0].addResult(isIron, new ItemStack(Item.ingotIron));
+		ScienceCraft.DateHandler.BlockyCraftHandler[0].addResult(isGold, new ItemStack(Item.ingotGold));
+		
+		// Smasher
 		ScienceCraft.DateHandler.BlockyCraftHandler[1].addResult(new ItemStack(Block.stone			), new ItemStack(Block.cobblestone	));
 		ScienceCraft.DateHandler.BlockyCraftHandler[1].addResult(new ItemStack(Block.cobblestone	), new ItemStack(Block.sand			));
 		ScienceCraft.DateHandler.BlockyCraftHandler[1].addResult(new ItemStack(Block.glass			), new ItemStack(Block.sand			));
+		
+		ScienceCraft.DateHandler.BlockyCraftHandler[1].addResult(new ItemStack(Block.oreIron		), isIron2							 );
+		ScienceCraft.DateHandler.BlockyCraftHandler[1].addResult(new ItemStack(Block.oreGold		), isGold2							 );
+		
+		// LavaGen
+		ScienceCraft.DateHandler.BlockyCraftHandler[2].addResult(new ItemStack(Block.obsidian		), new ItemStack(Block.lavaMoving));
 		}
 	}

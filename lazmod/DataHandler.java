@@ -27,7 +27,7 @@ public class DataHandler
 	public byte[][]				BlockySlotCoordY			= new byte			[BlockyBlockTypeAmount][BlockyBlockSlotAmount];
 
 	
-    public final byte			CraftingItemNumber			= 3;
+    public final byte			CraftingItemNumber			= 5;
 	public String[]				CraftingLocalization		= new String[CraftingItemNumber];
 
 	
@@ -79,7 +79,8 @@ public class DataHandler
 		CraftingLocalization[0]	= "Placeholder";
 		CraftingLocalization[1]	= "Soul in a Bottle";
 		CraftingLocalization[2]	= "Contained Spaaaace!";
-		
+		CraftingLocalization[3]	= "Iron Dust";
+		CraftingLocalization[4]	= "Gold Dust";
 		/*
 		EvilEnchantLocalization[0] = "";
 		EvilEnchantLocalization[1] = "";

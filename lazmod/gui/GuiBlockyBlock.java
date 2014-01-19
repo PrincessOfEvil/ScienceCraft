@@ -27,7 +27,7 @@ public class GuiBlockyBlock extends GuiContainer
     	{
     	fontRenderer.drawString(ScienceCraft.DateHandler.BlockyLocalization[id], 8, 6, 4210752);
         fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-    	fontRenderer.drawString(((Integer)(TE.charge)).toString(), 8, 16, 4210752);
+    	fontRenderer.drawString(((Integer)(TE.getCharge())).toString(), 8, 16, 4210752);
     	}
 
     @Override

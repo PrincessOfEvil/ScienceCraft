@@ -2,6 +2,7 @@ package lazmod;
 
 import lazmod.EMS.EnergyMatterSystem;
 import lazmod.blocks.BlockBlocky;
+import lazmod.blocks.BlockCrystF;
 import lazmod.blocks.BlockFField;
 import lazmod.blocks.BlockIrnTnk;
 import lazmod.blocks.BlockWtrSrc;
@@ -30,6 +31,7 @@ public class ScienceCraft
 	public static Block FField;
 	public static Block IrnTnk;
 	public static Block WtrSrc;
+	public static Block CrystF;
 	
 	public static Block BlockyBlock;
 	
@@ -43,6 +45,7 @@ public class ScienceCraft
 	public static int FField_Cfg;
 	public static int IrnTnk_Cfg;
 	public static int WtrSrc_Cfg;
+	public static int CrystF_Cfg;
 	
 	public static int BlockyBlock_Cfg;
 	
@@ -72,8 +75,6 @@ public class ScienceCraft
 	//@SidedProxy(clientSide = "mods.lazmod.SC_Client", serverSide= "mods.lazmod.SC_Proxy")
 	//public static SC_Proxy proxy;
 	
-	public static EnergyMatterSystem TempSystem;
-	
     @Instance("ScienceCraft")
     public static ScienceCraft instance;
 
@@ -88,6 +89,7 @@ public class ScienceCraft
 		FField_Cfg		= CFG.config.get("Blocks",	"Force Field",			1240	 ).getInt();
 		IrnTnk_Cfg		= CFG.config.get("Blocks",	"Iron Tank",			1241	 ).getInt();
 		WtrSrc_Cfg		= CFG.config.get("Blocks",	"Infinite Water Source",1242	 ).getInt();
+		CrystF_Cfg		= CFG.config.get("Blocks",	"Crystal Catcher",		1243	 ).getInt();
 		
 		BlockyBlock_Cfg	= CFG.config.get("Blocks",	"Type-A TE Blocks",		1250	 ).getInt();
 
@@ -114,6 +116,8 @@ public class ScienceCraft
 		FField			= new BlockFField		(FField_Cfg)				.setUnlocalizedName("ffield")		.setBlockUnbreakable()	.setCreativeTab(this.SCTab).setLightValue(0.4F);
 		IrnTnk			= new BlockIrnTnk		(IrnTnk_Cfg)				.setUnlocalizedName("irntnk")		.setHardness(6F)		.setCreativeTab(this.SCTab);
 		WtrSrc			= new BlockWtrSrc		(WtrSrc_Cfg)				.setUnlocalizedName("wtrsrc")		.setHardness(6F)		.setCreativeTab(this.SCTab);
+		CrystF			= new BlockCrystF		(CrystF_Cfg)				.setUnlocalizedName("crystf")		.setHardness(5F)		.setCreativeTab(this.SCTab);
+
 		
 		BlockyBlock		= new BlockBlocky		(BlockyBlock_Cfg)			.setUnlocalizedName("blockyblock")	.setHardness(6F)		.setCreativeTab(this.SCTab);
 		
@@ -133,6 +137,7 @@ public class ScienceCraft
 		LangHandler.addNames();
 		
 		MinecraftForge.setBlockHarvestLevel(IrnTnk, "pickaxe", 2);
+		MinecraftForge.setBlockHarvestLevel(WtrSrc, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(BlockyBlock, "pickaxe", 1);
 		}
 	}

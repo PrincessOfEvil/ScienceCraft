@@ -29,6 +29,7 @@ public class RegistryHandler
 		GameRegistry.registerBlock(ScienceCraft.FField, "ForceField");
 		GameRegistry.registerBlock(ScienceCraft.IrnTnk, ItemBlockIrnTnk.class, "IronTank");
 		GameRegistry.registerBlock(ScienceCraft.WtrSrc, "WtrSrc");
+		GameRegistry.registerBlock(ScienceCraft.CrystF, "CrystF");
 		
 		GameRegistry.registerBlock(ScienceCraft.BlockyBlock, ItemBlockBlocky.class, "BlockyBlock");
 		

@@ -2,6 +2,7 @@ package lazmod.EMS;
 
 import lazmod.ScienceCraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
 public class EnergyMatterSystem
 {
@@ -53,7 +54,7 @@ public class EnergyMatterSystem
 		}
 	 */
 	
-	enum EMSType {ENERGY, CASING, CONDUCTOR, CORE, CARBON, OMNIMATTER}
+	public static enum EMSType {ENERGY, CASING, CONDUCTOR, CORE, CARBON, OMNIMATTER}
 	
 	private EntityPlayer player;
 		
@@ -68,36 +69,30 @@ public class EnergyMatterSystem
 		carbon			= EMS[4];
 		omnimatter		= EMS[5];
 		
-		maxEnergy		= EMS[6];
-		maxCasing		= EMS[7];
-		maxConductor	= EMS[8];
-		maxCore			= EMS[9];
-		maxCarbon		= EMS[10];
-		maxOmnimatter	= EMS[11];
-		
 		addToList(cPlayer);
 		}
 	
 	public EnergyMatterSystem(EntityPlayer cPlayer)
 		{
-		this(cPlayer, new int[]{0,0,0,0,0,0, 0,0,0,0,0,0});
+		this(cPlayer, new int[]{0,0,0,0,0,0});
 		}
 	
 	private void addToList(EntityPlayer cPlayer)
 		{
 		ScienceCraft.DateHandler.EMS.put(cPlayer.username, this);
+		EMSWaveShooter shooter = new EMSWaveShooter(cPlayer);
 		}
 	
 	public void add(EMSType type, int amount)
 		{
 		switch (type)
 			{
-			case ENERGY		: energy	 += amount; break;
-			case CASING		: casing	 += amount; break;
-			case CONDUCTOR	: conductor	 += amount; break;
-			case CORE		: core		 += amount; break;
-			case CARBON		: carbon	 += amount; break;
-			case OMNIMATTER	: omnimatter += amount; break;
+			case ENERGY		: energy	 += amount; if (energy		> maxEnergy		) {energy		= maxEnergy		;} break;
+			case CASING		: casing	 += amount; if (casing		> maxCasing		) {casing		= maxCasing		;} break;
+			case CONDUCTOR	: conductor	 += amount; if (conductor	> maxConductor	) {conductor	= maxConductor	;} break;
+			case CORE		: core		 += amount; if (core		> maxCore		) {core			= maxCore		;} break;
+			case CARBON		: carbon	 += amount; if (carbon		> maxCarbon		) {carbon		= maxCarbon		;} break;
+			case OMNIMATTER	: omnimatter += amount; if (omnimatter	> maxOmnimatter	) {omnimatter	= maxOmnimatter	;} break;
 			}
 		}
 	public int get(EMSType type)

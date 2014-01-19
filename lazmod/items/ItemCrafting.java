@@ -29,6 +29,9 @@ public class ItemCrafting extends Item
     	iconSaver[0] = iconRegister.registerIcon("lazmod:itemDummy");
     	iconSaver[1] = iconRegister.registerIcon("lazmod:itemSoul");
     	iconSaver[2] = iconRegister.registerIcon("lazmod:itemSpace");
+    	
+    	iconSaver[3] = iconRegister.registerIcon("lazmod:itemDustIron");
+    	iconSaver[4] = iconRegister.registerIcon("lazmod:itemDustGold");
     	}
     @Override
     public Icon getIconFromDamage(int i)
@@ -39,7 +42,7 @@ public class ItemCrafting extends Item
     @Override
     public boolean requiresMultipleRenderPasses()
     	{
-        return true;
+        return false;
     	}
     
 	@Override
