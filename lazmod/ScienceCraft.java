@@ -1,6 +1,6 @@
 package lazmod;
 
-import lazmod.EMS.EnergyMatterSystem;
+import lazmod.CES.CrystalEnergySystem;
 import lazmod.blocks.BlockBlocky;
 import lazmod.blocks.BlockCrystF;
 import lazmod.blocks.BlockFField;
@@ -98,9 +98,9 @@ public class ScienceCraft
 		
 		// Must I float away?
 		// Will I ever awake? 
-		Unawakening		= CFG.config.get("Items",	"Crafting items",		30000-256).getInt();
+		Unawakening		= CFG.config.get("ItCES",	"Crafting itCES",		30000-256).getInt();
 		
-		ObsPick_Cfg		= CFG.config.get("Items",	"Obsidian Pick",		30032-256).getInt();
+		ObsPick_Cfg		= CFG.config.get("ItCES",	"Obsidian Pick",		30032-256).getInt();
 		
 		CFG.config.save();
 		

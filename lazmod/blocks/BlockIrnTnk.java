@@ -95,8 +95,8 @@ public class BlockIrnTnk extends BlockContainer
 	@Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int x, int y, int z, int st)
     	{
-        ItemStack itemstack = this.createStackedBlock(st);
-        if (itemstack != null)
+        ItemStack itCEStack = this.createStackedBlock(st);
+        if (itCEStack != null)
             {            
             NBTTagCompound data = new NBTTagCompound();
             
@@ -111,25 +111,25 @@ public class BlockIrnTnk extends BlockContainer
             	data.setString("Empty", "");
             	}
         	
-        	itemstack.setTagCompound(data);
+        	itCEStack.setTagCompound(data);
         	
-        	itemstack.setItemDamage(32000 - tile.tank.getFluidAmount());
+        	itCEStack.setItemDamage(32000 - tile.tank.getFluidAmount());
         	
             par2EntityPlayer.addStat(StatList.mineBlockStatArray[this.blockID], 1);
             par2EntityPlayer.addExhaustion(0.025F);
             
-            this.dropBlockAsItem_do(par1World, x, y, z, itemstack);
+            this.dropBlockAsItem_do(par1World, x, y, z, itCEStack);
             }
         } 
         
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemstack)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itCEStack)
 		{
-		super.onBlockPlacedBy(world, x, y, z, entityliving, itemstack);
+		super.onBlockPlacedBy(world, x, y, z, entityliving, itCEStack);
 		
-		if (itemstack.stackTagCompound != null)
+		if (itCEStack.stackTagCompound != null)
 			{
-			NBTTagCompound data = itemstack.stackTagCompound;
+			NBTTagCompound data = itCEStack.stackTagCompound;
         
 			tile.tank.setCapacity(data.getInteger("Capacity"));
         	

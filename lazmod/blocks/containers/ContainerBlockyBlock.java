@@ -57,12 +57,11 @@ public class ContainerBlockyBlock extends Container
     
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int codifier, int amount)
-    	{	/*
+    	{	
         if (codifier == 0)
         	{
         	this.tileEntity.setCharge(amount);
         	}
-    	 	 */
         if (codifier == 1)
         	{
         	this.tileEntity.blockMeta = amount;
@@ -76,12 +75,12 @@ public class ContainerBlockyBlock extends Container
         for (int i = 0; i < this.crafters.size(); ++i)
         	{
             ICrafting icrafting = (ICrafting)this.crafters.get(i);
-/*
+
             if (this.lastCharge != this.tileEntity.getCharge())
             	{
                 icrafting.sendProgressBarUpdate(this, 0, this.tileEntity.getCharge());
             	}
- */
+ 
             if (this.lastBlockMeta != this.tileEntity.blockMeta)
             	{
                 icrafting.sendProgressBarUpdate(this, 1, this.tileEntity.blockMeta);

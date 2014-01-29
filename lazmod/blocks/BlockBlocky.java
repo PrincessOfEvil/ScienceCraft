@@ -31,11 +31,11 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
 	public int blockMeta;
 	private EntityPlayer player;
 	
-	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems)
+	public void getSubBlocks(int unknown, CreativeTabs tab, List subItCES)
 		{
 		for (int ix = 0; ix < ScienceCraft.DateHandler.BlockyBlockTypeAmount; ix++)
 			{
-			subItems.add(new ItemStack(this, 1, ix));
+			subItCES.add(new ItemStack(this, 1, ix));
 			}
 		}
 	
@@ -99,11 +99,11 @@ public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost i
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6)
     	{
-        dropItems(world, x, y, z);
+        dropItCES(world, x, y, z);
         tile.undoCharge();
         super.breakBlock(world, x, y, z, par5, par6);
     	}
-    private void dropItems(World world, int x, int y, int z)
+    private void dropItCES(World world, int x, int y, int z)
     	{
         Random rand = new Random();
 

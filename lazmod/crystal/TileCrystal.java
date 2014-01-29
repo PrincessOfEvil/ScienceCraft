@@ -1,15 +1,14 @@
 package lazmod.crystal;
 
-import lazmod.EMS.EMSWaveEvent;
-import lazmod.EMS.EnergyMatterSystem.EMSType;
-import lazmod.blocks.tileentities.EMSTileEntity;
+import lazmod.CES.CESWaveEvent;
+import lazmod.blocks.tileentities.CESTileEntity;
 import lazmod.blocks.tileentities.logic.SolarLogic;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 
-public class TileCrystal extends EMSTileEntity
+public class TileCrystal extends CESTileEntity
 	{
 	public String type;
 	public int size;
@@ -17,10 +16,9 @@ public class TileCrystal extends EMSTileEntity
 	
 	public TileCrystal(){}
 	
-	public TileCrystal(int Size,String Type)
+	public TileCrystal(String cType)
 		{
-		size = Size;
-		type = Type;
+		type = cType;
 		MinecraftForge.EVENT_BUS.register(this);
 		}
 	
@@ -28,26 +26,26 @@ public class TileCrystal extends EMSTileEntity
 		{
 		if (maxAdded == true)
 			{
-			system.addMax(EMSType.ENERGY, -4000 * size);
+			system.addMax(-8000);
 			}
 		}
 	
 	@ForgeSubscribe
 	@Override
-    public void onWaveEvent(EMSWaveEvent event)
+    public void onWaveEvent(CESWaveEvent event)
 		{
 		if (!worldObj.isRemote)
 			if (this.type == "Derivium")
 			{
 				{
-				if (event.player.username == this.player)
+				if (event.player == this.player)
 					{
 			    	if (maxAdded == false)
 						{
-			    		system.addMax(EMSType.ENERGY, 4000 * size);
+			    		system.addMax(8000);
 			    		maxAdded = true;
 						}
-			    	system.add(EMSType.ENERGY,(int) (worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*320/4*size));
+			    	system.add((int) (worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*160));
 					}
 				}
 			}
@@ -57,7 +55,6 @@ public class TileCrystal extends EMSTileEntity
 	public void readFromNBT(NBTTagCompound data)
 		{
 		super.readFromNBT(data);
-		size = data.getInteger("Size");
 		type = data.getString("Type");
 		}
 
@@ -65,7 +62,6 @@ public class TileCrystal extends EMSTileEntity
 	public void writeToNBT(NBTTagCompound data)
 		{
 		super.writeToNBT(data);
-		data.setInteger("Size", size);
 		data.setString("Type", type);
 		}
 	}

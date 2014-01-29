@@ -2,73 +2,81 @@ package lazmod;
 
 import java.util.HashMap;
 
-import lazmod.EMS.EnergyMatterSystem;
+import lazmod.CES.CrystalEnergySystem;
 import lazmod.blocks.tileentities.logic.CraftFurnaceHandler;
 import lazmod.blocks.tileentities.logic.CraftLavaGenHandler;
 import lazmod.blocks.tileentities.logic.CraftSmasherHandler;
 import lazmod.blocks.tileentities.logic.ICraftHandler;
+import lazmod.blocks.tileentities.logic.SolarLogic;
 import net.minecraft.enchantment.Enchantment;
 
 public class DataHandler
 	{
 	public DataHandler() {};
 	
-    public final byte			BlockyBlockTypeAmount		= 3;
-    public final byte			BlockyBlockSlotAmount		= 2;
-    public final int			BlockyISlimit				= 64;
-	public byte[]				BlockyISamount				= new byte			[BlockyBlockTypeAmount];
-	public String[]				BlockyBlockTypeName			= new String		[BlockyBlockTypeAmount];
-	public String[]				BlockyLocalization			= new String		[BlockyBlockTypeAmount];
-	public int[]				BlockyDangerSlot			= new int			[BlockyBlockTypeAmount];
-	public ICraftHandler[]		BlockyCraftHandler			= new ICraftHandler	[BlockyBlockTypeAmount];
+    public final static byte		BlockyBlockTypeAmount		= 3;
+    public byte						BBType						= 0;
+    public final byte				BlockyBlockSlotAmount		= 2;
+    public final int				BlockyISlimit				= 64;
+	public byte[]					BlockyISamount				= new byte			[BlockyBlockTypeAmount];
+	public String[]					BlockyBlockTypeName			= new String		[BlockyBlockTypeAmount];
+	public String[]					BlockyLocalization			= new String		[BlockyBlockTypeAmount];
+	public int[]					BlockyDangerSlot			= new int			[BlockyBlockTypeAmount];
+	public static ICraftHandler[]	BlockyCraftHandler			= new ICraftHandler	[BlockyBlockTypeAmount];
+	public static SolarLogic[]		BlockyLogic					= new SolarLogic	[BlockyBlockTypeAmount];
 	
 	
-	public byte[][]				BlockySlotCoordX			= new byte			[BlockyBlockTypeAmount][BlockyBlockSlotAmount];
-	public byte[][]				BlockySlotCoordY			= new byte			[BlockyBlockTypeAmount][BlockyBlockSlotAmount];
+	public byte[][]					BlockySlotCoordX			= new byte			[BlockyBlockTypeAmount][BlockyBlockSlotAmount];
+	public byte[][]					BlockySlotCoordY			= new byte			[BlockyBlockTypeAmount][BlockyBlockSlotAmount];
 
 	
-    public final byte			CraftingItemNumber			= 5;
-	public String[]				CraftingLocalization		= new String[CraftingItemNumber];
+    public final byte				CraftingItemNumber			= 5;
+	public String[]					CraftingLocalization		= new String[CraftingItemNumber];
 
 	
-	public String 				EvilEnchantLocalization[]	= new String[Enchantment.enchantmentsList.length];
+	public String 					EvilEnchantLocalization[]	= new String[Enchantment.enchantmentsList.length];
 	
 	
-	public HashMap<String, EnergyMatterSystem> EMS			= new HashMap<String, EnergyMatterSystem>();
+	public HashMap<String, CrystalEnergySystem> CES = new HashMap<String, CrystalEnergySystem>();
 	
 	public void addValues()
 		{
-		BlockyBlockTypeName[0]	= "SolarFurnace";
-		BlockyISamount[0]		= 2;
-		BlockyDangerSlot[0]		= 1;
-		BlockyCraftHandler[0]	= CraftFurnaceHandler.staticInst();
+		BBType						= 0;
+		BlockyBlockTypeName[BBType]	= "SolarFurnace";
+		BlockyISamount[BBType]		= 2;
+		BlockyDangerSlot[BBType]	= 1;
+		BlockyCraftHandler[BBType]	= CraftFurnaceHandler.staticInst();
+		BlockyLogic[BBType]			= new SolarLogic(BBType);
 		
-		BlockySlotCoordX[0][0]	= 56;
-		BlockySlotCoordY[0][0]	= 35;
-		BlockySlotCoordX[0][1]	= 116;
-		BlockySlotCoordY[0][1]	= 35;
+		BlockySlotCoordX[BBType][0]	= 56;
+		BlockySlotCoordY[BBType][0]	= 35;
+		BlockySlotCoordX[BBType][1]	= 116;
+		BlockySlotCoordY[BBType][1]	= 35;
 		
+		BBType						= 1;
+		BlockyBlockTypeName[BBType]	= "SolarSmasher";
+		BlockyISamount[BBType]		= 2;
+		BlockyDangerSlot[BBType]	= 1;
+		BlockyCraftHandler[BBType]	= CraftSmasherHandler.staticInst();
+		BlockyLogic[BBType]			= new SolarLogic(BBType);
 		
-		BlockyBlockTypeName[1]	= "SolarSmasher";
-		BlockyISamount[1]		= 2;
-		BlockyDangerSlot[1]		= 1;
-		BlockyCraftHandler[1]	= CraftSmasherHandler.staticInst();
+		BlockySlotCoordX[BBType][0]	= 56;
+		BlockySlotCoordY[BBType][0]	= 35;
+		BlockySlotCoordX[BBType][1]	= 116;
+		BlockySlotCoordY[BBType][1]	= 35;
 		
-		BlockySlotCoordX[1][0]	= 56;
-		BlockySlotCoordY[1][0]	= 35;
-		BlockySlotCoordX[1][1]	= 116;
-		BlockySlotCoordY[1][1]	= 35;
+
+		BBType						= 2;
+		BlockyBlockTypeName[BBType]	= "SolarLavaGen";
+		BlockyISamount[BBType]		= 2;
+		BlockyDangerSlot[BBType]	= 1;
+		BlockyCraftHandler[BBType]	= CraftLavaGenHandler.staticInst();
+		BlockyLogic[BBType]			= new SolarLogic(BBType);
 		
-		
-		BlockyBlockTypeName[2]	= "SolarLavaGen";
-		BlockyISamount[2]		= 2;
-		BlockyDangerSlot[2]		= 1;
-		BlockyCraftHandler[2]	= CraftLavaGenHandler.staticInst();
-		
-		BlockySlotCoordX[2][0]	= 56;
-		BlockySlotCoordY[2][0]	= 35;
-		BlockySlotCoordX[2][1]	= 116;
-		BlockySlotCoordY[2][1]	= 35;
+		BlockySlotCoordX[BBType][0]	= 56;
+		BlockySlotCoordY[BBType][0]	= 35;
+		BlockySlotCoordX[BBType][1]	= 116;
+		BlockySlotCoordY[BBType][1]	= 35;
 		}
 	public void addLocalizations()
 		{

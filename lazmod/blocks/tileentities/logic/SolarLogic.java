@@ -48,15 +48,15 @@ public class SolarLogic
 		{
 		if (canUse(inventory))
 			{
-			ItemStack itemstack = handler.getCraftingResult(inventory[0]);
+			ItemStack itCEStack = handler.getCraftingResult(inventory[0]);
 
 			if (inventory[1] == null)
 				{
-				inventory[1] = itemstack.copy();
+				inventory[1] = itCEStack.copy();
 				}
-			else if (inventory[1].isItemEqual(itemstack))
+			else if (inventory[1].isItemEqual(itCEStack))
 				{
-				inventory[1].stackSize += itemstack.stackSize;
+				inventory[1].stackSize += itCEStack.stackSize;
 				}
 
 			--inventory[0].stackSize;
@@ -81,11 +81,11 @@ public class SolarLogic
 			}
 		else
 			{
-			ItemStack itemstack = handler.getCraftingResult(inventory[0]);
+			ItemStack itCEStack = handler.getCraftingResult(inventory[0]);
 			if (inventory[1] == null) return true;
-			if (inventory[1].isItemEqual(itemstack)) return true;
-			int result = inventory[1].stackSize + itemstack.stackSize;
-			return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
+			if (inventory[1].isItemEqual(itCEStack)) return true;
+			int result = inventory[1].stackSize + itCEStack.stackSize;
+			return (result <= getInventoryStackLimit() && result <= itCEStack.getMaxStackSize());
 			}
 		}
 

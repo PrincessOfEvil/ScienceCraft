@@ -14,7 +14,7 @@ public class ItemCrystalRenderer implements IItemRenderer
     
     public ItemCrystalRenderer(String type)
     	{
-    	modelCrystal = new ModelCrystal(1, type);
+    	modelCrystal = new ModelCrystal(type);
     	}
 	
 	@Override

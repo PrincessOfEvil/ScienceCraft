@@ -46,11 +46,11 @@ public class ItemCrafting extends Item
     	}
     
 	@Override
-	public void getSubItems(int par1, CreativeTabs tab, List subItems)
+	public void getSubItems(int par1, CreativeTabs tab, List SubItems)
 		{
 		for (int tItemId = 1; tItemId < itemNumber; tItemId++)
 			{
-			subItems.add(new ItemStack(par1, 1, tItemId));
+			SubItems.add(new ItemStack(par1, 1, tItemId));
 			}
 		}
 	public String getUnlocalizedName(ItemStack par1ItemStack)

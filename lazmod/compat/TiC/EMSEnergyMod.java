@@ -3,11 +3,11 @@ package lazmod.compat.TiC;
 import net.minecraft.item.ItemStack;
 import tconstruct.library.tools.ToolMod;
 
-public class EMSEnergyMod extends ToolMod
+public class CESEnergyMod extends ToolMod
 	{
-	public EMSEnergyMod(ItemStack[] items, int effect, String dataKey)
+	public CESEnergyMod(ItemStack[] itCES, int effect, String dataKey)
 		{
-		super(items, effect, dataKey);
+		super(itCES, effect, dataKey);
 		// TODO Auto-generated constructor stub
 		}
 

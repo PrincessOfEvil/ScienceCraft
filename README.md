@@ -5,7 +5,13 @@ Faithful 32x Pack (Thread link: minecraftforum.net/topic/72747) - thanks for som
 TODO: 
 WORKING TILE ENTITIES. Because I don't like bugs. (I love glitches though.) <= It'll be there forever.
 Crystals. They should do something.
-EMS.
+CES.
 Obsidian tools - iron-level, highly enchantable, only "evil" enchants (all of them, but with some funny tooltips).
 Imaginary_mass-bullet rifle - hard-to-make item that does nothing. Or something. (Spoiler: test of hitscan system. I HAVE to make hitscan before Elo or another engine-killer does that.)
 Cool-looking assembly table. 
+
+	private int casing;		// Iron, Steel
+	private int conductor;	// Copper, Silver, Gold
+	private int core;		// Sand, Glass, Obsidian
+	private int carbon;		// Coal, Diamond
+	private int omnimatter;	// Can substitute anything

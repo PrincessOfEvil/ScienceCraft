@@ -16,11 +16,10 @@ public class ModelCrystal extends ModelBase
     
 	private IModelCustom modelCrystal;
     
-    public ModelCrystal(int Size, String Type)
+    public ModelCrystal(String cType)
     	{
-    	size = Size;
-    	type = Type;
-    	modelCrystal = AdvancedModelLoader.loadModel("/assets/lazmod/models/crystal"+Type+".obj");
+    	type = cType;
+    	modelCrystal = AdvancedModelLoader.loadModel("/assets/lazmod/models/crystal"+cType+".obj");
     	}
     
     public void render()
@@ -36,7 +35,7 @@ public class ModelCrystal extends ModelBase
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         
         GL11.glTranslatef((float)x+0.5f, (float)y, (float)z+0.5f);
-		GL11.glScalef(0.25f*size, 0.25f*size, 0.25f*size);
+		GL11.glScalef(0.5f, 0.5f, 0.5f);
 		
 	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal"+type+".png"));
 

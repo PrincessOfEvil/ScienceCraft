@@ -50,10 +50,9 @@ public class RegistryHandler
         
 //		MinecraftForgeClient.registerItemRenderer(ScienceCraft.CraftingItem.itemID, new CraftingItemRenderer());
         
-
-        MinecraftForge.EVENT_BUS.register(new EventListener());
-        
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+
+		MinecraftForge.EVENT_BUS.register(new EventListener());
 		}
 	
 	}

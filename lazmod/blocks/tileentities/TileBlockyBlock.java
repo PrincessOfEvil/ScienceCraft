@@ -1,31 +1,23 @@
 package lazmod.blocks.tileentities;
 
 import lazmod.ScienceCraft;
-import lazmod.EMS.EMSWaveEvent;
-import lazmod.EMS.EnergyMatterSystem.EMSType;
+import lazmod.CES.CESWaveEvent;
 import lazmod.blocks.tileentities.logic.SolarLogic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.ForgeSubscribe;
 
-public class TileBlockyBlock extends EMSTileEntity implements ISidedInventory //TODO: Alot, shiftclick
+public class TileBlockyBlock extends CESTileEntity implements ISidedInventory //TODO: Alot, shiftclick
 	{
     public	int					blockMeta;
-    
-    public	int					charge;
-    
     public	boolean				isUsing;
-    
     private	byte[]				ISamnt = ScienceCraft.DateHandler.BlockyISamount;
-    
-    private	static SolarLogic	logic;
-    
     private	ItemStack[]			inventory;
-    
     
     public	TileBlockyBlock(){}
     
@@ -33,19 +25,35 @@ public class TileBlockyBlock extends EMSTileEntity implements ISidedInventory //
     	{
     	this.blockMeta = blockMeta;
     	inventory = new ItemStack[ISamnt[blockMeta]];
-    	logic = new SolarLogic(blockMeta);
     	}
 
 	public void undoCharge()
 		{
 		if (maxAdded == true)
 			{
-			system.addMax(EMSType.ENERGY, -32000);
+			system.addMax(-32000);
 			}
 		}
 	public int getCharge()
 		{
-		return system.get(EMSType.ENERGY);
+		if (system == null)
+			{
+			system = ScienceCraft.DateHandler.CES.get(player);
+			return 0;
+			}
+		return system.get();
+		}
+	
+	public void setCharge(int i)
+		{
+		if (system == null)
+			{
+			system = ScienceCraft.DateHandler.CES.get(player);
+			}
+		else
+			{
+			system.set(i);
+			}
 		}
 	
 	@Override
@@ -66,10 +74,10 @@ public class TileBlockyBlock extends EMSTileEntity implements ISidedInventory //
 		super.readFromNBT(tagCompound);
 		
 		blockMeta = tagCompound.getInteger("BlockMeta");
-		logic = new SolarLogic(blockMeta);
+		
+		tileRegister(player);
 		
 		inventory = new ItemStack[ISamnt[blockMeta]];
-		
         NBTTagList tagList = tagCompound.getTagList("Inventory");
         for (byte i = 0; i < tagList.tagCount(); i++)
         	{
@@ -106,33 +114,27 @@ public class TileBlockyBlock extends EMSTileEntity implements ISidedInventory //
 	
 	@ForgeSubscribe
 	@Override
-    public void onWaveEvent(EMSWaveEvent event)
+    public void onWaveEvent(CESWaveEvent event)
 		{
 		if (!worldObj.isRemote)
 			{
-			if (event.player.username == this.player)
+			if (event.player == this.player)
 				{
 		    	if (maxAdded == false)
 					{
-		    		system.addMax(EMSType.ENERGY, 32000);
+		    		system.addMax(32000);
 		    		maxAdded = true;
 					}
-		    	system.add(EMSType.ENERGY,(int) (worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*320));
-		    	charge = system.get(EMSType.ENERGY);
-		    	if (canUse() && system.get(EMSType.ENERGY) >= 8000)
+		    	system.add((int) (worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*320));
+		    	if (canUse() && system.get() >= 8000)
 		    		{
 		    		this.useItem();
-		    		system.add(EMSType.ENERGY,-8000);
+		    		system.add(-8000);
 		    		isUsing = true;
 		    		}
 		    	else
 		    		{
 		    		isUsing = false;
-		    		}
-		    	if (logic.id != blockMeta)
-		    		{
-		    		System.out.println("TBB.update: -_-"+logic.toString());
-		    		logic = new SolarLogic(blockMeta);
 		    		}
 				}
 			}
@@ -197,7 +199,7 @@ public class TileBlockyBlock extends EMSTileEntity implements ISidedInventory //
 	@Override
 	public int getInventoryStackLimit()
 		{
-		return logic.getInventoryStackLimit();
+		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].getInventoryStackLimit();
 		}
 
 	@Override
@@ -213,36 +215,36 @@ public class TileBlockyBlock extends EMSTileEntity implements ISidedInventory //
 	public void closeChest() {}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
+	public boolean isItemValidForSlot(int slot, ItemStack itCEStack)
 		{
-		return logic.isItemValidForSlot(slot);
+		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].isItemValidForSlot(slot);
 		}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 		{
-		return logic.getAccessibleSlotsFromSide(side);
+		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].getAccessibleSlotsFromSide(side);
 		}
 	
 	@Override
-	public boolean canInsertItem(int slot, ItemStack itemstack, int side)
+	public boolean canInsertItem(int slot, ItemStack itCEStack, int side)
 		{
-		return logic.canInsertItem(slot, side);
+		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].canInsertItem(slot, side);
 		}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack itemstack, int side)
+	public boolean canExtractItem(int slot, ItemStack itCEStack, int side)
 		{
-		return logic.canExtractItem(slot, side);
+		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].canExtractItem(slot, side);
 		}
 	
 	public void useItem()
     	{
-		inventory = logic.useItem(inventory);
+		inventory = ScienceCraft.DateHandler.BlockyLogic[blockMeta].useItem(inventory);
     	}
 
 	private boolean canUse()
 	    {
-		return logic.canUse(inventory);
+		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].canUse(inventory);
 	    }
 	}

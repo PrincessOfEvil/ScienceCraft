@@ -1,4 +1,4 @@
-package lazmod.EMS;
+package lazmod.CES;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,9 +9,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-public class EMSWaveShooter
+public class CESWaveShooter
 	{	
-	public EMSWaveShooter(final EntityPlayer cPlayer)
+	public CESWaveShooter(final String cPlayer)
 		{
 		Timer timer = new Timer(true);
 		timer.schedule(
@@ -20,7 +20,7 @@ public class EMSWaveShooter
 				@Override
 				public void run()
 					{
-					MinecraftForge.EVENT_BUS.post(new EMSWaveEvent(cPlayer));
+					MinecraftForge.EVENT_BUS.post(new CESWaveEvent(cPlayer));
 					}
 				}
 		, 0, 1000);

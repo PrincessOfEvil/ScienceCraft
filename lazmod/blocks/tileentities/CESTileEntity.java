@@ -1,30 +1,29 @@
 package lazmod.blocks.tileentities;
 
 import lazmod.ScienceCraft;
-import lazmod.EMS.EMSWaveEvent;
-import lazmod.EMS.EnergyMatterSystem;
-import lazmod.EMS.EnergyMatterSystem.EMSType;
+import lazmod.CES.CESWaveEvent;
+import lazmod.CES.CrystalEnergySystem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 
-public abstract class EMSTileEntity extends TileEntity
+public abstract class CESTileEntity extends TileEntity
 	{
 	protected String player;
 
-    protected EnergyMatterSystem system;
+    protected CrystalEnergySystem system;
     
     protected boolean maxAdded = false;
 	
-    public EMSTileEntity(){}
+    public CESTileEntity(){}
     
 	public void tileRegister(String username)
 		{
 		player = username;
 		MinecraftForge.EVENT_BUS.register(this);
-		system = ScienceCraft.DateHandler.EMS.get(player);
+		system = ScienceCraft.DateHandler.CES.get(player);
 		}
 
 	@Override
@@ -32,7 +31,7 @@ public abstract class EMSTileEntity extends TileEntity
 		{
 		super.readFromNBT(tagCompound);
 		player = tagCompound.getString("Player");
-		system = ScienceCraft.DateHandler.EMS.get(player);
+		system = ScienceCraft.DateHandler.CES.get(player);
 		}
 	
 	@Override
@@ -43,5 +42,5 @@ public abstract class EMSTileEntity extends TileEntity
 		}
 	
 	@ForgeSubscribe
-	public void onWaveEvent(EMSWaveEvent event){}
+	public void onWaveEvent(CESWaveEvent event){}
 	}

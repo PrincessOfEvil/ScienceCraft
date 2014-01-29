@@ -16,7 +16,7 @@ public class GuiHandler implements IGuiHandler
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if(tileEntity instanceof TileBlockyBlock)
         	{
-            return new ContainerBlockyBlock(player.inventory, (TileBlockyBlock)tileEntity);
+            return new ContainerBlockyBlock(player.inventory, (TileBlockyBlock) tileEntity);
             }
         return null;
     	}
