@@ -98,9 +98,9 @@ public class ScienceCraft
 		
 		// Must I float away?
 		// Will I ever awake? 
-		Unawakening		= CFG.config.get("ItCES",	"Crafting itCES",		30000-256).getInt();
+		Unawakening		= CFG.config.get("Items",	"Crafting Items",		30000-256).getInt();
 		
-		ObsPick_Cfg		= CFG.config.get("ItCES",	"Obsidian Pick",		30032-256).getInt();
+		ObsPick_Cfg		= CFG.config.get("Items",	"Obsidian Pick",		30032-256).getInt();
 		
 		CFG.config.save();
 		
@@ -118,7 +118,6 @@ public class ScienceCraft
 		WtrSrc			= new BlockWtrSrc		(WtrSrc_Cfg)				.setUnlocalizedName("wtrsrc")		.setHardness(6F)		.setCreativeTab(this.SCTab);
 		CrystF			= new BlockCrystF		(CrystF_Cfg)				.setUnlocalizedName("crystf")		.setHardness(5F)		.setCreativeTab(this.SCTab);
 
-		
 		BlockyBlock		= new BlockBlocky		(BlockyBlock_Cfg)			.setUnlocalizedName("blockyblock")	.setHardness(6F)		.setCreativeTab(this.SCTab);
 		
 		Derivium		= new Crystal			(Derivium_Cfg,"Derivium")	.setUnlocalizedName("derivium")		.setHardness(4F)		.setCreativeTab(this.SCTab).setLightValue(0.5F);
