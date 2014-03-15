@@ -1,35 +1,47 @@
 package lazmod.blocks.tileentities.logic;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.minecraft.item.ItemStack;
 
 public class CraftLavaGenHandler implements ICraftHandler
 	{
-    private static final CraftLavaGenHandler craftBase = new CraftLavaGenHandler();
-	private HashMap<List<Integer>, ItemStack> craftList = new HashMap<List<Integer>, ItemStack>();
-	
+	private static final CraftLavaGenHandler	craftBase	= new CraftLavaGenHandler();
+	private Map<ItemStack, ItemStack>			craftList	= new HashMap<ItemStack, ItemStack>();
+
 	public static final ICraftHandler staticInst()
 		{
 		return craftBase;
 		}
-	
+
 	@Override
-    public ItemStack getCraftingResult(ItemStack input) 
+	public ItemStack getCraftingResult(ItemStack stack)
 		{
-        if (input == null)
-        	{
-            return null;
-        	}
-        return (ItemStack)craftList.get(Arrays.asList(input.itemID, input.getItemDamage()));
+		Iterator<?> iterator = craftList.entrySet().iterator();
+		Entry<?, ?> entry;
+
+		do
+			{
+			if (!iterator.hasNext()) { return null; }
+
+			entry = (Entry<?, ?>) iterator.next();
+			}
+		while (!isEqual(stack, (ItemStack) entry.getKey()));
+
+		return (ItemStack) entry.getValue();
 		}
 
-	
+	private boolean isEqual(ItemStack stack1, ItemStack stack2)
+		{
+		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == 32767 || stack1.getItemDamage() == stack2.getItemDamage());
+		}
+
 	@Override
 	public void addResult(ItemStack input, ItemStack output)
 		{
-		craftList.put(Arrays.asList(input.itemID, input.getItemDamage()),output);
+		craftList.put(input, output);
 		}
 	}

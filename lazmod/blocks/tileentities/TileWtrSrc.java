@@ -1,7 +1,7 @@
 package lazmod.blocks.tileentities;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidEvent;
@@ -13,8 +13,9 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileWtrSrc extends TileEntity implements IFluidHandler
 	{
-	private static Fluid WATER = FluidRegistry.WATER;
-	private static int BUCKET_VOLUME = FluidContainerRegistry.BUCKET_VOLUME;
+	private static Fluid	WATER			= FluidRegistry.WATER;
+	private static int		BUCKET_VOLUME	= FluidContainerRegistry.BUCKET_VOLUME;
+
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 		{
@@ -31,19 +32,19 @@ public class TileWtrSrc extends TileEntity implements IFluidHandler
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 		{
-        int drained = maxDrain;
-        if (drained > BUCKET_VOLUME)
-        	{
-            drained = BUCKET_VOLUME;
-        	}
-    	FluidStack stack = new FluidStack(WATER, drained);
-        if (doDrain)
-            {
-    		FluidTank tank = new FluidTank(WATER, BUCKET_VOLUME, BUCKET_VOLUME);
-        	
-        	FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(stack, this.worldObj, this.xCoord, this.yCoord, this.zCoord, tank));
-            }
-        return stack;
+		int drained = maxDrain;
+		if (drained > BUCKET_VOLUME)
+			{
+			drained = BUCKET_VOLUME;
+			}
+		FluidStack stack = new FluidStack(WATER, drained);
+		if (doDrain)
+			{
+			FluidTank tank = new FluidTank(WATER, BUCKET_VOLUME, BUCKET_VOLUME);
+
+			FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(stack, worldObj, xCoord, yCoord, zCoord, tank));
+			}
+		return stack;
 		}
 
 	@Override
@@ -62,7 +63,7 @@ public class TileWtrSrc extends TileEntity implements IFluidHandler
 	public FluidTankInfo[] getTankInfo(ForgeDirection from)
 		{
 		FluidTank tank = new FluidTank(WATER, FluidContainerRegistry.BUCKET_VOLUME, FluidContainerRegistry.BUCKET_VOLUME);
-		return new FluidTankInfo[] {(tank).getInfo()};
+		return new FluidTankInfo[] {tank.getInfo()};
 		}
 
 	}

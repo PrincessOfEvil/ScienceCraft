@@ -1,15 +1,13 @@
 package lazmod.crystal;
 
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class ItemCrystal extends ItemBlock
 	{
-	public ItemCrystal(int par1) 
+	public ItemCrystal(Block par1)
 		{
 		super(par1);
 		}

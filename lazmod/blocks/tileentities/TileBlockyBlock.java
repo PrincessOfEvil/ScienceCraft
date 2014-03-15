@@ -1,31 +1,31 @@
 package lazmod.blocks.tileentities;
 
+import lazmod.DataHandler;
 import lazmod.ScienceCraft;
 import lazmod.CES.CESWaveEvent;
-import lazmod.blocks.tileentities.logic.SolarLogic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.event.ForgeSubscribe;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class TileBlockyBlock extends CESTileEntity implements ISidedInventory //TODO: Alot, shiftclick
+public class TileBlockyBlock extends CESTileEntity implements ISidedInventory // TODO: Alot, shiftclick
 	{
-    public	int					blockMeta;
-    public	boolean				isUsing;
-    private	byte[]				ISamnt = ScienceCraft.DateHandler.BlockyISamount;
-    private	ItemStack[]			inventory;
-    
-    public	TileBlockyBlock(){}
-    
-    public	TileBlockyBlock(int blockMeta) 
-    	{
-    	this.blockMeta = blockMeta;
-    	inventory = new ItemStack[ISamnt[blockMeta]];
-    	}
+	public int			blockMeta;
+	public boolean		isUsing;
+	private byte[]		ISamnt	= ScienceCraft.DateHandler.BlockyISamount;
+	private ItemStack[]	inventory;
+
+	public TileBlockyBlock()
+		{}
+
+	public TileBlockyBlock(int blockMeta)
+		{
+		this.blockMeta = blockMeta;
+		System.out.println(blockMeta);
+		inventory = new ItemStack[ISamnt[blockMeta]];
+		}
 
 	public void undoCharge()
 		{
@@ -34,6 +34,7 @@ public class TileBlockyBlock extends CESTileEntity implements ISidedInventory //
 			system.addMax(-32000);
 			}
 		}
+
 	public int getCharge()
 		{
 		if (system == null)
@@ -43,7 +44,7 @@ public class TileBlockyBlock extends CESTileEntity implements ISidedInventory //
 			}
 		return system.get();
 		}
-	
+
 	public void setCharge(int i)
 		{
 		if (system == null)
@@ -55,7 +56,7 @@ public class TileBlockyBlock extends CESTileEntity implements ISidedInventory //
 			system.set(i);
 			}
 		}
-	
+
 	@Override
 	public int getSizeInventory()
 		{
@@ -69,182 +70,184 @@ public class TileBlockyBlock extends CESTileEntity implements ISidedInventory //
 		}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tagCompound) 
+	public void readFromNBT(NBTTagCompound tagCompound)
 		{
 		super.readFromNBT(tagCompound);
-		
+
 		blockMeta = tagCompound.getInteger("BlockMeta");
-		
+
 		tileRegister(player);
-		
 		inventory = new ItemStack[ISamnt[blockMeta]];
-        NBTTagList tagList = tagCompound.getTagList("Inventory");
-        for (byte i = 0; i < tagList.tagCount(); i++)
-        	{
-        	NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
-        	byte slot = tag.getByte("Slot");
-        	if (slot >= 0 && slot < inventory.length)
-        		{
-        		inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
-                }
-        	}
+		NBTTagList tagList = tagCompound.getTagList("Inventory", 10);
+		for (byte i = 0; i < tagList.tagCount(); i++)
+			{
+			NBTTagCompound tag = tagList.getCompoundTagAt(i);
+			byte slot = tag.getByte("Slot");
+			if (slot >= 0 && slot < inventory.length)
+				{
+				inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
+				}
+			}
 		}
+
 	@Override
-	public void writeToNBT(NBTTagCompound tagCompound) 
+	public void writeToNBT(NBTTagCompound tagCompound)
 		{
 		super.writeToNBT(tagCompound);
-		
+
 		tagCompound.setInteger("BlockMeta", blockMeta);
-		
-        NBTTagList itemList = new NBTTagList();
-        for (byte i = 0; i < inventory.length; i++)
-        	{
-            ItemStack stack = inventory[i];
-            if (stack != null)
-            	{
-            	NBTTagCompound tag = new NBTTagCompound();
-                tag.setByte("Slot", (byte) i);
-                stack.writeToNBT(tag);
-                itemList.appendTag(tag);
-                }
-        	}
-		
+
+		NBTTagList itemList = new NBTTagList();
+		for (byte i = 0; i < inventory.length; i++)
+			{
+			ItemStack stack = inventory[i];
+			if (stack != null)
+				{
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setByte("Slot", i);
+				stack.writeToNBT(tag);
+				itemList.appendTag(tag);
+				}
+			}
+
 		tagCompound.setTag("Inventory", itemList);
 		}
-	
-	@ForgeSubscribe
+
+	@SubscribeEvent
 	@Override
-    public void onWaveEvent(CESWaveEvent event)
+	public void onWaveEvent(CESWaveEvent event)
 		{
 		if (!worldObj.isRemote)
 			{
-			if (event.player == this.player)
+			if (event.player == player)
 				{
-		    	if (maxAdded == false)
+				if (maxAdded == false)
 					{
-		    		system.addMax(32000);
-		    		maxAdded = true;
+					system.addMax(32000);
+					maxAdded = true;
 					}
-		    	system.add((int) (worldObj.getLightBrightness(xCoord, yCoord+1, zCoord)*320));
-		    	if (canUse() && system.get() >= 8000)
-		    		{
-		    		this.useItem();
-		    		system.add(-8000);
-		    		isUsing = true;
-		    		}
-		    	else
-		    		{
-		    		isUsing = false;
-		    		}
+				system.add((int) (worldObj.getLightBrightness(xCoord, yCoord + 1, zCoord) * 320));
+				if (canUse() && system.get() >= 8000)
+					{
+					useItem();
+					system.add(-8000);
+					isUsing = true;
+					}
+				else
+					{
+					isUsing = false;
+					}
 				}
 			}
-    	}
+		}
 
-    @Override
-    public ItemStack decrStackSize(int slot, int amt)
-    	{
-        ItemStack stack = getStackInSlot(slot);
-        if (stack != null)
-        	{
-            if (stack.stackSize <= amt)
-            	{
-                setInventorySlotContents(slot, null);
-                }
-            else
-            	{
-                stack = stack.splitStack(amt);
-                if (stack.stackSize == 0)
-                	{
-                    setInventorySlotContents(slot, null);
-                    }
-                }
-            }
-            return stack;
-    	}
+	@Override
+	public ItemStack decrStackSize(int slot, int amt)
+		{
+		ItemStack stack = getStackInSlot(slot);
+		if (stack != null)
+			{
+			if (stack.stackSize <= amt)
+				{
+				setInventorySlotContents(slot, null);
+				}
+			else
+				{
+				stack = stack.splitStack(amt);
+				if (stack.stackSize == 0)
+					{
+					setInventorySlotContents(slot, null);
+					}
+				}
+			}
+		return stack;
+		}
 
-    @Override
-    public ItemStack getStackInSlotOnClosing(int slot)
-    	{
-        ItemStack stack = getStackInSlot(slot);
-        if (stack != null)
-        	{
-            setInventorySlotContents(slot, null);
-            }
-        return stack;
-    	}
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot)
+		{
+		ItemStack stack = getStackInSlot(slot);
+		if (stack != null)
+			{
+			setInventorySlotContents(slot, null);
+			}
+		return stack;
+		}
 
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
 		{
-        this.inventory[par1] = par2ItemStack;
+		inventory[par1] = par2ItemStack;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit())
-        	{
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
-        	}
+		if (par2ItemStack != null && par2ItemStack.stackSize > getInventoryStackLimit())
+			{
+			par2ItemStack.stackSize = getInventoryStackLimit();
+			}
 		}
 
 	@Override
-	public String getInvName()
+	public String getInventoryName()
 		{
 		return ScienceCraft.DateHandler.BlockyLocalization[blockMeta];
 		}
 
 	@Override
-	public boolean isInvNameLocalized()
+	public boolean hasCustomInventoryName()
 		{
-		return false;
+		return true;
 		}
 
 	@Override
 	public int getInventoryStackLimit()
 		{
-		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].getInventoryStackLimit();
+		return DataHandler.BlockyLogic[blockMeta].getInventoryStackLimit();
 		}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 		{
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : entityplayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : entityplayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
 		}
 
 	@Override
-	public void openChest() {}
+	public void openInventory()
+		{}
 
 	@Override
-	public void closeChest() {}
+	public void closeInventory()
+		{}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itCEStack)
 		{
-		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].isItemValidForSlot(slot);
+		return DataHandler.BlockyLogic[blockMeta].isItemValidForSlot(slot);
 		}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 		{
-		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].getAccessibleSlotsFromSide(side);
+		return DataHandler.BlockyLogic[blockMeta].getAccessibleSlotsFromSide(side);
 		}
-	
+
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itCEStack, int side)
 		{
-		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].canInsertItem(slot, side);
+		return DataHandler.BlockyLogic[blockMeta].canInsertItem(slot, side);
 		}
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itCEStack, int side)
 		{
-		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].canExtractItem(slot, side);
+		return DataHandler.BlockyLogic[blockMeta].canExtractItem(slot, side);
 		}
-	
+
 	public void useItem()
-    	{
-		inventory = ScienceCraft.DateHandler.BlockyLogic[blockMeta].useItem(inventory);
-    	}
+		{
+		inventory = DataHandler.BlockyLogic[blockMeta].useItem(inventory);
+		}
 
 	private boolean canUse()
-	    {
-		return ScienceCraft.DateHandler.BlockyLogic[blockMeta].canUse(inventory);
-	    }
+		{
+		return DataHandler.BlockyLogic[blockMeta].canUse(inventory);
+		}
 	}

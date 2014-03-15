@@ -8,20 +8,21 @@ import net.minecraft.item.ItemStack;
 public class ItemBlockBlocky extends ItemBlock
 	{
 
-	public ItemBlockBlocky(int id)
+	public ItemBlockBlocky(Block id)
 		{
 		super(id);
 		setHasSubtypes(true);
 		}
 
-		@Override
-		public int getMetadata (int damageValue)
-			{
-			return damageValue;
-			}
-		
-		public String getUnlocalizedName(ItemStack par1ItemStack)
-			{
-			return ScienceCraft.DateHandler.BlockyLocalization[par1ItemStack.getItemDamage()];
-			}
+	@Override
+	public int getMetadata(int damageValue)
+		{
+		return damageValue;
+		}
+
+	@Override
+	public String getUnlocalizedName(ItemStack par1ItemStack)
+		{
+		return ScienceCraft.DateHandler.BlockyLocalization[par1ItemStack.getItemDamage()];
+		}
 	}

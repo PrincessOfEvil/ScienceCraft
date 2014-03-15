@@ -14,105 +14,106 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerBlockyBlock extends Container
 	{
-	private int id;
-	
-    protected TileBlockyBlock tileEntity;
+	private int					id;
 
-	private int lastCharge;
-	private int lastBlockMeta;
+	protected TileBlockyBlock	tileEntity;
 
-    public ContainerBlockyBlock (InventoryPlayer inventoryPlayer, TileBlockyBlock te)
-    	{
-    	tileEntity = te;
-    	
-    	id = te.blockMeta;
-    	
-    	for (byte ctr = 0; ctr < ScienceCraft.DateHandler.BlockyISamount[id]; ctr++)
-    		{
-    		if (ScienceCraft.DateHandler.BlockyDangerSlot[id] == ctr)
-    			{
-    			addSlotToContainer(new SlotFurnace(inventoryPlayer.player, te, ctr, ScienceCraft.DateHandler.BlockySlotCoordX[id][ctr], ScienceCraft.DateHandler.BlockySlotCoordY[id][ctr]));
-    			}
-    		else
-    			{
-    			addSlotToContainer(new Slot(te, ctr, ScienceCraft.DateHandler.BlockySlotCoordX[id][ctr], ScienceCraft.DateHandler.BlockySlotCoordY[id][ctr]));
-    			}
-    		}
-    	
-    	bindPlayerInventory(inventoryPlayer);
-    	}
+	private int					lastCharge;
+	private int					lastBlockMeta;
 
-    @Override
-    public boolean canInteractWith(EntityPlayer player)
-    	{
-    	return tileEntity.isUseableByPlayer(player);
-    	}
+	public ContainerBlockyBlock(InventoryPlayer inventoryPlayer, TileBlockyBlock te)
+		{
+		tileEntity = te;
 
-    public void addCraftingToCrafters(ICrafting par1ICrafting)
-    	{
-        super.addCraftingToCrafters(par1ICrafting);
-        par1ICrafting.sendProgressBarUpdate(this, 0, this.tileEntity.getCharge());
-        par1ICrafting.sendProgressBarUpdate(this, 1, this.tileEntity.blockMeta);
-    	}
-    
-    @SideOnly(Side.CLIENT)
-    public void updateProgressBar(int codifier, int amount)
-    	{	
-        if (codifier == 0)
-        	{
-        	this.tileEntity.setCharge(amount);
-        	}
-        if (codifier == 1)
-        	{
-        	this.tileEntity.blockMeta = amount;
-        	}
-    	}
-    
-    public void detectAndSendChanges()
-    	{
-        super.detectAndSendChanges();
+		id = te.blockMeta;
 
-        for (int i = 0; i < this.crafters.size(); ++i)
-        	{
-            ICrafting icrafting = (ICrafting)this.crafters.get(i);
+		for (byte ctr = 0; ctr < ScienceCraft.DateHandler.BlockyISamount[id]; ctr++)
+			{
+			if (ScienceCraft.DateHandler.BlockyDangerSlot[id] == ctr)
+				{
+				addSlotToContainer(new SlotFurnace(inventoryPlayer.player, te, ctr, ScienceCraft.DateHandler.BlockySlotCoordX[id][ctr], ScienceCraft.DateHandler.BlockySlotCoordY[id][ctr]));
+				}
+			else
+				{
+				addSlotToContainer(new Slot(te, ctr, ScienceCraft.DateHandler.BlockySlotCoordX[id][ctr], ScienceCraft.DateHandler.BlockySlotCoordY[id][ctr]));
+				}
+			}
 
-            if (this.lastCharge != this.tileEntity.getCharge())
-            	{
-                icrafting.sendProgressBarUpdate(this, 0, this.tileEntity.getCharge());
-            	}
- 
-            if (this.lastBlockMeta != this.tileEntity.blockMeta)
-            	{
-                icrafting.sendProgressBarUpdate(this, 1, this.tileEntity.blockMeta);
-            	}
-        	}
+		bindPlayerInventory(inventoryPlayer);
+		}
 
-        this.lastCharge = this.tileEntity.getCharge();
-        this.lastBlockMeta = this.tileEntity.blockMeta;
-    	}
-    
-    
-    protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
-    	{
-        for (int i = 0; i < 3; i++)
-        	{
-            for (int j = 0; j < 9; j++)
-            	{
-            	addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            	}
-        	}
+	@Override
+	public boolean canInteractWith(EntityPlayer player)
+		{
+		return tileEntity.isUseableByPlayer(player);
+		}
 
-        for (int i = 0; i < 9; i++)
-        	{
-            addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
-        	}
-    	}
+	@Override
+	public void addCraftingToCrafters(ICrafting par1ICrafting)
+		{
+		super.addCraftingToCrafters(par1ICrafting);
+		par1ICrafting.sendProgressBarUpdate(this, 0, tileEntity.getCharge());
+		par1ICrafting.sendProgressBarUpdate(this, 1, tileEntity.blockMeta);
+		}
 
-    
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slot)
-    	{
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void updateProgressBar(int codifier, int amount)
+		{
+		if (codifier == 0)
+			{
+			tileEntity.setCharge(amount);
+			}
+		if (codifier == 1)
+			{
+			tileEntity.blockMeta = amount;
+			}
+		}
+
+	@Override
+	public void detectAndSendChanges()
+		{
+		super.detectAndSendChanges();
+
+		for (int i = 0; i < crafters.size(); ++i)
+			{
+			ICrafting icrafting = (ICrafting) crafters.get(i);
+
+			if (lastCharge != tileEntity.getCharge())
+				{
+				icrafting.sendProgressBarUpdate(this, 0, tileEntity.getCharge());
+				}
+
+			if (lastBlockMeta != tileEntity.blockMeta)
+				{
+				icrafting.sendProgressBarUpdate(this, 1, tileEntity.blockMeta);
+				}
+			}
+
+		lastCharge = tileEntity.getCharge();
+		lastBlockMeta = tileEntity.blockMeta;
+		}
+
+	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
+		{
+		for (int i = 0; i < 3; i++)
+			{
+			for (int j = 0; j < 9; j++)
+				{
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				}
+			}
+
+		for (int i = 0; i < 9; i++)
+			{
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+			}
+		}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int slot)
+		{
 		return null;
-    	}
-    	
+		}
+
 	}

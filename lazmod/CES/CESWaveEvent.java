@@ -1,12 +1,11 @@
 package lazmod.CES;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.Event;
+import cpw.mods.fml.common.eventhandler.Event;
 
 public class CESWaveEvent extends Event
 	{
-	public final String player;
-	
+	public final String	player;
+
 	public CESWaveEvent(String cPlayer)
 		{
 		player = cPlayer;
