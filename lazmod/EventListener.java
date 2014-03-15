@@ -14,11 +14,11 @@ public class EventListener
 			{
 			if (event.entity instanceof EntityPlayer)
 				{
-				if (!ScienceCraft.DateHandler.CES.containsKey(((EntityPlayer) event.entity).getGameProfile().getName()))
+				if (!ScienceCraft.dataHandler.CES.containsKey(((EntityPlayer) event.entity).getGameProfile().getName()))
 					{
 					String name = ((EntityPlayer) event.entity).getGameProfile().getName();
 					CrystalEnergySystem CES = new CrystalEnergySystem(name);
-					ScienceCraft.DateHandler.CES.put(name, CES);
+					ScienceCraft.dataHandler.CES.put(name, CES);
 					}
 				}
 			}

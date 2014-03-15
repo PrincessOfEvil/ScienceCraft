@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileCrystalRenderer extends TileEntitySpecialRenderer
 	{
 	private ModelCrystal	modelCrystal;
-
+	
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tick)
 		{

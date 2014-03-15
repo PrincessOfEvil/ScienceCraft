@@ -11,7 +11,7 @@ public class ItemCrystal extends ItemBlock
 		{
 		super(par1);
 		}
-
+	
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack)
 		{

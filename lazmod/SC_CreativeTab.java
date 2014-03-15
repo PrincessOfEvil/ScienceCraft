@@ -11,7 +11,7 @@ public class SC_CreativeTab extends CreativeTabs
 		{
 		super(name);
 		}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem()

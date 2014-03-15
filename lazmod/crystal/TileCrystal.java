@@ -11,16 +11,16 @@ public class TileCrystal extends CESTileEntity
 	public String	type;
 	public int		size;
 	public String	username;
-
+	
 	public TileCrystal()
 		{}
-
+	
 	public TileCrystal(String cType)
 		{
 		type = cType;
 		MinecraftForge.EVENT_BUS.register(this);
 		}
-
+	
 	public void undoCharge()
 		{
 		if (maxAdded == true)
@@ -28,7 +28,7 @@ public class TileCrystal extends CESTileEntity
 			system.addMax(-8000);
 			}
 		}
-
+	
 	@SubscribeEvent
 	@Override
 	public void onWaveEvent(CESWaveEvent event)
@@ -51,14 +51,14 @@ public class TileCrystal extends CESTileEntity
 				}
 			}
 		}
-
+	
 	@Override
 	public void readFromNBT(NBTTagCompound data)
 		{
 		super.readFromNBT(data);
 		type = data.getString("Type");
 		}
-
+	
 	@Override
 	public void writeToNBT(NBTTagCompound data)
 		{

@@ -17,8 +17,8 @@ public class Crystal extends BlockContainer
 	public String			type;
 	public TileCrystal		tile;
 	private EntityPlayer	player;
-	private IIcon	icon;
-
+	private IIcon			icon;
+	
 	public Crystal(String Type)
 		{
 		super(Material.glass);
@@ -30,37 +30,37 @@ public class Crystal extends BlockContainer
 		maxY = 0.5;
 		maxZ = 0.75;
 		}
-
+	
 	@Override
 	public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity)
 		{
 		return false;
 		}
-
+	
 	@Override
 	public int getMobilityFlag()
 		{
 		return 2;
 		}
-
+	
 	@Override
 	public boolean isOpaqueCube()
 		{
 		return false;
 		}
-
+	
 	@Override
 	public boolean renderAsNormalBlock()
 		{
 		return false;
 		}
-
+	
 	@Override
 	public int getRenderBlockPass()
 		{
 		return 1;
 		}
-
+	
 	@Override
 	public int getRenderType()
 		{
@@ -70,7 +70,7 @@ public class Crystal extends BlockContainer
 	@Override
 	public void registerBlockIcons(IIconRegister IconRegister)
 		{
-		icon = IconRegister.registerIcon("lazmod:crystal"+this.type);
+		icon = IconRegister.registerIcon("lazmod:crystal" + type);
 		}
 	
 	@Override
@@ -78,28 +78,28 @@ public class Crystal extends BlockContainer
 		{
 		return icon;
 		}
-
+	
 	@Override
 	public boolean hasTileEntity()
 		{
 		return true;
 		}
-
+	
 	@Override
 	public TileEntity createNewTileEntity(World world, int intgr)
 		{
 		return tile = new TileCrystal(type);
 		}
-
+	
 	@Override
 	public void onBlockHarvested(World par1World, int x, int y, int z, int meta, EntityPlayer par6EntityPlayer)
 		{
 		tile = (TileCrystal) par1World.getTileEntity(x, y, z);
 		tile.undoCharge();
-
+		
 		super.onBlockHarvested(par1World, x, y, z, meta, par6EntityPlayer);
 		}
-
+	
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itCEStack)
 		{

@@ -15,20 +15,20 @@ public class TileWtrSrc extends TileEntity implements IFluidHandler
 	{
 	private static Fluid	WATER			= FluidRegistry.WATER;
 	private static int		BUCKET_VOLUME	= FluidContainerRegistry.BUCKET_VOLUME;
-
+	
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 		{
 		return 0;
 		}
-
+	
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 		{
 		// TODO Auto-generated method stub
 		return null;
 		}
-
+	
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 		{
@@ -41,29 +41,29 @@ public class TileWtrSrc extends TileEntity implements IFluidHandler
 		if (doDrain)
 			{
 			FluidTank tank = new FluidTank(WATER, BUCKET_VOLUME, BUCKET_VOLUME);
-
+			
 			FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(stack, worldObj, xCoord, yCoord, zCoord, tank));
 			}
 		return stack;
 		}
-
+	
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid)
 		{
 		return false;
 		}
-
+	
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid)
 		{
 		return true;
 		}
-
+	
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from)
 		{
 		FluidTank tank = new FluidTank(WATER, FluidContainerRegistry.BUCKET_VOLUME, FluidContainerRegistry.BUCKET_VOLUME);
-		return new FluidTankInfo[] {tank.getInfo()};
+		return new FluidTankInfo[] { tank.getInfo() };
 		}
-
+	
 	}

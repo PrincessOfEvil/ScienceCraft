@@ -16,13 +16,13 @@ import net.minecraft.world.World;
 public class BlockCrystF extends Block
 	{
 	private IIcon[]	iconSaver;
-
+	
 	public BlockCrystF()
 		{
 		super(Material.rock);
 		setHarvestLevel("pickaxe", 1);
 		}
-
+	
 	@Override
 	public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 		{
@@ -37,29 +37,29 @@ public class BlockCrystF extends Block
 					switch (rnd.nextInt(2))
 						{
 						case 0:
-						par1World.spawnEntityInWorld(new EntityItem(par1World, x + 0.5, y + 1, z + 0.5, new ItemStack(ScienceCraft.Derivium)));
-						break;
+							par1World.spawnEntityInWorld(new EntityItem(par1World, x + 0.5, y + 1, z + 0.5, new ItemStack(ScienceCraft.Derivium)));
+							break;
 						case 1:
-						par1World.spawnEntityInWorld(new EntityItem(par1World, x + 0.5, y + 1, z + 0.5, new ItemStack(ScienceCraft.Emmitium)));
-						break;
+							par1World.spawnEntityInWorld(new EntityItem(par1World, x + 0.5, y + 1, z + 0.5, new ItemStack(ScienceCraft.Emmitium)));
+							break;
 						}
-
+					
 					return true;
 					}
 				}
 			}
 		return false;
 		}
-
+	
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 		{
 		iconSaver = new IIcon[2];
-
+		
 		iconSaver[0] = par1IconRegister.registerIcon("lazmod:blockCFTop");
 		iconSaver[1] = par1IconRegister.registerIcon("furnace_top");
 		}
-
+	
 	@Override
 	public IIcon getIcon(int blockSide, int metadata)
 		{

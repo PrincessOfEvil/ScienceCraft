@@ -18,8 +18,8 @@ public class ItemBlockIrnTnk extends ItemBlock
 		maxStackSize = 1;
 		setNoRepair();
 		}
-
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 		{
@@ -34,7 +34,7 @@ public class ItemBlockIrnTnk extends ItemBlock
 			par3List.add("Empty");
 			}
 		}
-
+	
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack)
 		{

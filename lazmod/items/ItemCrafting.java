@@ -13,28 +13,26 @@ public class ItemCrafting extends Item
 	{
 	private IIcon[]	iconSaver;
 	public boolean	hasSubtypes	= true;
-
-	private byte	itemNumber	= ScienceCraft.DateHandler.CraftingItemNumber;
-
+	
+	private byte	itemNumber	= ScienceCraft.dataHandler.CraftingItemNumber;
+	
 	public ItemCrafting()
 		{
 		super();
 		setHasSubtypes(true);
 		}
-
+	
 	@Override
 	public void registerIcons(IIconRegister iconRegister)
 		{
 		iconSaver = new IIcon[itemNumber];
-
-		iconSaver[0] = iconRegister.registerIcon("lazmod:itemDummy");
-		iconSaver[1] = iconRegister.registerIcon("lazmod:itemSoul");
-		iconSaver[2] = iconRegister.registerIcon("lazmod:itemSpace");
-
-		iconSaver[3] = iconRegister.registerIcon("lazmod:itemDustIron");
-		iconSaver[4] = iconRegister.registerIcon("lazmod:itemDustGold");
+		
+		for (int i = 0; i < iconSaver.length; i++)
+			{
+			iconSaver[i] = iconRegister.registerIcon("lazmod:" + ScienceCraft.dataHandler.CraftingUnlocalization[i]);
+			}
 		}
-
+	
 	@Override
 	public IIcon getIconFromDamage(int i)
 		{
@@ -45,14 +43,14 @@ public class ItemCrafting extends Item
 		iconSaver = new IIcon[itemNumber];
 		return iconSaver[i];
 		}
-
+	
 	@Override
 	public boolean requiresMultipleRenderPasses()
 		{
 		return false;
 		}
-
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void getSubItems(Item par1, CreativeTabs tab, List SubItems)
 		{
@@ -61,10 +59,10 @@ public class ItemCrafting extends Item
 			SubItems.add(new ItemStack(par1, 1, tItemId));
 			}
 		}
-
+	
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 		{
-		return ScienceCraft.DateHandler.CraftingLocalization[par1ItemStack.getItemDamage()];
+		return "item."+ScienceCraft.dataHandler.CraftingUnlocalization[par1ItemStack.getItemDamage()];
 		}
 	}
