@@ -1,5 +1,8 @@
 package lazmod;
 
+import java.util.Random;
+
+import tests.EventListenerModded;
 import lazmod.blocks.BlockBlocky;
 import lazmod.blocks.BlockCrystF;
 import lazmod.blocks.BlockFField;
@@ -12,6 +15,8 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -62,9 +67,12 @@ public class ScienceCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 		{
+		MinecraftForge.EVENT_BUS.register(new EventListenerModded());
+
+		
 		System.out.println("Pre-init value:" + 0XC_FP2F);
 		// We do what we must
-		// Because we can.
+		// Because we're can.
 		
 		CFG = new SC_Config(event, "ScienceCraft/config.cfg");
 		

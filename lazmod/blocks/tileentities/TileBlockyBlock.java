@@ -12,7 +12,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class TileBlockyBlock extends CESTileEntity implements ISidedInventory // TODO: shiftclick
+public class TileBlockyBlock extends CESTileEntity implements ISidedInventory // TODO: Ûûû. shiftclick
 	{
 	public int			blockMeta;
 	public boolean		isUsing;

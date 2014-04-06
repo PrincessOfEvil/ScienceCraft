@@ -22,20 +22,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockBlocky extends BlockContainer // TODO: TE, multiblock almost
-// implemented. It'll be
-// Solar-powered Furnace right
-// now.
+public class BlockBlocky extends BlockContainer //FIXME DAMMIT, I think I found it.
 	{
+	public TileBlockyBlock	tile;
+	private EntityPlayer	player;
+	
 	public BlockBlocky()
 		{
 		super(Material.rock);
 		setHarvestLevel("pickaxe", 1);
 		}
-	
-	public TileBlockyBlock	tile;
-	private EntityPlayer	player;
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubBlocks(Item item, CreativeTabs tab, List subItems)
 		{
