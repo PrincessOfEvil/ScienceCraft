@@ -1,8 +1,6 @@
 package lazmod;
 
-import java.util.Random;
-
-import tests.EventListenerModded;
+import tests.RubinOreGenerator;
 import lazmod.blocks.BlockBlocky;
 import lazmod.blocks.BlockCrystF;
 import lazmod.blocks.BlockFField;
@@ -15,14 +13,13 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "ScienceCraft", name = "Science Craft", version = "0.112 alpha")
 public class ScienceCraft
@@ -67,9 +64,6 @@ public class ScienceCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 		{
-		MinecraftForge.EVENT_BUS.register(new EventListenerModded());
-
-		
 		System.out.println("Pre-init value:" + 0XC_FP2F);
 		// We do what we must
 		// Because we're can.
@@ -107,5 +101,7 @@ public class ScienceCraft
 	public void load(FMLInitializationEvent event) // Warranty void if void.
 		{
 		ReciHandler.addRecipes();
+		
+        //GameRegistry.registerWorldGenerator(new RubinOreGenerator(), 255);
 		}
 	}

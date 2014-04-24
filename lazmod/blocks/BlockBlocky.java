@@ -5,6 +5,7 @@ import java.util.Random;
 
 import lazmod.DataHandler;
 import lazmod.ScienceCraft;
+import lazmod.blocks.tileentities.CESTileEntity;
 import lazmod.blocks.tileentities.TileBlockyBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -24,9 +25,6 @@ import net.minecraft.world.World;
 
 public class BlockBlocky extends BlockContainer //FIXME DAMMIT, I think I found it.
 	{
-	public TileBlockyBlock	tile;
-	private EntityPlayer	player;
-	
 	public BlockBlocky()
 		{
 		super(Material.rock);
@@ -45,15 +43,14 @@ public class BlockBlocky extends BlockContainer //FIXME DAMMIT, I think I found 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack)
 		{
-		player = (EntityPlayer) par5EntityLiving;
-		tile.tileRegister(player.getGameProfile().getName());
+		((CESTileEntity) par1World.getTileEntity(par2, par3, par4)).tileRegister(((EntityPlayer) par5EntityLiving).getGameProfile().getName());
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving, par6ItemStack);
 		}
 	
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 		{
-		return tile = new TileBlockyBlock(var2);
+		return new TileBlockyBlock(var2);
 		}
 	
 	@Override
@@ -104,7 +101,7 @@ public class BlockBlocky extends BlockContainer //FIXME DAMMIT, I think I found 
 	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
 		{
 		dropItems(world, x, y, z);
-		tile.undoCharge();
+		((TileBlockyBlock) world.getTileEntity(x, y, z)).undoCharge();
 		super.breakBlock(world, x, y, z, par5, par6);
 		}
 	

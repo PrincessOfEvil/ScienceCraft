@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 
 public class BlockWtrSrc extends BlockContainer
 	{
-	
 	private IIcon[]	iconSaver;
 	
 	public BlockWtrSrc()

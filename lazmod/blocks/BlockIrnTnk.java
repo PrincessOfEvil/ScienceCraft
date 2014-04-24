@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
@@ -20,7 +21,6 @@ import net.minecraftforge.fluids.FluidTank;
 
 public class BlockIrnTnk extends BlockContainer
 	{
-	public TileIrnTnk	tile;
 	private IIcon[]		iconSaver;
 	
 	public BlockIrnTnk()
@@ -38,7 +38,7 @@ public class BlockIrnTnk extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int i)
 		{
-		return tile = new TileIrnTnk(32);
+		return new TileIrnTnk(32);
 		}
 	
 	@Override
@@ -46,7 +46,7 @@ public class BlockIrnTnk extends BlockContainer
 		{
 		if (!par1World.isRemote)
 			{
-			tile = (TileIrnTnk) par1World.getTileEntity(x, y, z);
+			TileIrnTnk tile = (TileIrnTnk) par1World.getTileEntity(x, y, z);
 			if (tile == null)
 				{
 				System.out.println("BIT:FUUUUUUK");
@@ -88,19 +88,14 @@ public class BlockIrnTnk extends BlockContainer
 		}
 	
 	@Override
-	public void onBlockHarvested(World par1World, int x, int y, int z, int meta, EntityPlayer par6EntityPlayer)
+	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer entityPlayer)
 		{
-		tile = (TileIrnTnk) par1World.getTileEntity(x, y, z);
-		
-		super.onBlockHarvested(par1World, x, y, z, meta, par6EntityPlayer);
-		}
-	
-	@Override
-	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int x, int y, int z, int st)
-		{
-		ItemStack itCEStack = createStackedBlock(st);
+
+		ItemStack itCEStack = createStackedBlock(meta);
 		if (itCEStack != null)
 			{
+			TileIrnTnk tile = (TileIrnTnk) world.getTileEntity(x, y, z);
+			
 			NBTTagCompound data = new NBTTagCompound();
 			
 			data.setInteger("Capacity", tile.tank.getCapacity());
@@ -118,11 +113,12 @@ public class BlockIrnTnk extends BlockContainer
 			
 			itCEStack.setItemDamage(32000 - tile.tank.getFluidAmount());
 			
-			par2EntityPlayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-			par2EntityPlayer.addExhaustion(0.025F);
+			entityPlayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+			entityPlayer.addExhaustion(0.025F);
 			
-			this.dropBlockAsItem(par1World, x, y, z, itCEStack);
+			this.dropBlockAsItem(world, x, y, z, itCEStack);
 			}
+		super.onBlockHarvested(world, x, y, z, meta, entityPlayer);
 		}
 	
 	@Override
@@ -132,6 +128,8 @@ public class BlockIrnTnk extends BlockContainer
 		
 		if (itCEStack.stackTagCompound != null)
 			{
+			TileIrnTnk tile = (TileIrnTnk) world.getTileEntity(x, y, z);
+			
 			NBTTagCompound data = itCEStack.stackTagCompound;
 			
 			tile.tank.setCapacity(data.getInteger("Capacity"));
