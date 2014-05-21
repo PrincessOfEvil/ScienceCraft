@@ -1,7 +1,6 @@
 package lazmod;
 
-import tests.RubinOreGenerator;
-import lazmod.blocks.BlockBlocky;
+import lazmod.blocks.BlockCGlass;
 import lazmod.blocks.BlockCrystF;
 import lazmod.blocks.BlockFField;
 import lazmod.blocks.BlockIrnTnk;
@@ -19,7 +18,6 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "ScienceCraft", name = "Science Craft", version = "0.112 alpha")
 public class ScienceCraft
@@ -28,8 +26,7 @@ public class ScienceCraft
 	public static Block					IrnTnk;
 	public static Block					WtrSrc;
 	public static Block					CrystF;
-	
-	public static Block					BlockyBlock;
+	public static Block					CGlass;
 	
 	public static Block					Derivium;
 	public static Block					Emmitium;
@@ -49,7 +46,7 @@ public class ScienceCraft
 	public static SC_Config				CFG;
 	
 	protected RecipeHandler				ReciHandler;
-	protected RegistryHandler			RegiHandler; // RegiSteel, RegiRock,RegiHandler.
+	protected RegistryHandler			RegiHandler;								// RegiSteel, RegiRock,RegiHandler.
 																					
 	public static DataHandler			dataHandler	= new DataHandler();
 	
@@ -60,6 +57,12 @@ public class ScienceCraft
 	
 	@Instance("ScienceCraft")
 	public static ScienceCraft			instance;
+	
+	@EventHandler
+	public void load(FMLInitializationEvent event) // Warranty void if void.
+		{
+		ReciHandler.addRecipes();
+		}
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -81,8 +84,7 @@ public class ScienceCraft
 		IrnTnk = new BlockIrnTnk().setBlockName("irntnk").setHardness(6F).setCreativeTab(ScienceCraft.SCTab);
 		WtrSrc = new BlockWtrSrc().setBlockName("wtrsrc").setHardness(6F).setCreativeTab(ScienceCraft.SCTab);
 		CrystF = new BlockCrystF().setBlockName("crystf").setHardness(5F).setCreativeTab(ScienceCraft.SCTab);
-		
-		BlockyBlock = new BlockBlocky().setBlockName("bblock").setHardness(6F).setCreativeTab(ScienceCraft.SCTab);
+		CGlass = new BlockCGlass().setBlockName("cglass").setHardness(3F).setCreativeTab(ScienceCraft.SCTab);
 		
 		Derivium = new Crystal("Derivium").setBlockName("derivium").setHardness(4F).setCreativeTab(ScienceCraft.SCTab).setLightLevel(0.5F);
 		Emmitium = new Crystal("Emmitium").setBlockName("emmitium").setHardness(4F).setCreativeTab(ScienceCraft.SCTab).setLightLevel(0.7F);
@@ -95,13 +97,5 @@ public class ScienceCraft
 		RegiHandler = new RegistryHandler();
 		
 		RegiHandler.registerThings();
-		}
-	
-	@EventHandler
-	public void load(FMLInitializationEvent event) // Warranty void if void.
-		{
-		ReciHandler.addRecipes();
-		
-        //GameRegistry.registerWorldGenerator(new RubinOreGenerator(), 255);
 		}
 	}

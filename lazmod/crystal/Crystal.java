@@ -38,21 +38,21 @@ public class Crystal extends BlockContainer
 		}
 	
 	@Override
+	public TileEntity createNewTileEntity(World world, int intgr)
+		{
+		return tile = new TileCrystal(type);
+		}
+	
+	@Override
+	public IIcon getIcon(int blockSide, int metadata)
+		{
+		return icon;
+		}
+	
+	@Override
 	public int getMobilityFlag()
 		{
 		return 2;
-		}
-	
-	@Override
-	public boolean isOpaqueCube()
-		{
-		return false;
-		}
-	
-	@Override
-	public boolean renderAsNormalBlock()
-		{
-		return false;
 		}
 	
 	@Override
@@ -68,27 +68,15 @@ public class Crystal extends BlockContainer
 		}
 	
 	@Override
-	public void registerBlockIcons(IIconRegister IconRegister)
-		{
-		icon = IconRegister.registerIcon("lazmod:crystal" + type);
-		}
-	
-	@Override
-	public IIcon getIcon(int blockSide, int metadata)
-		{
-		return icon;
-		}
-	
-	@Override
 	public boolean hasTileEntity()
 		{
 		return true;
 		}
 	
 	@Override
-	public TileEntity createNewTileEntity(World world, int intgr)
+	public boolean isOpaqueCube()
 		{
-		return tile = new TileCrystal(type);
+		return false;
 		}
 	
 	@Override
@@ -106,5 +94,17 @@ public class Crystal extends BlockContainer
 		player = (EntityPlayer) entityliving;
 		tile.tileRegister(player.getGameProfile().getName());
 		super.onBlockPlacedBy(world, x, y, z, entityliving, itCEStack);
+		}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister IconRegister)
+		{
+		icon = IconRegister.registerIcon("lazmod:crystal" + type);
+		}
+	
+	@Override
+	public boolean renderAsNormalBlock()
+		{
+		return false;
 		}
 	}

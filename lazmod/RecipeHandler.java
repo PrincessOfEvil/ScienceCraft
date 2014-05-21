@@ -54,19 +54,5 @@ public class RecipeHandler
 		/*
 		 * Solar recipes
 		 */
-		// Furnace
-		DataHandler.BlockyCraftHandler[0].addResult(isIron, new ItemStack(Items.iron_ingot));
-		DataHandler.BlockyCraftHandler[0].addResult(isGold, new ItemStack(Items.gold_ingot));
-		
-		// Smasher
-		DataHandler.BlockyCraftHandler[1].addResult(new ItemStack(Blocks.stone), new ItemStack(Blocks.cobblestone));
-		DataHandler.BlockyCraftHandler[1].addResult(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.sand));
-		DataHandler.BlockyCraftHandler[1].addResult(new ItemStack(Blocks.glass), new ItemStack(Blocks.sand));
-		
-		DataHandler.BlockyCraftHandler[1].addResult(new ItemStack(Blocks.iron_ore), isIron2);
-		DataHandler.BlockyCraftHandler[1].addResult(new ItemStack(Blocks.gold_ore), isGold2);
-		
-		// LavaGen
-		DataHandler.BlockyCraftHandler[2].addResult(new ItemStack(Blocks.obsidian), new ItemStack(Blocks.lava));
 		}
 	}

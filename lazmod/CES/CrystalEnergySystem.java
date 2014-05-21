@@ -13,12 +13,6 @@ public class CrystalEnergySystem
 		addToList(cPlayer);
 		}
 	
-	private void addToList(String cPlayer)
-		{
-		ScienceCraft.dataHandler.CES.put(cPlayer, this);
-		new CESWaveShooter(cPlayer);
-		}
-	
 	public void add(int amount)
 		{
 		energy += amount;
@@ -28,13 +22,15 @@ public class CrystalEnergySystem
 			}
 		}
 	
-	public void set(int amount)
+	public void addMax(int amount)
 		{
-		energy = amount;
-		if (energy > maxEnergy)
-			{
-			energy = maxEnergy;
-			}
+		maxEnergy += amount;
+		}
+	
+	private void addToList(String cPlayer)
+		{
+		ScienceCraft.dataHandler.CES.put(cPlayer, this);
+		new CESWaveShooter(cPlayer);
 		}
 	
 	public int get()
@@ -42,9 +38,9 @@ public class CrystalEnergySystem
 		return energy;
 		}
 	
-	public void addMax(int amount)
+	public int[] getAll()
 		{
-		maxEnergy += amount;
+		return new int[] { energy, maxEnergy };
 		}
 	
 	public int getMax()
@@ -52,8 +48,12 @@ public class CrystalEnergySystem
 		return maxEnergy;
 		}
 	
-	public int[] getAll()
+	public void set(int amount)
 		{
-		return new int[] { energy, maxEnergy };
+		energy = amount;
+		if (energy > maxEnergy)
+			{
+			energy = maxEnergy;
+			}
 		}
 	}

@@ -23,10 +23,27 @@ public class ItemCrystalRenderer implements IItemRenderer
 		return true;
 		}
 	
-	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	private void renderCrystal(float x, float y, float z, float scale)
 		{
-		return true;
+		GL11.glPushMatrix();
+		
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		
+		GL11.glDisable(GL11.GL_LIGHTING);
+		
+		GL11.glTranslatef(x, y - 0.75f, z);
+		GL11.glScalef(scale * 3f, scale * 3f, scale * 3f);
+		
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal" + modelCrystal.type + ".png"));
+		
+		modelCrystal.render();
+		
+		GL11.glDisable(GL11.GL_BLEND);
+		
+		GL11.glEnable(GL11.GL_LIGHTING);
+		
+		GL11.glPopMatrix();
 		}
 	
 	@Override
@@ -57,26 +74,9 @@ public class ItemCrystalRenderer implements IItemRenderer
 			}
 		}
 	
-	private void renderCrystal(float x, float y, float z, float scale)
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
 		{
-		GL11.glPushMatrix();
-		
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		
-		GL11.glDisable(GL11.GL_LIGHTING);
-		
-		GL11.glTranslatef(x, y - 0.75f, z);
-		GL11.glScalef(scale * 3f, scale * 3f, scale * 3f);
-		
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("lazmod:textures/crystals/crystal" + modelCrystal.type + ".png"));
-		
-		modelCrystal.render();
-		
-		GL11.glDisable(GL11.GL_BLEND);
-		
-		GL11.glEnable(GL11.GL_LIGHTING);
-		
-		GL11.glPopMatrix();
+		return true;
 		}
 	}

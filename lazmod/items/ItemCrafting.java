@@ -23,31 +23,11 @@ public class ItemCrafting extends Item
 		}
 	
 	@Override
-	public void registerIcons(IIconRegister iconRegister)
-		{
-		iconSaver = new IIcon[itemNumber];
-		
-		for (int i = 0; i < iconSaver.length; i++)
-			{
-			iconSaver[i] = iconRegister.registerIcon("lazmod:" + ScienceCraft.dataHandler.CraftingUnlocalization[i]);
-			}
-		}
-	
-	@Override
 	public IIcon getIconFromDamage(int i)
 		{
-		if (iconSaver != null)
-			{
-			return iconSaver[i];
-			}
+		if (iconSaver != null) { return iconSaver[i]; }
 		iconSaver = new IIcon[itemNumber];
 		return iconSaver[i];
-		}
-	
-	@Override
-	public boolean requiresMultipleRenderPasses()
-		{
-		return false;
 		}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -63,6 +43,23 @@ public class ItemCrafting extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 		{
-		return "item."+ScienceCraft.dataHandler.CraftingUnlocalization[par1ItemStack.getItemDamage()];
+		return "item." + ScienceCraft.dataHandler.CraftingUnlocalization[par1ItemStack.getItemDamage()];
+		}
+	
+	@Override
+	public void registerIcons(IIconRegister iconRegister)
+		{
+		iconSaver = new IIcon[itemNumber];
+		
+		for (int i = 0; i < iconSaver.length; i++)
+			{
+			iconSaver[i] = iconRegister.registerIcon("lazmod:" + ScienceCraft.dataHandler.CraftingUnlocalization[i]);
+			}
+		}
+	
+	@Override
+	public boolean requiresMultipleRenderPasses()
+		{
+		return false;
 		}
 	}

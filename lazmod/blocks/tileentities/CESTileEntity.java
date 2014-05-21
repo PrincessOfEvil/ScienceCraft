@@ -19,12 +19,9 @@ public abstract class CESTileEntity extends TileEntity
 	public CESTileEntity()
 		{}
 	
-	public void tileRegister(String username)
-		{
-		player = username;
-		MinecraftForge.EVENT_BUS.register(this);
-		system = ScienceCraft.dataHandler.CES.get(player);
-		}
+	@SubscribeEvent
+	public void onWaveEvent(CESWaveEvent event)
+		{}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound)
@@ -34,14 +31,17 @@ public abstract class CESTileEntity extends TileEntity
 		system = ScienceCraft.dataHandler.CES.get(player);
 		}
 	
+	public void tileRegister(String username)
+		{
+		player = username;
+		MinecraftForge.EVENT_BUS.register(this);
+		system = ScienceCraft.dataHandler.CES.get(player);
+		}
+	
 	@Override
 	public void writeToNBT(NBTTagCompound tagCompound)
 		{
 		super.writeToNBT(tagCompound);
 		tagCompound.setString("Player", player);
 		}
-	
-	@SubscribeEvent
-	public void onWaveEvent(CESWaveEvent event)
-		{}
 	}

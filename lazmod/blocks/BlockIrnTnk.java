@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
@@ -21,7 +20,7 @@ import net.minecraftforge.fluids.FluidTank;
 
 public class BlockIrnTnk extends BlockContainer
 	{
-	private IIcon[]		iconSaver;
+	private IIcon[]	iconSaver;
 	
 	public BlockIrnTnk()
 		{
@@ -32,13 +31,26 @@ public class BlockIrnTnk extends BlockContainer
 	@Override
 	public int quantityDropped(Random random)
 		{
-		return 1;
+		return 0;
 		}
 	
 	@Override
 	public TileEntity createNewTileEntity(World var1, int i)
 		{
 		return new TileIrnTnk(32);
+		}
+	
+	@Override
+	public IIcon getIcon(int blockSide, int metadata)
+		{
+		if (blockSide == 0 || blockSide == 1)
+			{
+			return iconSaver[0];
+			}
+		else
+			{
+			return iconSaver[1];
+			}
 		}
 	
 	@Override
@@ -90,35 +102,37 @@ public class BlockIrnTnk extends BlockContainer
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer entityPlayer)
 		{
-
-		ItemStack itCEStack = createStackedBlock(meta);
-		if (itCEStack != null)
+		if (!world.isRemote)
 			{
-			TileIrnTnk tile = (TileIrnTnk) world.getTileEntity(x, y, z);
-			
-			NBTTagCompound data = new NBTTagCompound();
-			
-			data.setInteger("Capacity", tile.tank.getCapacity());
-			
-			if (tile.tank.getFluid() != null)
+			ItemStack itCEStack = createStackedBlock(meta);
+			if (itCEStack != null)
 				{
-				tile.tank.getFluid().writeToNBT(data);
+				TileIrnTnk tile = (TileIrnTnk) world.getTileEntity(x, y, z);
+				
+				NBTTagCompound data = new NBTTagCompound();
+				
+				data.setInteger("Capacity", tile.tank.getCapacity());
+				
+				if (tile.tank.getFluid() != null)
+					{
+					tile.tank.getFluid().writeToNBT(data);
+					}
+				else
+					{
+					data.setString("Empty", "");
+					}
+				
+				itCEStack.setTagCompound(data);
+				
+				itCEStack.setItemDamage(32000 - tile.tank.getFluidAmount());
+				
+				entityPlayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+				entityPlayer.addExhaustion(0.025F);
+				
+				this.dropBlockAsItem(world, x, y, z, itCEStack);
 				}
-			else
-				{
-				data.setString("Empty", "");
-				}
-			
-			itCEStack.setTagCompound(data);
-			
-			itCEStack.setItemDamage(32000 - tile.tank.getFluidAmount());
-			
-			entityPlayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
-			entityPlayer.addExhaustion(0.025F);
-			
-			this.dropBlockAsItem(world, x, y, z, itCEStack);
+			super.onBlockHarvested(world, x, y, z, meta, entityPlayer);
 			}
-		super.onBlockHarvested(world, x, y, z, meta, entityPlayer);
 		}
 	
 	@Override
@@ -153,18 +167,5 @@ public class BlockIrnTnk extends BlockContainer
 		
 		iconSaver[0] = IconRegister.registerIcon("lazmod:blockIrnTnkTB");
 		iconSaver[1] = IconRegister.registerIcon("lazmod:blockIrnTnkSide");
-		}
-	
-	@Override
-	public IIcon getIcon(int blockSide, int metadata)
-		{
-		if (blockSide == 0 || blockSide == 1)
-			{
-			return iconSaver[0];
-			}
-		else
-			{
-			return iconSaver[1];
-			}
 		}
 	}

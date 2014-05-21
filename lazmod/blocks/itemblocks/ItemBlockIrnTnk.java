@@ -3,12 +3,10 @@ package lazmod.blocks.itemblocks;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 public class ItemBlockIrnTnk extends ItemBlock
@@ -40,7 +38,7 @@ public class ItemBlockIrnTnk extends ItemBlock
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack)
 		{
-
+		
 		return EnumRarity.uncommon;
 		}
 	}

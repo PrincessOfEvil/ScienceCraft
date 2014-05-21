@@ -17,9 +17,15 @@ public class TileWtrSrc extends TileEntity implements IFluidHandler
 	private static int		BUCKET_VOLUME	= FluidContainerRegistry.BUCKET_VOLUME;
 	
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
+	public boolean canDrain(ForgeDirection from, Fluid fluid)
 		{
-		return 0;
+		return true;
+		}
+	
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid)
+		{
+		return false;
 		}
 	
 	@Override
@@ -48,15 +54,9 @@ public class TileWtrSrc extends TileEntity implements IFluidHandler
 		}
 	
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid)
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 		{
-		return false;
-		}
-	
-	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid)
-		{
-		return true;
+		return 0;
 		}
 	
 	@Override

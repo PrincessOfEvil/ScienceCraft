@@ -24,6 +24,19 @@ public class BlockCrystF extends Block
 		}
 	
 	@Override
+	public IIcon getIcon(int blockSide, int metadata)
+		{
+		if (blockSide == 1)
+			{
+			return iconSaver[0];
+			}
+		else
+			{
+			return iconSaver[1];
+			}
+		}
+	
+	@Override
 	public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 		{
 		if (!par1World.isRemote)
@@ -37,10 +50,14 @@ public class BlockCrystF extends Block
 					switch (rnd.nextInt(2))
 						{
 						case 0:
-							par1World.spawnEntityInWorld(new EntityItem(par1World, x + 0.5, y + 1, z + 0.5, new ItemStack(ScienceCraft.Derivium)));
+							EntityItem ed = new EntityItem(par1World, x + 0.5, y + 1, z + 0.5, new ItemStack(ScienceCraft.Derivium));
+							ed.addVelocity(0, 2, 0);
+							par1World.spawnEntityInWorld(ed);
 							break;
 						case 1:
-							par1World.spawnEntityInWorld(new EntityItem(par1World, x + 0.5, y + 1, z + 0.5, new ItemStack(ScienceCraft.Emmitium)));
+							EntityItem ee = new EntityItem(par1World, x + 0.5, y + 1, z + 0.5, new ItemStack(ScienceCraft.Emmitium));
+							ee.addVelocity(0, 2, 0);
+							par1World.spawnEntityInWorld(ee);
 							break;
 						}
 					
@@ -58,18 +75,5 @@ public class BlockCrystF extends Block
 		
 		iconSaver[0] = par1IconRegister.registerIcon("lazmod:blockCFTop");
 		iconSaver[1] = par1IconRegister.registerIcon("furnace_top");
-		}
-	
-	@Override
-	public IIcon getIcon(int blockSide, int metadata)
-		{
-		if (blockSide == 1)
-			{
-			return iconSaver[0];
-			}
-		else
-			{
-			return iconSaver[1];
-			}
 		}
 	}

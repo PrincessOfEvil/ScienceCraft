@@ -21,14 +21,6 @@ public class TileCrystal extends CESTileEntity
 		MinecraftForge.EVENT_BUS.register(this);
 		}
 	
-	public void undoCharge()
-		{
-		if (maxAdded == true)
-			{
-			system.addMax(-8000);
-			}
-		}
-	
 	@SubscribeEvent
 	@Override
 	public void onWaveEvent(CESWaveEvent event)
@@ -57,6 +49,14 @@ public class TileCrystal extends CESTileEntity
 		{
 		super.readFromNBT(data);
 		type = data.getString("Type");
+		}
+	
+	public void undoCharge()
+		{
+		if (maxAdded == true)
+			{
+			system.addMax(-8000);
+			}
 		}
 	
 	@Override

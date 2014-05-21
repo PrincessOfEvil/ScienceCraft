@@ -22,10 +22,7 @@ public class BlockFField extends Block
 	@Override
 	public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity)
 		{
-		if (entity instanceof EntityDragon)
-			{
-			return false;
-			}
+		if (entity instanceof EntityDragon) { return false; }
 		return true;
 		}
 	
@@ -36,9 +33,9 @@ public class BlockFField extends Block
 		}
 	
 	@Override
-	public int quantityDropped(Random random)
+	public int getRenderBlockPass()
 		{
-		return 0;
+		return 1;
 		}
 	
 	@Override
@@ -48,27 +45,27 @@ public class BlockFField extends Block
 		}
 	
 	@Override
-	public boolean renderAsNormalBlock()
+	public int quantityDropped(Random random)
 		{
-		return false;
-		}
-	
-	@Override
-	public int getRenderBlockPass()
-		{
-		return 1;
-		}
-	
-	@Override
-	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-		{
-		return true;
+		return 0;
 		}
 	
 	@Override
 	public void registerBlockIcons(IIconRegister IconRegister)
 		{
 		blockIcon = IconRegister.registerIcon("lazmod:blockFField");
+		}
+	
+	@Override
+	public boolean renderAsNormalBlock()
+		{
+		return false;
+		}
+	
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+		{
+		return true;
 		}
 	
 	}

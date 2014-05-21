@@ -13,10 +13,16 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TileIrnTnk extends TileEntity implements IFluidHandler
 	{
 	public FluidTank	tank;
+	private boolean		shouldDestroy;
 	
 	public TileIrnTnk()
 		{
 		this(null, 0);
+		}
+	
+	public TileIrnTnk(FluidStack fluid, int capacity)
+		{
+		tank = new FluidTank(fluid, capacity * FluidContainerRegistry.BUCKET_VOLUME);
 		}
 	
 	public TileIrnTnk(int capacity)
@@ -24,9 +30,41 @@ public class TileIrnTnk extends TileEntity implements IFluidHandler
 		this(null, capacity);
 		}
 	
-	public TileIrnTnk(FluidStack fluid, int capacity)
+	@Override
+	public boolean canDrain(ForgeDirection from, Fluid fluid)
 		{
-		tank = new FluidTank(fluid, capacity * FluidContainerRegistry.BUCKET_VOLUME);
+		return true;
+		}
+	
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid)
+		{
+		return true;
+		}
+	
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
+		{
+		if (resource == null || !resource.isFluidEqual(tank.getFluid())) { return null; }
+		return tank.drain(resource.amount, doDrain);
+		}
+	
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+		{
+		return tank.drain(maxDrain, doDrain);
+		}
+	
+	@Override
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
+		{
+		return tank.fill(resource, doFill);
+		}
+	
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection from)
+		{
+		return new FluidTankInfo[] { tank.getInfo() };
 		}
 	
 	@Override
@@ -43,45 +81,5 @@ public class TileIrnTnk extends TileEntity implements IFluidHandler
 		super.writeToNBT(data);
 		tank.writeToNBT(data);
 		data.setInteger("Capacity", tank.getCapacity());
-		}
-	
-	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
-		{
-		return tank.fill(resource, doFill);
-		}
-	
-	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
-		{
-		if (resource == null || !resource.isFluidEqual(tank.getFluid()))
-			{
-			return null;
-			}
-		return tank.drain(resource.amount, doDrain);
-		}
-	
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
-		{
-		return tank.drain(maxDrain, doDrain);
-		}
-	
-	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid)
-		{
-		return true;
-		}
-	
-	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid)
-		{
-		return true;
-		}
-	
-	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from)
-		{
-		return new FluidTankInfo[] { tank.getInfo() };
 		}
 	}
