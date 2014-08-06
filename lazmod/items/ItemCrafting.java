@@ -43,7 +43,7 @@ public class ItemCrafting extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 		{
-		return "item." + ScienceCraft.dataHandler.CraftingUnlocalization[par1ItemStack.getItemDamage()];
+		return "item." + ScienceCraft.dataHandler.CraftingNames[par1ItemStack.getItemDamage()];
 		}
 	
 	@Override
@@ -53,7 +53,7 @@ public class ItemCrafting extends Item
 		
 		for (int i = 0; i < iconSaver.length; i++)
 			{
-			iconSaver[i] = iconRegister.registerIcon("lazmod:" + ScienceCraft.dataHandler.CraftingUnlocalization[i]);
+			iconSaver[i] = iconRegister.registerIcon("lazmod:" + ScienceCraft.dataHandler.CraftingNames[i]);
 			}
 		}
 	

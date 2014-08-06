@@ -27,7 +27,7 @@ public class ModelCrystal extends ModelBase
 		modelCrystal.renderAll();
 		}
 	
-	public void render(TileCrystal crystal, double x, double y, double z)
+	public void render(double x, double y, double z)
 		{
 		GL11.glPushMatrix();
 		

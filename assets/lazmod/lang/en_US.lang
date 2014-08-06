@@ -4,6 +4,7 @@ tile.ffield.name=Force Field
 tile.irntnk.name=Iron Tank
 tile.wtrsrc.name=Infinite Water Source
 tile.crystf.name=Crystal Catcher
+tile.cglass.name=Autoconnecting Glass
 
 tile.solarFurnace.name=Solar Furnace
 tile.solarSmasher.name=Solar Smasher

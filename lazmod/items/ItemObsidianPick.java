@@ -30,7 +30,7 @@ public class ItemObsidianPick extends ItemPickaxe
 				{
 				short short1 = nbttaglist.getCompoundTagAt(i).getShort("id");
 				short short2 = nbttaglist.getCompoundTagAt(i).getShort("lvl");
-				String Ench = ScienceCraft.dataHandler.EvilEnchantLocalization[short1];
+				String Ench = ScienceCraft.dataHandler.EvilEnchantNames[short1];
 				
 				if (Enchantment.enchantmentsList[short1] != null)
 					{

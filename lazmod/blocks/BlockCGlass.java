@@ -9,6 +9,7 @@ public class BlockCGlass extends Block
 	public BlockCGlass()
 		{
 		super(Material.glass);
+		setBlockTextureName("lazmod:blockCGlass");
 		}
 	
 	@Override
@@ -21,7 +22,7 @@ public class BlockCGlass extends Block
 	@Override
 	public int getRenderBlockPass()
 		{
-		return 1;
+		return 0;
 		}
 	
 	@Override

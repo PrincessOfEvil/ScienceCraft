@@ -1,5 +1,7 @@
 package lazmod.crystal;
 
+import lazmod.blocks.tileentities.CESTileEntity;
+import lazmod.blocks.tileentities.TileIrnTnk;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,8 +17,6 @@ import net.minecraft.world.World;
 public class Crystal extends BlockContainer
 	{
 	public String			type;
-	public TileCrystal		tile;
-	private EntityPlayer	player;
 	private IIcon			icon;
 	
 	public Crystal(String Type)
@@ -40,7 +40,7 @@ public class Crystal extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int intgr)
 		{
-		return tile = new TileCrystal(type);
+		return new TileCrystal(type);
 		}
 	
 	@Override
@@ -82,7 +82,7 @@ public class Crystal extends BlockContainer
 	@Override
 	public void onBlockHarvested(World par1World, int x, int y, int z, int meta, EntityPlayer par6EntityPlayer)
 		{
-		tile = (TileCrystal) par1World.getTileEntity(x, y, z);
+		TileCrystal tile = (TileCrystal) par1World.getTileEntity(x, y, z);
 		tile.undoCharge();
 		
 		super.onBlockHarvested(par1World, x, y, z, meta, par6EntityPlayer);
@@ -91,8 +91,9 @@ public class Crystal extends BlockContainer
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itCEStack)
 		{
-		player = (EntityPlayer) entityliving;
-		tile.tileRegister(player.getGameProfile().getName());
+		EntityPlayer player = (EntityPlayer) entityliving;
+		CESTileEntity tile = (CESTileEntity) world.getTileEntity(x, y, z);
+		tile.tileRegister(player);
 		super.onBlockPlacedBy(world, x, y, z, entityliving, itCEStack);
 		}
 	

@@ -3,6 +3,7 @@ package lazmod;
 import lazmod.blocks.itemblocks.ItemBlockIrnTnk;
 import lazmod.blocks.renderer.ConnectedGlassRenderer;
 import lazmod.blocks.tileentities.TileIrnTnk;
+import lazmod.blocks.tileentities.TileSolar;
 import lazmod.blocks.tileentities.TileWtrSrc;
 import lazmod.crystal.ItemCrystal;
 import lazmod.crystal.ItemCrystalRenderer;
@@ -37,14 +38,21 @@ public class RegistryHandler
 		GameRegistry.registerBlock(ScienceCraft.CrystF, "CrystalF");
 		GameRegistry.registerBlock(ScienceCraft.CGlass, "ConnectedGlass");
 		
+		GameRegistry.registerBlock(ScienceCraft.SolarFurnace, "SolarFurnace");
+		GameRegistry.registerBlock(ScienceCraft.SolarSmasher, "SolarSmasher");
+		GameRegistry.registerBlock(ScienceCraft.SolarLavaGen, "SolarLavaGen");
+		
 		GameRegistry.registerBlock(ScienceCraft.Derivium, ItemCrystal.class, "Derivium");
 		GameRegistry.registerBlock(ScienceCraft.Emmitium, ItemCrystal.class, "Emmitium");
+		
 		
 		GameRegistry.registerItem(ScienceCraft.CraftingItem, "CraftingItem");
 		GameRegistry.registerItem(ScienceCraft.ObsidianPick, "ObsidianPick");
 		
 		GameRegistry.registerTileEntity(TileIrnTnk.class, "IronTankTile");
 		GameRegistry.registerTileEntity(TileWtrSrc.class, "WaterSrcTile");
+		
+		GameRegistry.registerTileEntity(TileSolar.class, "SolarTile");
 		
 		GameRegistry.registerTileEntity(TileCrystal.class, "CrystalTile");
 		

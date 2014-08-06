@@ -1,6 +1,7 @@
 package lazmod.crystal;
 
 import lazmod.CES.CESWaveEvent;
+import lazmod.CES.CrystalEnergySystem;
 import lazmod.blocks.tileentities.CESTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,14 +31,14 @@ public class TileCrystal extends CESTileEntity
 			if (type == "Derivium")
 				{
 					{
-					if (event.player == player)
+					if (event.player == player.getDisplayName())
 						{
 						if (maxAdded == false)
 							{
-							system.addMax(8000);
+							((CrystalEnergySystem) player.getExtendedProperties(CrystalEnergySystem.name)).addMax(8000);
 							maxAdded = true;
 							}
-						system.add((int) (worldObj.getLightBrightness(xCoord, yCoord + 1, zCoord) * 160));
+						((CrystalEnergySystem) player.getExtendedProperties(CrystalEnergySystem.name)).add((int) (worldObj.getLightBrightness(xCoord, yCoord + 1, zCoord) * 160));
 						}
 					}
 				}
@@ -55,7 +56,7 @@ public class TileCrystal extends CESTileEntity
 		{
 		if (maxAdded == true)
 			{
-			system.addMax(-8000);
+			((CrystalEnergySystem) player.getExtendedProperties(CrystalEnergySystem.name)).addMax(-8000);
 			}
 		}
 	

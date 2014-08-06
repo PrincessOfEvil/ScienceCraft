@@ -2,6 +2,8 @@ package lazmod.blocks;
 
 import java.util.Random;
 
+import buildcraft.BuildCraftCore;
+import buildcraft.core.inventory.InvUtils;
 import lazmod.blocks.tileentities.TileIrnTnk;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -15,12 +17,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 public class BlockIrnTnk extends BlockContainer
 	{
-	private IIcon[]	iconSaver;
+	private IIcon[]	icons;
 	
 	public BlockIrnTnk()
 		{
@@ -45,23 +49,56 @@ public class BlockIrnTnk extends BlockContainer
 		{
 		if (blockSide == 0 || blockSide == 1)
 			{
-			return iconSaver[0];
+			return icons[0];
 			}
 		else
 			{
-			return iconSaver[1];
+			return icons[1];
+			}
+		}
+	
+	// Stolen from BC.
+	private static ItemStack consumeItem(ItemStack stack)
+		{
+		if (stack.stackSize == 1)
+			{
+			if (stack.getItem().hasContainerItem())
+				{
+				return stack.getItem().getContainerItem(stack);
+				}
+			else
+				{
+				return null;
+				}
+			}
+		else
+			{
+			stack.splitStack(1);
+
+			return stack;
 			}
 		}
 	
 	@Override
-	public boolean onBlockActivated(World par1World, int x, int y, int z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
 		{
-		if (!par1World.isRemote)
+		if (!world.isRemote)
 			{
-			TileIrnTnk tile = (TileIrnTnk) par1World.getTileEntity(x, y, z);
-			if (tile == null)
+			TileIrnTnk tile = (TileIrnTnk) world.getTileEntity(x, y, z);
+			ItemStack current = entityPlayer.inventory.getCurrentItem();
+			
+			if (current != null)
 				{
-				System.out.println("BIT:FUUUUUUK");
+				FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(current);
+				if (liquid != null)
+					{
+					int qty = tile.fill(ForgeDirection.UNKNOWN, liquid, true);
+
+					if (qty != 0 && !entityPlayer.capabilities.isCreativeMode)
+						{
+						entityPlayer.inventory.setInventorySlotContents(entityPlayer.inventory.currentItem, consumeItem(current));
+						}
+					}
 				}
 			
 			FluidTank tank = tile.tank;
@@ -70,29 +107,29 @@ public class BlockIrnTnk extends BlockContainer
 				{
 				int amount = tank.getFluidAmount();
 				
-				par5EntityPlayer.addChatMessage(new ChatComponentText("-------"));
-				par5EntityPlayer.addChatMessage(new ChatComponentText("Fluid = " + tank.getFluid().getFluid().getName()));
+				entityPlayer.addChatMessage(new ChatComponentText("-------"));
+				entityPlayer.addChatMessage(new ChatComponentText("Fluid = " + tank.getFluid().getFluid().getName()));
 				switch ((int) (amount / 8000f))
 					{
 					case 0:
-						par5EntityPlayer.addChatMessage(new ChatComponentText("§9Fluid amount = " + ((Integer) amount).toString()));
+						entityPlayer.addChatMessage(new ChatComponentText("§9Fluid amount = " + ((Integer) amount).toString()));
 						break;
 					case 1:
-						par5EntityPlayer.addChatMessage(new ChatComponentText("§aFluid amount = " + ((Integer) amount).toString()));
+						entityPlayer.addChatMessage(new ChatComponentText("§aFluid amount = " + ((Integer) amount).toString()));
 						break;
 					case 2:
-						par5EntityPlayer.addChatMessage(new ChatComponentText("§eFluid amount = " + ((Integer) amount).toString()));
+						entityPlayer.addChatMessage(new ChatComponentText("§eFluid amount = " + ((Integer) amount).toString()));
 						break;
 					case 3:
-						par5EntityPlayer.addChatMessage(new ChatComponentText("§6Fluid amount = " + ((Integer) amount).toString()));
+						entityPlayer.addChatMessage(new ChatComponentText("§6Fluid amount = " + ((Integer) amount).toString()));
 						break;
 					case 4:
-						par5EntityPlayer.addChatMessage(new ChatComponentText("§cFluid amount = " + ((Integer) amount).toString()));
+						entityPlayer.addChatMessage(new ChatComponentText("§cFluid amount = " + ((Integer) amount).toString()));
 						break;
 					default:
 						break;
 					}
-				par5EntityPlayer.addChatMessage(new ChatComponentText("-------"));
+				entityPlayer.addChatMessage(new ChatComponentText("-------"));
 				return true;
 				}
 			}
@@ -163,9 +200,9 @@ public class BlockIrnTnk extends BlockContainer
 	@Override
 	public void registerBlockIcons(IIconRegister IconRegister)
 		{
-		iconSaver = new IIcon[2];
+		icons = new IIcon[2];
 		
-		iconSaver[0] = IconRegister.registerIcon("lazmod:blockIrnTnkTB");
-		iconSaver[1] = IconRegister.registerIcon("lazmod:blockIrnTnkSide");
+		icons[0] = IconRegister.registerIcon("lazmod:blockIrnTnkTB");
+		icons[1] = IconRegister.registerIcon("lazmod:blockIrnTnkSide");
 		}
 	}

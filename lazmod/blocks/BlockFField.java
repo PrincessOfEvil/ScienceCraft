@@ -32,18 +32,7 @@ public class BlockFField extends Block
 		return 2;
 		}
 	
-	@Override
-	public int getRenderBlockPass()
-		{
-		return 1;
-		}
-	
-	@Override
-	public boolean isOpaqueCube()
-		{
-		return false;
-		}
-	
+
 	@Override
 	public int quantityDropped(Random random)
 		{
@@ -54,6 +43,18 @@ public class BlockFField extends Block
 	public void registerBlockIcons(IIconRegister IconRegister)
 		{
 		blockIcon = IconRegister.registerIcon("lazmod:blockFField");
+		}
+	
+	@Override
+	public int getRenderBlockPass()
+		{
+		return 1;
+		}
+	
+	@Override
+	public boolean isOpaqueCube()
+		{
+		return false;
 		}
 	
 	@Override
