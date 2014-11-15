@@ -15,8 +15,7 @@ public class BlockCGlass extends Block
 	@Override
 	public boolean canRenderInPass(int pass)
 		{
-		RegistryHandler.connectedGlassRenderPass = pass;
-		return true;
+		return RegistryHandler.connectedGlassRenderPass == pass;
 		}
 	
 	@Override

@@ -1,17 +1,11 @@
 package lazmod.crystal;
 
-import lazmod.CES.CESWaveEvent;
-import lazmod.CES.CrystalEnergySystem;
-import lazmod.blocks.tileentities.CESTileEntity;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.tileentity.TileEntity;
 
-public class TileCrystal extends CESTileEntity
+public class TileCrystal extends TileEntity
 	{
 	public String	type;
 	public int		size;
-	public String	username;
 	
 	public TileCrystal()
 		{}
@@ -19,51 +13,5 @@ public class TileCrystal extends CESTileEntity
 	public TileCrystal(String cType)
 		{
 		type = cType;
-		MinecraftForge.EVENT_BUS.register(this);
-		}
-	
-	@SubscribeEvent
-	@Override
-	public void onWaveEvent(CESWaveEvent event)
-		{
-		if (!worldObj.isRemote)
-			{
-			if (type == "Derivium")
-				{
-					{
-					if (event.player == player.getDisplayName())
-						{
-						if (maxAdded == false)
-							{
-							((CrystalEnergySystem) player.getExtendedProperties(CrystalEnergySystem.name)).addMax(8000);
-							maxAdded = true;
-							}
-						((CrystalEnergySystem) player.getExtendedProperties(CrystalEnergySystem.name)).add((int) (worldObj.getLightBrightness(xCoord, yCoord + 1, zCoord) * 160));
-						}
-					}
-				}
-			}
-		}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound data)
-		{
-		super.readFromNBT(data);
-		type = data.getString("Type");
-		}
-	
-	public void undoCharge()
-		{
-		if (maxAdded == true)
-			{
-			((CrystalEnergySystem) player.getExtendedProperties(CrystalEnergySystem.name)).addMax(-8000);
-			}
-		}
-	
-	@Override
-	public void writeToNBT(NBTTagCompound data)
-		{
-		super.writeToNBT(data);
-		data.setString("Type", type);
 		}
 	}

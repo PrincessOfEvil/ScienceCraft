@@ -1,7 +1,5 @@
 package lazmod.crystal;
 
-import lazmod.blocks.tileentities.CESTileEntity;
-import lazmod.blocks.tileentities.TileIrnTnk;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -82,18 +80,12 @@ public class Crystal extends BlockContainer
 	@Override
 	public void onBlockHarvested(World par1World, int x, int y, int z, int meta, EntityPlayer par6EntityPlayer)
 		{
-		TileCrystal tile = (TileCrystal) par1World.getTileEntity(x, y, z);
-		tile.undoCharge();
-		
 		super.onBlockHarvested(par1World, x, y, z, meta, par6EntityPlayer);
 		}
 	
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itCEStack)
 		{
-		EntityPlayer player = (EntityPlayer) entityliving;
-		CESTileEntity tile = (CESTileEntity) world.getTileEntity(x, y, z);
-		tile.tileRegister(player);
 		super.onBlockPlacedBy(world, x, y, z, entityliving, itCEStack);
 		}
 	

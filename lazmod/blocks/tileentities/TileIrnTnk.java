@@ -24,7 +24,7 @@ public class TileIrnTnk extends TileEntity implements IFluidHandler
 	
 	public TileIrnTnk(FluidStack fluid, int capacity)
 		{
-		tank = new FluidTank(fluid, capacity * FluidContainerRegistry.BUCKET_VOLUME);
+		tank = new FluidTank(fluid, capacity);
 		}
 	
 	public TileIrnTnk(int capacity)

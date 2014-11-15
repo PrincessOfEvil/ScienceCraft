@@ -1,26 +1,14 @@
 package lazmod.blocks.tileentities;
 
-import lazmod.CES.CESWaveEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.tileentity.TileEntity;
 
-public class TileSolar extends CESTileEntity
+public class TileSolar extends TileEntity
 	{
-	public final byte type;
+	private byte type;
 
 	public TileSolar(byte cType)
 		{
 		type = cType;
 		}
-
-	@SubscribeEvent
-	public void onWaveEvent(CESWaveEvent event)
-		{
-		if (!worldObj.isRemote)
-			{
-			if (event.player.equals(player))
-				{
-				
-				}
-			}
-		}
+	
 	}

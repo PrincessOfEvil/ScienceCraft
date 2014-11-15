@@ -9,6 +9,7 @@ import lazmod.crystal.ItemCrystal;
 import lazmod.crystal.ItemCrystalRenderer;
 import lazmod.crystal.TileCrystal;
 import lazmod.crystal.TileCrystalRenderer;
+import lazmod.items.renderer.CraftingItemRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -45,9 +46,10 @@ public class RegistryHandler
 		GameRegistry.registerBlock(ScienceCraft.Derivium, ItemCrystal.class, "Derivium");
 		GameRegistry.registerBlock(ScienceCraft.Emmitium, ItemCrystal.class, "Emmitium");
 		
-		
 		GameRegistry.registerItem(ScienceCraft.CraftingItem, "CraftingItem");
 		GameRegistry.registerItem(ScienceCraft.ObsidianPick, "ObsidianPick");
+		
+		GameRegistry.registerBlock(ScienceCraft.EnergyFluidBlock, "EnergyFluid");
 		
 		GameRegistry.registerTileEntity(TileIrnTnk.class, "IronTankTile");
 		GameRegistry.registerTileEntity(TileWtrSrc.class, "WaterSrcTile");
@@ -65,12 +67,9 @@ public class RegistryHandler
 		
 		RenderingRegistry.registerBlockHandler(new ConnectedGlassRenderer());
 		
-		// MinecraftForgeClient.registerItemRenderer(ScienceCraft.CraftingItem.itemID,
-		// new CraftingItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(ScienceCraft.CraftingItem, new CraftingItemRenderer());
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(ScienceCraft.instance, new GuiHandler());
-		
-		MinecraftForge.EVENT_BUS.register(new EventListener());
 		}
 	
 	}

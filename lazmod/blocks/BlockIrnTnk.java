@@ -2,8 +2,8 @@ package lazmod.blocks;
 
 import java.util.Random;
 
-import buildcraft.BuildCraftCore;
-import buildcraft.core.inventory.InvUtils;
+import lazmod.DataHandler;
+import lazmod.ScienceCraft;
 import lazmod.blocks.tileentities.TileIrnTnk;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -41,7 +41,7 @@ public class BlockIrnTnk extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1, int i)
 		{
-		return new TileIrnTnk(32);
+		return new TileIrnTnk(DataHandler.IrnTnkDfltCapacity);
 		}
 	
 	@Override
@@ -62,7 +62,7 @@ public class BlockIrnTnk extends BlockContainer
 		{
 		if (stack.stackSize == 1)
 			{
-			if (stack.getItem().hasContainerItem())
+			if (stack.getItem().hasContainerItem(stack))
 				{
 				return stack.getItem().getContainerItem(stack);
 				}
@@ -82,12 +82,23 @@ public class BlockIrnTnk extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
 		{
-		if (!world.isRemote)
+		TileIrnTnk tile = (TileIrnTnk) world.getTileEntity(x, y, z);
+		ItemStack current = entityPlayer.inventory.getCurrentItem();
+		
+		boolean truå = false;
+		
+		if (current != null)
 			{
-			TileIrnTnk tile = (TileIrnTnk) world.getTileEntity(x, y, z);
-			ItemStack current = entityPlayer.inventory.getCurrentItem();
-			
-			if (current != null)
+			if (current.isItemEqual(new ItemStack(ScienceCraft.CraftingItem, 1, 2)))
+				{
+				tile.tank.setCapacity(tile.tank.getCapacity() + DataHandler.IrnTnkDfltCapacity);
+				if (!entityPlayer.capabilities.isCreativeMode)
+					{
+					entityPlayer.inventory.setInventorySlotContents(entityPlayer.inventory.currentItem, consumeItem(current));
+					}
+				truå = true;
+				}
+			else
 				{
 				FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(current);
 				if (liquid != null)
@@ -98,42 +109,43 @@ public class BlockIrnTnk extends BlockContainer
 						{
 						entityPlayer.inventory.setInventorySlotContents(entityPlayer.inventory.currentItem, consumeItem(current));
 						}
+					truå = true;
 					}
-				}
-			
-			FluidTank tank = tile.tank;
-			
-			if (tank.getFluid() != null)
-				{
-				int amount = tank.getFluidAmount();
-				
-				entityPlayer.addChatMessage(new ChatComponentText("-------"));
-				entityPlayer.addChatMessage(new ChatComponentText("Fluid = " + tank.getFluid().getFluid().getName()));
-				switch ((int) (amount / 8000f))
-					{
-					case 0:
-						entityPlayer.addChatMessage(new ChatComponentText("§9Fluid amount = " + ((Integer) amount).toString()));
-						break;
-					case 1:
-						entityPlayer.addChatMessage(new ChatComponentText("§aFluid amount = " + ((Integer) amount).toString()));
-						break;
-					case 2:
-						entityPlayer.addChatMessage(new ChatComponentText("§eFluid amount = " + ((Integer) amount).toString()));
-						break;
-					case 3:
-						entityPlayer.addChatMessage(new ChatComponentText("§6Fluid amount = " + ((Integer) amount).toString()));
-						break;
-					case 4:
-						entityPlayer.addChatMessage(new ChatComponentText("§cFluid amount = " + ((Integer) amount).toString()));
-						break;
-					default:
-						break;
-					}
-				entityPlayer.addChatMessage(new ChatComponentText("-------"));
-				return true;
 				}
 			}
-		return false;
+		
+		FluidTank tank = tile.tank;
+		
+		if (tank.getFluid() != null && !world.isRemote)
+			{
+			int amount = tank.getFluidAmount();
+			
+			String f = "";
+			
+			switch ((int) (amount / tank.getCapacity() / 4))
+				{
+				case 0:
+					f = "§9";
+					break;
+				case 1:
+					f = "§a";
+					break;
+				case 2:
+					f = "§e";
+					break;
+				case 3:
+					f = "§6";
+					break;
+				case 4:
+					f = "§c";
+					break;
+				default:
+					break;
+				}
+			entityPlayer.addChatMessage(new ChatComponentText(f + tank.getFluid().getFluid().getName() + " : " + ((Integer) amount).toString() + "/" + ((Integer) tank.getCapacity()).toString()));
+			truå = true;
+			}
+		return truå;
 		}
 	
 	@Override
@@ -161,7 +173,7 @@ public class BlockIrnTnk extends BlockContainer
 				
 				itCEStack.setTagCompound(data);
 				
-				itCEStack.setItemDamage(32000 - tile.tank.getFluidAmount());
+				itCEStack.setItemDamage(DataHandler.IrnTnkDfltCapacity - tile.tank.getFluidAmount()*DataHandler.IrnTnkDfltCapacity/tile.tank.getCapacity());
 				
 				entityPlayer.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
 				entityPlayer.addExhaustion(0.025F);

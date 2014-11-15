@@ -10,11 +10,11 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 
-public class ItemObsidianPick extends ItemPickaxe
+public class ItemPick extends ItemPickaxe
 	{
-	public ItemObsidianPick()
+	public ItemPick()
 		{
-		super(ScienceCraft.SC_OBSIDIAN);
+		super(ScienceCraft.SC_PICKER);
 		}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

@@ -3,13 +3,13 @@ package lazmod;
 import java.util.HashMap;
 import java.util.Map;
 
-import lazmod.CES.CESWaveShooter;
-import lazmod.CES.CrystalEnergySystem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.IIcon;
 
 public class DataHandler
 	{
+	public static int							IrnTnkDfltCapacity			= 64000;
+	
 	public static final byte					SolarAmount					= 3;
 	public static IIcon							SolarFaceIcons[]			= new IIcon[SolarAmount];
 	public static IIcon							SolarOtherIcons[]			= new IIcon[3];
@@ -20,13 +20,13 @@ public class DataHandler
 	public static String						CraftingNames[]				= new String[CraftingItemNumber];
 	public static String						EvilEnchantNames[]			= new String[Enchantment.enchantmentsList.length];
 	
-	public HashMap<String, CESWaveShooter> shooterMap = null;
-	
 	public DataHandler()
 		{}
 	
 	public void addValues()
-		{}
+		{
+		
+		}
 	
 	public void addNames()
 		{

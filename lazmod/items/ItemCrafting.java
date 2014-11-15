@@ -60,6 +60,6 @@ public class ItemCrafting extends Item
 	@Override
 	public boolean requiresMultipleRenderPasses()
 		{
-		return false;
+		return true;
 		}
 	}
